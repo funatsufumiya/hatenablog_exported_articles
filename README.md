@@ -1,6 +1,6 @@
 # hatenablog_exported_articles
 
-funatsufumiya.hatenablog.com の閉鎖に伴うバックアップです。
+はてなブログ funatsufumiya.hatenablog.com の閉鎖に伴うバックアップです。
 
 https://funatsufumiya.github.io/hatenablog_exported_articles/index.html (GitHub Pages) で読むことができます。
 
@@ -19,6 +19,7 @@ https://funatsufumiya.github.io/hatenablog_exported_articles/index.html (GitHub 
 GitHubが適切な配置場所だとは思っていないので、より適切な場所をゆっくりと検討していきたいと思っていますが、技術記事等の価値を鑑みてバックアップを公開しています。
 
 GitHub上での公開に伴うオープンソースライセンス等は検討中ですが、CC-BY-SAなどが適切とはあまり思えないので精査中です。現状はGitHubの利用規約にしたがって利用していただければと思います。（[参考記事: GitHubでライセンスをつけないとどうなるの？ - Qiita](https://qiita.com/Tatamo/items/ae7bf4878abcf0584291)）
+
 
 
 
