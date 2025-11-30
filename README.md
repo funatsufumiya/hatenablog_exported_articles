@@ -22,11 +22,12 @@ https://funatsufumiya.github.io/hatenablog_exported_articles/index.html (GitHub 
 
 ### 後継のブログについて
 
-はてなブログ・Qiita・Zennの後継となるブログは、一旦GitHub/Obsidianにて継続しています（主に技術記事のみ）： https://github.com/funatsufumiya/articles/
+はてなブログ・Qiita・Zennの後継となるブログは、一旦GitHub/Obsidianにて継続しています（主に技術記事のみ。内容の継承や連続性はなし。）： https://github.com/funatsufumiya/articles/
 
 ### ライセンスについて
 
 GitHub上での公開に伴うオープンソースライセンス等は検討中ですが、CC-BY-SAなどが適切とはあまり思えないので精査中です。現状はGitHubの利用規約にしたがって利用していただければと思います。（[参考記事: GitHubでライセンスをつけないとどうなるの？ - Qiita](https://qiita.com/Tatamo/items/ae7bf4878abcf0584291)）
+
 
 
 
