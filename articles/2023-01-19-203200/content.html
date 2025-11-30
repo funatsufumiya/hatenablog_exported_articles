@@ -1,0 +1,51 @@
+<h2 id="練習ツール">練習ツール</h2>
+
+<p>早いことにもう3日目。ローマ字配列を置き換えようとしたことが今までなかったので、ローマ字配列というのは英語も打てるので練習ツールが豊富。</p>
+
+<ul>
+<li><a href="https://www.typingbolt.com/">Typing Bolt &#x26A1; | Your AI Powered Personal Typing Tutor</a></li>
+<li><a href="https://typing.io/">Typing Practice for Programmers | typing.io</a></li>
+<li><a href="https://sushida.net/play.html">&#x5BFF;&#x53F8;&#x6253; - Play</a></li>
+<li><a href="https://www.e-typing.ne.jp/">&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30CD;&#x30C3;&#x30C8;&#x3067;&#x30BF;&#x30A4;&#x30D4;&#x30F3;&#x30B0;&#x7DF4;&#x7FD2; &#x30A4;&#x30FC;&#x30BF;&#x30A4;&#x30D4;&#x30F3;&#x30B0; | e-typing &#x30ED;&#x30FC;&#x30DE;&#x5B57;&#x30BF;&#x30A4;&#x30D4;&#x30F3;&#x30B0;</a></li>
+<li><a href="https://typing.twi1.me/">&#x697D;&#x3057;&#x304F;&#x30BF;&#x30A4;&#x30D4;&#x30F3;&#x30B0;&#x7DF4;&#x7FD2;&#x304C;&#x3067;&#x304D;&#x308B;&#x300C;&#x30DE;&#x30A4;&#x30BF;&#x30A4;&#x30D4;&#x30F3;&#x30B0;&#x300D;</a></li>
+</ul>
+
+
+<p>特にTyping Boltはすごい。結構同じような単語が続くので慣れるまでが辛いけど、その分だけ最適化されていて上達が早い。</p>
+
+<p>今までこれらを日本語用と英語用で区別して、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Dvorak">Dvorak</a>と新下駄で別々に練習していたので、両方使えるのはローマ字配列の魅力。</p>
+
+<p>どうしても飽きはきてしまうので、練習方法が多いのは大切。</p>
+
+<h2 id="Asterteの苦手単語">Asterte+の苦手単語</h2>
+
+<p>Asterte+、思いのほかローマ字に特化している印象で、日本語打鍵については不満はほぼないのだけど、英単語は打ちにくいのがちょいちょいある。</p>
+
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Dvorak">Dvorak</a>と同じで右手小指〜薬指にある部分が打ちづらく、<code>P</code>、<code>V</code>、<code>Z</code>、<code>B</code> が続くと辛い。例えば vip、zip などや、wash など。それでも、これらの文字が直に連続することは考えにくいので、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Dvorak">Dvorak</a>でいう ls や ln のような極端に打てない単語には、実用上ではまだ自分は遭遇してはいないものの、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unix">Unix</a>コマンドやプログラミングで出てくる、<code>pv</code> や <code>zbuffer</code>、<code>bzip</code>等はかなり打ちづらい。</p>
+
+<pre class="code" data-lang="" data-unlink>$ tar cf - data/ | pv | bzip2 &gt; data.tar.bz2</pre>
+
+
+<p>とか出てくると辛そうだけど、正直<a class="keyword" href="http://d.hatena.ne.jp/keyword/Dvorak">Dvorak</a>での <code>ls</code> や <code>ln</code> のように、頻繁に出てくると慣れてしまえるかもしれない。</p>
+
+<p>とはいえ、<code>ls</code> や <code>ln</code> ほど頻出するとは考えにくく、実用上の障壁にはならなそう。それだけ Asterte+ が日本語・英語・プログラミングにおいて安定して使える完成度の高い配列といえるかもしれない。</p>
+
+<p>致命的に打ちづらい単語を、配列表を見ながらあえて人工的に作って列挙するとするなら、<code>GV</code>、<code>SRP</code>、<code>VB</code> あたりか。いずれも出現頻度は低そうではある。</p>
+
+<h2 id="類似配列で打ちにくい単語">類似配列で打ちにくい単語</h2>
+
+<p>せっかくなので、同様の考えで打ちにくい単語を考えてみると、</p>
+
+<ul>
+<li>大西配列: <code>jp</code>, <code>python</code>, <code>bypass</code>, <code>HP</code>, <code>hiphop</code>, <code>hyper</code>,<code>my</code>,<code>js</code>,<code>ze-</code>,<code>le-</code> ( <code>-el</code> )</li>
+<li>Eucalyn: <code>ls</code>, <code>ln</code>, <code>jpy</code>, <code>dj</code>, <code>DSL</code>, <code>DSP</code>, <code>DL</code></li>
+</ul>
+
+
+<p>などが挙げられる。大西配列は案外頻出の英語が含まれているので辛そうな印象。</p>
+
+<p>こうしてみてみると、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Dvorak">Dvorak</a>が苦手とする単語 ( <code>ls</code>, <code>ln</code>, <code>jp</code>, <code>py</code> ) と傾向が似ているので、一般語の頻出単語だけで配列を設計すると、こうした組み合わせはどうしても打ちにくくなるのかもしれない。</p>
+
+<p>ひょっとすると配列設計で大事なのは、頻出単語を楽に打てるよりも、致命的に打ちにくい単語を作らないことにあるのかもしれない。</p>
+
+<p>やっぱりこういう苦手単語を分析するためにも、はやくキー<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%C8%A5%ED%A1%BC%A5%AF">ストローク</a>におけるdigraphとtrigraphを完成させなければ。</p>

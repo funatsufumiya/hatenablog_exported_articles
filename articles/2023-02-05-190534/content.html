@@ -1,0 +1,12 @@
+<p><strong>【追記1】<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a>は投稿の自動削除に対応済みだったため、以下の機能は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>参加者全員に対して投稿の自動削除を適用したい場合に有効。</strong><br>
+<strong>【追記2】<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a>を自分でホストする場合も、cronで一定期間より昔の投稿は削除できるため、以下は参考程度。</strong></p>
+
+<p>最近<a class="keyword" href="http://d.hatena.ne.jp/keyword/Twitter">Twitter</a>のログインが頻繁にブロックされるようになり、アカウントの凍結も増えているようだったので、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a>を数日利用していた。</p>
+
+<p>以前「消える系 (ephemeral) <a class="keyword" href="http://d.hatena.ne.jp/keyword/SNS">SNS</a>」というものに興味をもった時期があり、例えば<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a>を独自に運用する場合にも、過去のデータがずっと残ってしまうというのは運用負担に繋がるので、持続的で価値があると考えた。</p>
+
+<p>調べてみると ephemeral.glitch.social という<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>が既にephemeral実装を行っており、<a href="https://github.com/nightpool/ephemeral.glitch.social">https://github.com/nightpool/ephemeral.glitch.social</a> にコードがあり、<code>app/models/status.rb</code> の <code>schedule_removal</code> 関数で削除周期を変更できる様子。</p>
+
+<p>ephemeral.glitch.social の<a href="https://ephemeral.glitch.social/about/more">説明</a>で、「月の満ち欠けと連動して20分から4時間の間で投稿を削除」という主旨があり、こうした不確定性を盛り込むことは興味深いし、<code>schedule_removal</code> の実装次第で好きに変更できるので、こういった点が<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A1%BC%A5%D7%A5%F3%A5%BD%A1%BC%A5%B9">オープンソース</a>の面白いところだと思った。</p>
+
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a>自体、まるで<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AD%A5%CE%A4%CE%CE%B9">キノの旅</a>のように複数の国があっていろんな文化が存在し、そうした独自文化を許容する考え方は興味深い。運営費用や運営方法も含めて各グループや各人で賄うというところも、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Twitter">Twitter</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>のように運営コストを<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%E9%A5%C3%A5%AF%A5%DC%A5%C3%A5%AF%A5%B9">ブラックボックス</a>にしないという意味で、持続的で良いと感じた。</p>

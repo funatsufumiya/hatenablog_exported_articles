@@ -1,0 +1,34 @@
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230801/20230801062026.jpg" width="1200" height="900" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>ついにこのときが来たか、という、個人的には歴史の1ページを見ているような感じ。<a href="#f-4b3be43e" name="fn-4b3be43e" title="後述するけれど、普通のキーボードでも、新下駄配列であればUSB2BT PLUSやかえうち2という追加ガジェットを使えば一応実現できる。">*1</a></p>
+
+<p>先日、Keychron K3 Proという、500gの軽量でありながら、QMK/VIAでの配列のフルカスタムができて、かつ<a class="keyword" href="https://d.hatena.ne.jp/keyword/Bluetooth">Bluetooth</a>/USB-Cの無線・有線接続ができるという、素晴らしい市販キーボードが販売された。</p>
+
+<p><div class="hatena-asin-detail"><a href="https://www.amazon.co.jp/dp/B0BWS4GPKZ?tag=mvnhatenadiar-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" class="hatena-asin-detail-image-link" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/31nyuiyYKWL._SL500_.jpg" class="hatena-asin-detail-image" alt="【国内正規品】Keychron K3 Version2 コンパクトスリム75%レイアウト ワイヤレス・メカニカルキーボード/JISレイアウト/White LEDライト/87キー/ロープロファイルGateron G Proメカニカルスイッチ/有線無線対応/Mac Windows対応 (ロープロファイルGateronメカニカル茶軸)" title="【国内正規品】Keychron K3 Version2 コンパクトスリム75%レイアウト ワイヤレス・メカニカルキーボード/JISレイアウト/White LEDライト/87キー/ロープロファイルGateron G Proメカニカルスイッチ/有線無線対応/Mac Windows対応 (ロープロファイルGateronメカニカル茶軸)"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="https://www.amazon.co.jp/dp/B0BWS4GPKZ?tag=mvnhatenadiar-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" target="_blank" rel="noopener">【国内正規品】Keychron K3 Version2 コンパクトスリム75%レイアウト ワイヤレス・メカニカルキーボード/JISレイアウト/White LEDライト/87キー/ロープロファイルGateron G Proメカニカルスイッチ/有線無線対応/Mac Windows対応 (ロープロファイルGateronメカニカル茶軸)</a></p><ul class="hatena-asin-detail-meta"><li>Keychron</li></ul><a href="https://www.amazon.co.jp/dp/B0BWS4GPKZ?tag=mvnhatenadiar-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" class="asin-detail-buy" target="_blank" rel="noopener">Amazon</a></div></div></p>
+
+<p>（ちなみに自分は<a class="keyword" href="https://d.hatena.ne.jp/keyword/Amazon">Amazon</a>じゃなくてヨドバシの通販で買って、ヨドバシエクストリームで数時間で届いて感激した。）</p>
+
+<p>QMKワイヤレス、QMK <a class="keyword" href="https://d.hatena.ne.jp/keyword/Bluetooth">Bluetooth</a>で市販されているものはおそらく現時点で他に存在しないので、市場としては初めての製品になるはず。今までもBLE Micro Proという基板自体はあったものの、自作キーボードに留まっていて、完成済み・組み立て済みの市販品はなかった。</p>
+
+<p>そしてこれで新下駄・<a class="keyword" href="https://d.hatena.ne.jp/keyword/%C6%E5%C5%E1">薙刀</a>式を打てるように、eswaiさんのコードをフォークして書き込み、ついに打てるようになった。</p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Ffunatsufumiya%2Fqmk_firmware_k3pro%2Fblob%2Fmain%2Fkeyboards%2Fkeychron%2Fk3_pro%2Freadme.md" title="qmk_firmware_k3pro/keyboards/keychron/k3_pro/readme.md at main · funatsufumiya/qmk_firmware_k3pro" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/funatsufumiya/qmk_firmware_k3pro/blob/main/keyboards/keychron/k3_pro/readme.md">github.com</a></cite></p>
+
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/mUBO9q0r2mk?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="iPadで新下駄・薙刀式。K3 ProでQMKワイヤレス。"></iframe><cite class="hatena-citation"><a href="https://youtu.be/mUBO9q0r2mk">youtu.be</a></cite></p>
+
+<p>ちなみに手順としては、qmk_<a class="keyword" href="https://d.hatena.ne.jp/keyword/firmware">firmware</a>を焼き込める環境を作り (割愛)、<code>funatsufumiya/qmk_firmware_k3pro</code> を<a class="keyword" href="https://d.hatena.ne.jp/keyword/GitHub">GitHub</a>から手元にcloneした上で、<code>make keychron/k3_pro/jis/white:shingeta:flash</code> (追記: 最新版では <code>make keychron/k3_pro/jis/white:naginata_v15_and_shingeta:flash</code>) でK3 Proの<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%A1%A1%BC%A5%E0%A5%A6%A5%A7%A5%A2">ファームウェア</a>を更新することで、新下駄・<a class="keyword" href="https://d.hatena.ne.jp/keyword/%C6%E5%C5%E1">薙刀</a>式が打てるようになる。（Fn + LEDボタン で新下駄・<a class="keyword" href="https://d.hatena.ne.jp/keyword/%C6%E5%C5%E1">薙刀</a>式の切り替え、Fn + スナップショットボタンで、<a class="keyword" href="https://d.hatena.ne.jp/keyword/QWERTY">QWERTY</a>・Astarteの切り替えに割り当てた。）</p>
+
+<p>なおK3 ProのDFUモード (<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%A1%A1%BC%A5%E0%A5%A6%A5%A7%A5%A2">ファームウェア</a>書き込みモード) は、スペースキーの下にあるリセットボタンを押しながら、OFF / Cable の切り替えスイッチを2回入れるとDFUモードに入れる。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230801/20230801062711.jpg" width="1200" height="900" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>実は、新下駄配列を<a class="keyword" href="https://d.hatena.ne.jp/keyword/iPad">iPad</a>で打つだけであれば、USB2BT PLUSや、かえうち2を使うという方法があったのだけれど、いずれの方法でも<a class="keyword" href="https://d.hatena.ne.jp/keyword/%C6%E5%C5%E1">薙刀</a>式は技術的な問題から実装ができず、新下駄などが仮に打てたとしても、カフェとかにちょっと仰々しいガジェットやケーブルを持ち込む必要があったので、自分はちょっと嫌だった。</p>
+
+<p>それが今回初めて、QMKワイヤレスという画期的な規格によって、ついにカフェで<a class="keyword" href="https://d.hatena.ne.jp/keyword/iPad">iPad</a>で優雅に、新配列で文字書きするという夢が実現された。</p>
+
+<p><a href="https://funatsufumiya.hatenablog.com/entry/2023/07/26/172407">先日記事に書いた</a>ように、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%C6%E5%C5%E1">薙刀</a>式をもう一度再考している最中だったので、タイミングとしてはこの上なく、に運命の巡り合わせなのかな、と思ってしまうくらい、新配列ユーザにとっては素晴らしい製品がナイスタイミングで発売されて、感激している。</p>
+
+<p>配列というのは、<a class="keyword" href="https://d.hatena.ne.jp/keyword/QWERTY">QWERTY</a>やJIS規格のように共通で決まっていることも素晴らしいのだけれど、自由に変えれるのが良いと自分は思っているので、こうしてQMK/VIAを誰でも使えるというのは、素敵なことだと思う。こうした製品がもっと出回って欲しいし、例えば<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%DD%A5%E1%A5%E9">ポメラ</a>や普通のパソコンなんかにもQMK/VIA的なものが導入されるような未来がくれば、配列<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%A8%A5%DF%A5%E5%A5%EC%A1%BC%A5%BF">エミュレータ</a>とかがなくてもよくなるのになと思ったりする。</p>
+<div class="footnote">
+<p class="footnote"><a href="#fn-4b3be43e" name="f-4b3be43e" class="footnote-number">*1</a><span class="footnote-delimiter">:</span><span class="footnote-text">後述するけれど、普通のキーボードでも、新下駄配列であればUSB2BT PLUSやかえうち2という追加ガジェットを使えば一応実現できる。</span></p>
+</div>

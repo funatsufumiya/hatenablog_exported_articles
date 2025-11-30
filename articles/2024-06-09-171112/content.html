@@ -1,0 +1,124 @@
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240601/20240601211204.jpg" width="1200" height="700" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p><strong><em>(全体の6記事目になります。他パートへのリンク: <a href="https://funatsufumiya.hatenablog.com/entry/2024/05/31/194416">Part1</a>, <a href="https://funatsufumiya.hatenablog.com/entry/2024/06/01/204016">Part2</a>, <a href="https://funatsufumiya.hatenablog.com/entry/2024/06/02/073000">Part3</a>, <a href="https://funatsufumiya.hatenablog.com/entry/2024/06/02/091844">Part4</a>, <a href="https://funatsufumiya.hatenablog.com/entry/2024/06/05/092534">Part5</a>, <a href="https://funatsufumiya.hatenablog.com/entry/2024/06/09/171112">Part6</a> )</em></strong></p>
+
+<p><a href="https://funatsufumiya.hatenablog.com/entry/2024/06/05/092534">前回</a>、追加記事としてスカルプトによる穴埋め技法を詳しく解説しましたが、今回も詳解の追記として、CAD側のノウハウである、<strong>Plasticityの操作Tips</strong>についてまとめていきます。</p>
+
+<h2 id="目次">目次</h2>
+
+<ul>
+<li>１：<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a>からソリッドへの変換方法</li>
+<li>２：点を点にスナップさせるには (Freestyleモード)</li>
+<li>３：Freestyleモードの応用・ミラーの軸指定、そしてPivotモード (V)</li>
+<li>４：線を分離させたいときは、Split → Unjoin</li>
+<li>５：C: カットツールは時短に便利</li>
+</ul>
+
+
+<h2 id="サーフェスからソリッドへの変換方法"><a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a>からソリッドへの変換方法</h2>
+
+<p><a href="https://funatsufumiya.hatenablog.com/entry/2024/06/05/092534">前回</a>は、穴埋め技法を紹介するためにあえて穴開きのあるモデル、つまり<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a>（曲面）のままでポリゴン出力を行いました。</p>
+
+<p>しかし実際には、CAD側でソリッド（実体）にできないと困ることが多くあります。</p>
+
+<h3 id="Plasticityの4つの操作モード">Plasticityの4つの操作モード</h3>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240609/20240609162901.png" width="310" height="88" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>Plasticityでは、数字キーの1〜5（5は全種) に、モード切替が割り当てられており、それぞれ、「点」「線」「面」「体」に対応しています。英語でいうと面が<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a>、体がソリッド（ボディ）です。</p>
+
+<p>Plasticityは<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a>とソリッドを柔軟に行き来することができるのですが、 <a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a>からソリッドに変換する場合は、</p>
+
+<ul>
+<li>面がすべて繋がっていること</li>
+</ul>
+
+
+<p>が条件になります。どうすれば面を繋げることができるか、というと、</p>
+
+<ul>
+<li><code>Join</code> (結合) ツールで面を繋げていく</li>
+<li><code>Patch</code> (穴埋め) ツールで（最後の）面を埋める</li>
+</ul>
+
+
+<p>というのがポイントになります。</p>
+
+<p>特に <code>Join</code> ツールには、コマンドメニュー (右下の「…」をクリックするか、Fキーを押す) を見ると、<code>Join</code>、<code>Join Curves</code>、<code>Join Sheets</code>（※ Sheetsは<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a>とほぼ同義）、と細かく分かれていることがわかります。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240609/20240609163542.png" width="796" height="648" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>これらをうまく使いながら、2つ以上に分かれてしまっている<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a>を1つにしていくのですが、基本は <code>Loft</code> や <code>Patch</code> で既存の<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a>を引き伸ばしていくことがベースになります。</p>
+
+<p>以下は、<code>Patch</code>ツールを使って面をソリッド化していく様子です。</p>
+
+<p><iframe width="420" height="315" src="https://www.youtube.com/embed/C8NWCJWRoco?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="[Plasticity] Surface to Solid using Patch tool"></iframe><cite class="hatena-citation"><a href="https://youtu.be/C8NWCJWRoco">youtu.be</a></cite></p>
+
+<p>また、以下では<code>Join Sheets</code>コマンドを使って面をソリッド化しています。</p>
+
+<p><iframe width="420" height="315" src="https://www.youtube.com/embed/s1zQH0Dts4c?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="[Plasticity] Surface to Solid using Join Sheets command"></iframe><cite class="hatena-citation"><a href="https://youtu.be/s1zQH0Dts4c">youtu.be</a></cite></p>
+
+<h2 id="点を点にスナップさせるには-Freestyleモード">点を点にスナップさせるには (Freestyleモード)</h2>
+
+<p>次に、Plasticityではスナップが基本的に効くのですが、点操作モード (1キー) ではなぜかスナップが効かなくて困ることがあります。</p>
+
+<p>特に、<strong>ある点を別の点に移動させたい</strong>とき、スナップが効いて欲しいところですが、スナップ一覧には項目がなくて困ります。</p>
+
+<p><figure class="figure-image figure-image-fotolife" title="画面右上のスナップ一覧には項目がない">
+<span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240609/20240609165232.png" width="358" height="656" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>画面右上のスナップ一覧には項目がない</figcaption></figure></p>
+
+<p>実は、<code>G</code>キーで点を動かすときに、<code>F</code>キーを押して<strong>Freestyleモードに切り替えると、元にする点と移動先の点を選ぶことができます。</strong></p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240609/20240609165504.jpg" width="1200" height="345" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<h2 id="Freestyleモードの応用ミラーの軸指定そしてPivotモード-V">Freestyleモードの応用・ミラーの軸指定、そしてPivotモード (V)</h2>
+
+<p>このモード実は非常に便利で、例えばミラーツールでFreestyleモードを使うと、好きな軸を選択したりできるようになります。</p>
+
+<p>この一見わかりづらいメニューには様々な便利なツールが隠されており、例えば <code>V</code> (<code>Pivot</code>) では、回転やスケールなどの原点を指定することができるので、中心以外を軸に回転やスケールさせたいときに便利です。</p>
+
+<p><figure class="figure-image figure-image-fotolife" title="VキーのPivotで回転・スケールの中心を変えられる"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240609/20240609172143.png" width="1200" height="782" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>VキーのPivotで回転・スケールの中心を変えられる</figcaption></figure></p>
+
+<h2 id="線を分離させたいときはSplit--Unjoin">線を分離させたいときは、Split → Unjoin</h2>
+
+<p>最後に、ある線を2つ以上に分解させたいときがよくあります。それに該当するであろう「Split」ツールを使うと、線の上に点を追加することはできるのですが、2つに分けることができなくて、いつもよくわからなくてTrimしたりしていました。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240609/20240609173840.jpg" width="1200" height="782" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>実は、一度Splitしたりした線は、<code>Unjoin</code> (Alt + J、または <code>F</code>のコマンドメニューからUnjoin) して分解させることができます。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240609/20240609170142.jpg" width="1200" height="743" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>これを知っておくと、例えば <code>Patch</code>ツールでうまく穴埋めできないとき、任意の点で線を分割して、目的の線を抽出することが簡単になります。</p>
+
+<p><figure class="figure-image figure-image-fotolife" title="こんな感じで線がクロスしているとき…"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240609/20240609170501.png" width="1200" height="782" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>こんな感じで線がクロスしているとき…</figcaption></figure></p>
+
+<p><figure class="figure-image figure-image-fotolife" title="Split + Unjoin をうまく使うと欲しい線だけ抽出できる"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240609/20240609170532.png" width="1200" height="782" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>Split + Unjoin をうまく使うと欲しい線だけ抽出できる</figcaption></figure></p>
+
+<h2 id="C-カットツールは時短に便利">C: カットツールは時短に便利</h2>
+
+<p>Tipsを挙げればキリがないのですが、最後にカットツールを紹介します。</p>
+
+<p>例えば<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D6%A1%BC%A5%EA%A5%A2%A5%F3">ブーリアン</a> (Boolean) のような操作を、単に線だけで、しかも今見ている視点でカットしたいというときに使います。</p>
+
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/YqzW21sjvbQ?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Plasticity | Cut Tool: Multiple Targets and Cutters"></iframe><cite class="hatena-citation"><a href="https://www.youtube.com/watch?v=YqzW21sjvbQ">www.youtube.com</a></cite></p>
+
+<p>これを毎回<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D6%A1%BC%A5%EA%A5%A2%A5%F3">ブーリアン</a>で行っていたら、かなり時間がかかることだと思います。形をちょっと変えたいというときにとても便利です。</p>
+
+<h2 id="まとめ-YouTubeなどを情報源に作業の効率化を">まとめ: <a class="keyword" href="https://d.hatena.ne.jp/keyword/YouTube">YouTube</a>などを情報源に、作業の効率化を！</h2>
+
+<p>さて、今回はTipsだけでしたが、知っているか知らないかで実現できることがあったり、作業が圧倒的に効率よくなることがあります。</p>
+
+<p>ちなみに自分の情報源の大半は、<a href="https://www.youtube.com/@Pixelfondue">Pixie Fondue</a>さんのチャンネルです。多くのTipsが1分以内で分割されてまとめられており、すべて動画で見れるのですごくわかりやすいです。</p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fwww.youtube.com%2F%40Pixelfondue" title="Pixel Fondue" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://www.youtube.com/@Pixelfondue">www.youtube.com</a></cite></p>
+
+<p>個人的なプランとして、これらのTipsなどを繋げて、NURBS<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%E2%A5%C7%A5%EA%A5%F3%A5%B0">モデリング</a>をスムーズに行っていく様子を動画にしたいと思っていますが、それはまたの機会で。</p>
+
+<p>CAD→スカルプトの連携手法は、なんとなくZModelerやZSphereの代替のような感じするし、一方でCADの表現力や汎用性というのは、MoiやPlasticityのようにノミやトンカチのような手の一つのような道具と化すと、想像以上に高いように感じています。CADとスカルプトによる可能性というものを、自分自身何かしら作品としても今後表現していけたらと思っています。</p>
+
+<hr />
+
+<p>（追記・余談）今回の連載ではsubdiv・ポリゴン<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%E2%A5%C7%A5%EA%A5%F3%A5%B0">モデリング</a>は比較対象としてあえて除外してきましたが、CADの弱点を補うために<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>をうまく使っていくコツを別記事に書いてみたので、参考にしてください。</p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ffunatsufumiya.hatenablog.com%2Fentry%2F2024%2F06%2F17%2F155129" title="Plasticityのような使い勝手をBlenderでも再現してみる 〜点と線に主眼をおきつつ、トポロジーを柔軟に扱う〜 - しさくろく" class="embed-card embed-blogcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 190px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://funatsufumiya.hatenablog.com/entry/2024/06/17/155129">funatsufumiya.hatenablog.com</a></cite></p>

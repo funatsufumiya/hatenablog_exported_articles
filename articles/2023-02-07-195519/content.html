@@ -1,0 +1,27 @@
+<p>先日、一度<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a>をカスタムして短期で投稿が消える (= <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%D5%A5%A7%A5%E1%A5%E9">エフェメラ</a>ルな) <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>を立てたのだけれど、いろいろと考えた末に削除することにした。</p>
+
+<p>多分、消える系<a class="keyword" href="http://d.hatena.ne.jp/keyword/SNS">SNS</a>がなかなかアプリやクローズドなコミュニケーション以外で存在しない理由と共通するものがあると思うので、参考に理由を書いておく。</p>
+
+<ul>
+<li>過去の投稿が消えてしまうので、責任のない投稿が行われる懸念を払拭できない。 <a href="#f-359884dd" name="fn-359884dd" title="この点がよく、犯罪などの温床になるとされる。">*1</a></li>
+<li>仮にサーバからは過去のデータが消えていても、様々な理由でキャッシュが残り、完全にはデータは消えない。特に<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a>のような分散型だと顕著。<a href="#f-7e1a2c70" name="fn-7e1a2c70" title="余談として、Wickr Me等でもスクリーンショットが残せないように対策をしてあったりするが、完全には対策はできないと思われる。">*2</a></li>
+<li>分散型<a class="keyword" href="http://d.hatena.ne.jp/keyword/SNS">SNS</a>で自分の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>だけが<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%D5%A5%A7%A5%E1%A5%E9">エフェメラ</a>ル (自動投稿削除) であったとしても、前述の理由からさほど<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%D1%A5%AF">インパク</a>トがない。</li>
+<li>DB等のストレージから定期的にデータを消す必要があり、削除のためのコストが高い。</li>
+<li>仮に削除コストがゼロだったとしても、ストレージ負担が定期的に減るだけで、コミュニケーションのための通信コスト、計算リソースは消費する。また、一時ストレージの容量もピークは存在するので、必ずしも少ない容量で維持はできない。</li>
+<li>アクティブユーザが少ない状態だと、全く投稿がないように見える。</li>
+<li>重要な投稿などを残す設定をしないと、ピン留めやブックマークした投稿も消える <a href="#f-877f310a" name="fn-877f310a" title="Mastodonの個人設定機能ではこれを考慮した選択肢が存在する">*3</a>。</li>
+</ul>
+
+
+<p>ちなみに、アプリなど各端末が通信する設計であればまた課題点は異なるので、あくまで現状の<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a>に限った点も多く、Snapchat等はこうした課題点や<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%EC%A1%BC%A5%C9%A5%AA%A5%D5">トレードオフ</a>をうまく回避していると思われる。</p>
+
+<p>また、これらを目をつぶって維持するにしても、単に自分の投稿を自動削除するだけであれば、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a>にその機能は既に存在していて、最近のバージョンであれば既存の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>で個人設定が可能 <a href="#f-4b43c7bb" name="fn-4b43c7bb" title="現状では投稿より1週間、2週間、1ヶ月からそれより大きな期間なら設定可能で、例えば1日で消したり数時間で消すためには独自のインスタンスでカスタマイズが必要。">*4</a>。そのため、わざわざサーバを維持する理由が見つからなかったため、削除することにした。</p>
+
+<p>ところで、今回KAGOYA CLOUDで実験を行ったのだけれど、KAGOYAの場合は費用が時間計算なので、かかった費用は百円程度。また、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C9%A5%E1%A5%A4%A5%F3">ドメイン</a>も初年度は1円というキャンペーンが行われていたのでほぼ費用はかからず。<a href="#f-939f50c1" name="fn-939f50c1" title="余談として、Xserverで当初実験しようとしていたのだけれど、住所等の入力に不備があったためVPSの作成が保留され、最終的には既にほかで代替を行っていたことからサポートに相談してそのまま解約した。">*5</a></p>
+<div class="footnote">
+<p class="footnote"><a href="#fn-359884dd" name="f-359884dd" class="footnote-number">*1</a><span class="footnote-delimiter">:</span><span class="footnote-text">この点がよく、犯罪などの温床になるとされる。</span></p>
+<p class="footnote"><a href="#fn-7e1a2c70" name="f-7e1a2c70" class="footnote-number">*2</a><span class="footnote-delimiter">:</span><span class="footnote-text">余談として、Wickr Me等でも<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EA%A1%BC%A5%F3%A5%B7%A5%E7%A5%C3%A5%C8">スクリーンショット</a>が残せないように対策をしてあったりするが、完全には対策はできないと思われる。</span></p>
+<p class="footnote"><a href="#fn-877f310a" name="f-877f310a" class="footnote-number">*3</a><span class="footnote-delimiter">:</span><span class="footnote-text"><a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a>の個人設定機能ではこれを考慮した選択肢が存在する</span></p>
+<p class="footnote"><a href="#fn-4b43c7bb" name="f-4b43c7bb" class="footnote-number">*4</a><span class="footnote-delimiter">:</span><span class="footnote-text">現状では投稿より1週間、2週間、1ヶ月からそれより大きな期間なら設定可能で、例えば1日で消したり数時間で消すためには独自の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>でカスタマイズが必要。</span></p>
+<p class="footnote"><a href="#fn-939f50c1" name="f-939f50c1" class="footnote-number">*5</a><span class="footnote-delimiter">:</span><span class="footnote-text">余談として、Xserverで当初実験しようとしていたのだけれど、住所等の入力に不備があったため<a class="keyword" href="http://d.hatena.ne.jp/keyword/VPS">VPS</a>の作成が保留され、最終的には既にほかで代替を行っていたことからサポートに相談してそのまま解約した。</span></p>
+</div>

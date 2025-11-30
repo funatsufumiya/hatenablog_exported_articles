@@ -1,0 +1,114 @@
+<p>昨日Astarte+を初めて打鍵して、<a href="https://funatsufumiya.hatenablog.com/entry/2023/01/16/071339">設定ファイルを準備</a>した。</p>
+
+<p><a href="https://neinvalli.hatenablog.com/entry/2018/07/21/185448">Astarte</a>から派生させたProgrammer's Astarteの考え方をそのまま<a href="http://cityline.seesaa.net/article/467199963.html">Astarte+</a>に適用した上で、Programmer's Astarte+を以下のように定義して、今日から本格的に練習することにした。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230117/20230117064938.png" width="803" height="377" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>練習を始めるにあたって、まず各種の統計分析にかけてみることにする。</p>
+
+<h2 id="1-プログラミングコードの打鍵統計">(1) プログラミングコードの打鍵統計</h2>
+
+<p><a href="https://stevep99.github.io/keyboard-layout-analyzer/">Keyboard Layout Analyzer</a>の分析にかけてみたところ、総じて良い結果が出ていた。(<a href="https://gist.github.com/funatsufumiya/13b2b083fbce4e703de06432a7cd1fbb">jsonファイル</a>)</p>
+
+<p>例えば以下のようなRustコードを入力文章にすると、次のような結果が出た。</p>
+
+<pre class="code lang-rust" data-lang="rust" data-unlink><span class="synComment">// The adult has seen it all, and can handle any drink well.</span>
+<span class="synComment">// All drinks are handled explicitly using `match`.</span>
+<span class="synStatement">fn</span> <span class="synIdentifier">give_adult</span>(drink: <span class="synType">Option</span><span class="synStatement">&lt;</span><span class="synType">&amp;str</span><span class="synStatement">&gt;</span>) {
+    <span class="synComment">// Specify a course of action for each case.</span>
+    <span class="synStatement">match</span> drink {
+        <span class="synConstant">Some</span>(<span class="synConstant">&quot;lemonade&quot;</span>) <span class="synStatement">=&gt;</span> <span class="synPreProc">println!</span>(<span class="synConstant">&quot;Yuck! Too sugary.&quot;</span>),
+        <span class="synConstant">Some</span>(inner)   <span class="synStatement">=&gt;</span> <span class="synPreProc">println!</span>(<span class="synConstant">&quot;{}? How nice.&quot;</span>, inner),
+        <span class="synConstant">None</span>          <span class="synStatement">=&gt;</span> <span class="synPreProc">println!</span>(<span class="synConstant">&quot;No drink? Oh well.&quot;</span>),
+    }
+}
+
+<span class="synComment">// Others will `panic` before drinking sugary drinks.</span>
+<span class="synComment">// All drinks are handled implicitly using `unwrap`.</span>
+<span class="synStatement">fn</span> <span class="synIdentifier">drink</span>(drink: <span class="synType">Option</span><span class="synStatement">&lt;</span><span class="synType">&amp;str</span><span class="synStatement">&gt;</span>) {
+    <span class="synComment">// `unwrap` returns a `panic` when it receives a `None`.</span>
+    <span class="synStatement">let</span> inside <span class="synStatement">=</span> drink.<span class="synIdentifier">unwrap</span>();
+    <span class="synStatement">if</span> inside <span class="synStatement">==</span> <span class="synConstant">&quot;lemonade&quot;</span> { <span class="synPreProc">panic!</span>(<span class="synConstant">&quot;AAAaaaaa!!!!&quot;</span>); }
+
+    <span class="synPreProc">println!</span>(<span class="synConstant">&quot;I love {}s!!!!!&quot;</span>, inside);
+}
+
+<span class="synStatement">fn</span> <span class="synIdentifier">main</span>() {
+    <span class="synStatement">let</span> water  <span class="synStatement">=</span> <span class="synConstant">Some</span>(<span class="synConstant">&quot;water&quot;</span>);
+    <span class="synStatement">let</span> lemonade <span class="synStatement">=</span> <span class="synConstant">Some</span>(<span class="synConstant">&quot;lemonade&quot;</span>);
+    <span class="synStatement">let</span> void  <span class="synStatement">=</span> <span class="synConstant">None</span>;
+
+    <span class="synIdentifier">give_adult</span>(water);
+    <span class="synIdentifier">give_adult</span>(lemonade);
+    <span class="synIdentifier">give_adult</span>(void);
+
+    <span class="synStatement">let</span> coffee <span class="synStatement">=</span> <span class="synConstant">Some</span>(<span class="synConstant">&quot;coffee&quot;</span>);
+    <span class="synStatement">let</span> nothing <span class="synStatement">=</span> <span class="synConstant">None</span>;
+
+    <span class="synIdentifier">drink</span>(coffee);
+    <span class="synIdentifier">drink</span>(nothing);
+}
+</pre>
+
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230122/20230122072132.png" width="930" height="502" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span>
+<span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230122/20230122072143.png" width="1200" height="519" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span>
+<span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230117/20230117072838.png" width="1200" height="518" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>下のProgrammer's <a class="keyword" href="http://d.hatena.ne.jp/keyword/Dvorak">Dvorak</a>と比較すると、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Dvorak">Dvorak</a>が<code>LRNS</code>を多用した場合に右手小指側に重心がかかるのに比べて、バランスはよくなっているのではないだろうか。（改めて、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Dvorak">Dvorak</a>だと<code>return</code>とか<code>ln</code>、<code>ls</code>が辛そうだ。）</p>
+
+<h2 id="2-ローマ字">(2) ローマ字</h2>
+
+<p>また、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%C4%B6%F5%CA%B8%B8%CB">青空文庫</a>より<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CB%B7%A4%C3%A4%C1%A4%E3%A4%F3">坊っちゃん</a>の冒頭部を打たせると、Colemak Mod-DHに勝る結果となり、当然というか<a class="keyword" href="http://d.hatena.ne.jp/keyword/Dvorak">Dvorak</a>よりも良かった。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230122/20230122072448.png" width="932" height="506" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span>
+<span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230122/20230122072500.png" width="1200" height="514" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span>
+<span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230122/20230122062831.png" width="1200" height="518" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span>
+<span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230122/20230122062844.png" width="1200" height="513" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p><code>A</code>の使用頻度が高いので中央にある良さが出ているのと、下段の使用が少ないので縦移動が抑制されているのも快適そうな印象。さすがローマ字を意識してあるだけあって<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DB%A1%BC%A5%E0%A5%DD%A5%B8%A5%B7%A5%E7%A5%F3">ホームポジション</a>を堅持しているのがわかる。</p>
+
+<p>Colemakでローマ字を打つというイメージがつかないが、こうしてみてみると<code>TA</code>、<code>SA</code>、<code>RA</code>あたりが辛そう。やっぱりdigraphや<a class="keyword" href="http://d.hatena.ne.jp/keyword/N-gram">N-gram</a>がないと、ヒートマップだけでは実際の辛さがわかりにくい。</p>
+
+<h2 id="3-英語">(3) 英語</h2>
+
+<p>最後に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%EA%A5%B9%A1%A6%A5%A4%A5%F3%A1%A6%A5%EF%A5%F3%A5%C0%A1%BC%A5%E9%A5%F3%A5%C9">アリス・イン・ワンダーランド</a>の冒頭部。これはColemak Mod-DHに次ぐ結果となった。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230122/20230122072603.png" width="950" height="500" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span>
+<span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230122/20230122072613.png" width="1200" height="512" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span>
+<span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230122/20230122063144.png" width="1200" height="510" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span>
+<span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230117/20230117074353.png" width="1200" height="509" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Dvorak">Dvorak</a>はやはり<code>LRNS</code>が辛い。これは1〜2年使っていても体感した。</p>
+
+<h2 id="所感">所感</h2>
+
+<p>こうして比較すると、やはり<a href="https://funatsufumiya.hatenablog.com/entry/2023/01/15/200610">digraphを使ったストローク分析</a>を早くやりたくなる。打ちにくい単語などを抽出してみたい。</p>
+
+<p>体感的には、Astarte+は悪手は少なそうではあるし、初日の今日の印象ではバランスも良く、スコア的にもColemakや<a class="keyword" href="http://d.hatena.ne.jp/keyword/Dvorak">Dvorak</a>より良いことが多く、日本語・英語・プログラミングのいずれに対しても最適でありそう。</p>
+
+<p>少なくとも、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%ED%A1%BC%A5%DE%BB%FA%C6%FE%CE%CF">ローマ字入力</a>は快適になるし、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Dvorak">Dvorak</a>の<code>LRNS</code>のような辛さは減りそう。</p>
+
+<p>個人的にProgrammer's <a class="keyword" href="http://d.hatena.ne.jp/keyword/Dvorak">Dvorak</a>と共通項を多く持ちながらも、日本語・英語・プログラムにおけるバランス面での大幅な改善が見られるので、Programmer's <a class="keyword" href="http://d.hatena.ne.jp/keyword/Dvorak">Dvorak</a>を愛用していて悩みを持っている自分としては、Programmer's Astarte+が見いだせたのはありがたい。似ている分だけ移行もスムーズ。</p>
+
+<p>あとは新下駄配列を使いながらも<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%ED%A1%BC%A5%DE%BB%FA%C6%FE%CE%CF">ローマ字入力</a>も使うか否かだけれど、高速打鍵時はローマ字も快適だし、プログラム中にアルファベットのローマ字が頻出するケースで<a class="keyword" href="http://d.hatena.ne.jp/keyword/Dvorak">Dvorak</a>は辛かったので、そういう意味で日本語・英語・プログラミング対応の配列は助かると思う。</p>
+
+<h2 id="追記-日本語Keyboard-Layout-Analyzer">追記: 日本語Keyboard Layout Analyzer</h2>
+
+<p>設定ファイル用の記事にも追加したが、<a href="https://github.com/eswai/keyboard_analyzer">eswai/keyboard_analyzer</a>用の設定ファイルも書いた。(<a href="https://gist.github.com/funatsufumiya/0dbbda6c81576ba24abca83ef0936f0c">jsonファイル</a>)</p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Feswai%2Fkeyboard_analyzer" title="GitHub - eswai/keyboard_analyzer: 日本語キー配列アナライザー" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/eswai/keyboard_analyzer">github.com</a></cite></p>
+
+<p>以下がデフォルトの文章での解析結果。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230117/20230117084323.png" width="1200" height="896" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230117/20230117083945.png" width="1200" height="1059" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>結果自体はそう変わらないけれど、分析ツールとして、普通の漢字かな混じり文が使えるのは楽で良い。</p>
+
+<p>比較として以下が新下駄配列で、統計データでは打鍵数がProgrammer's Astarte+の73%、しかもそのうち単打が70%以上、総アクション数でいうとAstarteの約50%という、なかなか驚異的な結果となっている。これもやっぱりdigraph分析を早く完成させて分析にかけたい。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230117/20230117084345.png" width="1200" height="907" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230117/20230117084234.png" width="1200" height="1066" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>

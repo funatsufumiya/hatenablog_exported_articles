@@ -1,0 +1,177 @@
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617141921.jpg" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p><a href="https://funatsufumiya.hatenablog.com/entry/2024/06/09/171112">前回</a>まで、<a href="https://funatsufumiya.hatenablog.com/archive/category/CAD%E2%86%92%E3%82%B9%E3%82%AB%E3%83%AB%E3%83%97%E3%83%88%EF%BC%88%E9%80%A3%E8%BC%89%E8%A8%98%E4%BA%8B%EF%BC%89">CAD→スカルプトをテーマにした連載記事</a>をずっと書いてきて、私自身、毎日一つ<a href="https://funatsufumiya.artstation.com/">ArtStation</a>に制作したものを投稿してきました。</p>
+
+<p>これらの連載記事では、CADでの難しいポイントをスカルプトを組み合わせることによって楽にしたり、CADという人工的・数学的なテイストにスカルプトの手癖を加えることの大事さを伝えたかったつもりです。</p>
+
+<h2 id="前置き-PlasticityとBlenderは操作性が似ている">前置き: Plasticityと<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>は操作性が似ている</h2>
+
+<p>とはいえ、PlasticityやMoiといったソフトによって、CADが大きく身近になったというのがポイントとしては大きく、私自身、毎日CAD系のソフトで制作をしていると、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>でもNURBSが扱えたら…<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> という気持ちにすらなってきます。</p>
+
+<p>Plasticityは<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>を相当に意識して作られていて、ショートカットキーや操作性はすごく似ています。では何が大きく違うかといえばやはり、<strong>サブディビジョン<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a></strong> (subdiv, SubD)、つまり<strong>ポリゴンとNURBSの違い</strong>が大きいわけですが、逆にそこがPlasticityと<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>がそれぞれ存在している意義を出している気がしていて、例えば人体や動物の<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%E2%A5%C7%A5%EA%A5%F3%A5%B0">モデリング</a>のように、曲線的で立体が多いものは、subdivの方が扱いやすかったりします。</p>
+
+<h2 id="目次BlenderでPlasticityライクに操作するポイント">（目次）<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>でPlasticityライクに操作するポイント</h2>
+
+<p>では、ポリゴン<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%E2%A5%C7%A5%EA%A5%F3%A5%B0">モデリング</a>でありながらも、PlasticityでやっているようなNURBS編集っぽい操作性を実現したいなと思ったら、どうしたらいいかを今回考えてみました。</p>
+
+<p>いくつかキーワードとなる事項を先に目次として挙げておきます。</p>
+
+<hr />
+
+<ul>
+<li>１：点と線の操作に主眼をおく</li>
+<li>２：ポリゴンの点は制御点と心得る</li>
+<li>３：プロポーショナル編集とスカルプトを、ポリゴン数に応じて使い分ける</li>
+<li>４：Quad Remesherをフル活用する</li>
+</ul>
+
+
+<hr />
+
+<div style="background: #f2eac2; padding: 30px; border-radius: 30px;"><strong><i class="blogicon-warning"></i></strong> 注意点ですが、当記事は<strong>Plasticityの弱みを補うために、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>のサブディビジョン<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a>を使った、曲面的編集に主眼を置いて</strong>いるので、この記事の内容は<strong>CAD的な操作を<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>で再現することが目的ではない</strong>ことに注意です。<a href="https://makertales.gumroad.com/l/CADsketcher">CAD Sketcher</a>や<a href="https://blendermarket.com/products/fluent">Fluent</a>、<a href="https://blendermarket.com/products/grid-modeler">Grid Modeler</a>のようなツールも有用ではありますが、もし<strong><a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>ライクなCAD</strong>を望んでいるならPlasticityを用いるのが良いと思います。</div>
+
+
+<h2 id="１点と線の操作に主眼をおく">１：点と線の操作に主眼をおく</h2>
+
+<p>今回提示するやり方の最大のポイントが、面（<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a>）や体（ソリッド）ではなくて、<strong>点と線に主眼をおく</strong>ことにあります。</p>
+
+<p>ふつう<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>を使うと、最初に立方体や球を置いたりして、それらの各面を押し出したりして作っていくのが標準的ですが、今回はあえてこのスタイルはとりません。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617141004.png" width="800" height="436" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>というのも、Plasticityは<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a>CADであることもあり、まず点や線をスケッチしていくことから作業を開始することが多くあり、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>の立方体や球、平面を基軸に作っていくやり方は、どちらかというとソリッドCAD的であるともいえます。</p>
+
+<p><figure class="figure-image figure-image-fotolife" title="Plasticityではとりあえず平面スケッチから入ることが多い"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617142118.png" width="1200" height="675" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>Plasticityではとりあえず平面スケッチから入ることが多い</figcaption></figure></p>
+
+<p>このスタイルを実現するために、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>上での初手として、<strong>最初に平面を置いて、点に変えます</strong>。</p>
+
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/eN0zhM6tjag?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="How to Add Single Vertex Point | Blender Tutorial"></iframe><cite class="hatena-citation"><a href="https://www.youtube.com/watch?v=eN0zhM6tjag">www.youtube.com</a></cite></p>
+
+<p>いくつか方法があって、上記動画で最初に紹介されているやり方は、<strong>平面を作って、選択解除して、Ctrl + 右クリックして点を打っていく</strong> (平面は最後に消す)、という方法です。</p>
+
+<p>これが一番シンプルではありますが、Ctrl + 右クリックという操作が慣れないと気づきにくいので、<strong>平面を全選択して、マージ (Mキー) で中央にマージ</strong> するのが個人的にはおすすめです。そうすると、最初に置いた平面は、原点一つだけ残った点に変わるので、後々操作がしやすいです。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617143224.jpg" width="1200" height="565" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>ここからは、残った点を選択して、<strong>押し出し (E) で線を描く</strong>わけですが、最終的にsubdivをかけることを念頭においているので、はじめからsubdivモディファイアをつけておいても良いです。</p>
+
+<p><figure class="figure-image figure-image-fotolife" title="（黒くて見えづらいが、subdivをかけると曲線がみえる）"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617143655.jpg" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>（黒くて見えづらいが、subdivをかけると曲線がみえる）</figcaption></figure></p>
+
+<p>あとは、こうやってできた曲線（subdivのかかった曲線）を、<strong>オブジェクト → 変換 → カーブ</strong>でカーブに変換すると、パイプやスイープなどの元に使えたり、回転体の元にできたりもしますし、線を選択して押し出しすれば、面を作ることもできます。</p>
+
+<p><figure class="figure-image figure-image-fotolife" title="カーブに変換したり"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617144131.png" width="1200" height="726" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>カーブに変換したり</figcaption></figure></p>
+
+<p><figure class="figure-image figure-image-fotolife" title="Shift + Ctrl + Bでベベルをつけたり"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617144457.png" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>Shift + Ctrl + Bでベベルをつけたり</figcaption></figure></p>
+
+<p><figure class="figure-image figure-image-fotolife" title="押し出して面にしたり"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617144156.png" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>押し出して面にしたり</figcaption></figure></p>
+
+<h3 id="点をコピーするにはShift--D--Enter--P">点をコピーするには？（Shift + D → Enter → P）</h3>
+
+<p>ちなみにこのやり方をやっていると、点と線に主眼があるので、他のオブジェクトから点や線をコピーしてきたりしたくなることがよくあります。（Plasticityでいう点や線へのスナップの代替にできたりもします。）</p>
+
+<p>そんなときは編集モードに入り、<strong>Shift + D → Enterで点をまず複製し、Pキーで分離 → 「選択」を選ぶ</strong>と、特定の点や線を別オブジェクトにすることができます。こうして作った点から、また新たにオブジェクトを作ることができます。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617145040.jpg" width="1200" height="902" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>（※ ちなみに複数のオブジェクトを選択して <strong>Ctrl + J（または右クリック → 結合）</strong> すると、複数のオブジェクトを<strong>結合</strong>できるので、既存のオブジェクトに別のオブジェクトの点や線を持っていきたいときはこれを使います。）</p>
+
+<p>この、点の複製と分離・結合を使うと、Plasticityでよくあるような、既存の点から線を新たに書くような操作を模擬することができます。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617145626.jpg" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<h2 id="２ポリゴンの点は制御点と心得る">２：ポリゴンの点は制御点と心得る</h2>
+
+<p>前述のノウハウを使うと、まるでNURBSかのようにポリゴンの線を操作することができるようになりますが、<strong>制御点だと理解する</strong>のがすごく大事です。</p>
+
+<p>ポリゴンは一見カクカクに見えていますが、これはsubdivの制御点なので、実際は点の数が少なければ少ないほど扱いやすく、たとえば線を書いた次の工程として、PlasticityのようなLoft・Patchにあたる操作は、単純に線の間を結んでsubdivをかけると実現できます。</p>
+
+<p><figure class="figure-image figure-image-fotolife" title="線を押し出したり(E)、繋げたり(F)すれば面ができて、点が少ないほど制御しやすい"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617151309.png" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>線を押し出したり(E)、繋げたり(F)すれば面ができて、点が少ないほど制御しやすい</figcaption></figure></p>
+
+<p>ちなみにこのとき、<strong>クリース (Shift + E)</strong> をつけると境界面をハッキリつけることができます。</p>
+
+<p><figure class="figure-image figure-image-fotolife" title="クリースで境界面を明確化"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617151453.png" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>クリースで境界面を明確化</figcaption></figure></p>
+
+<p>このときもやはり、点や線の数が少ないほうが制御しやすいです。ちなみにAlt + クリック（ループ選択）や、Ctrl + クリック (最短経路選択) を活用すると作業がしやすいです。</p>
+
+<p>ここから先は、ナイフツールで新しいポリゴンを切っていったり、作った点を動かすことで作り込んでいくわけですが、何度もいうように制御点であるということを意識しておくことで、余計な点を加えないほうが美しいことはだんだん理解できてくると思います。（境界面をハッキリさせたいときに、点を増やさずクリースを活用するのがコツ。）</p>
+
+<p><figure class="figure-image figure-image-fotolife" title="ナイフツールでポリゴンを切り込んでいく様子（※ 逆に辺を減らしたいときは、「溶解」という操作も便利。）"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617155423.png" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>ナイフツールでポリゴンを切り込んでいく様子（※ 逆に辺を減らしたいときは、「<a href="https://www.youtube.com/watch?v=VDA92t2PNGU">溶解</a>」という操作も便利。）</figcaption></figure></p>
+
+<h2 id="３プロポーショナル編集とスカルプトをポリゴン数に応じて使い分ける">３：プロポーショナル編集とスカルプトを、ポリゴン数に応じて使い分ける</h2>
+
+<p>ちなみに、作業をすすめていくとどうしても点の数が増えてきますが、ポリゴン密度によってツールを使い分けるのがコツになってきます。</p>
+
+<p>特に、</p>
+
+<ul>
+<li>低密度 → <strong>直接編集</strong></li>
+<li>中密度 → <strong>プロポーショナル編集</strong></li>
+<li>高密度 → <strong>スカルプト編集</strong></li>
+</ul>
+
+
+<p>という段階を覚えておけば、たいていのケースには対応できます。</p>
+
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/sp9nBGC-4xY?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Blender3 超入門⑥【プロポーショナル編集の使い方 / 8つの減衰タイプ】"></iframe><cite class="hatena-citation"><a href="https://www.youtube.com/watch?v=sp9nBGC-4xY">www.youtube.com</a></cite></p>
+
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/lmd_NbWCmAY?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="【Blender3.5】スカルプトの使い方を解説！"></iframe><cite class="hatena-citation"><a href="https://www.youtube.com/watch?v=lmd_NbWCmAY">www.youtube.com</a></cite></p>
+
+<p>ちなみに、「<a href="https://dskjal.com/blender/loose-editing.html">Blender でアバター編集に便利な機能</a>」という記事に書かれているノウハウが、曲面や<a class="keyword" href="https://d.hatena.ne.jp/keyword/%CD%AD%B5%A1">有機</a>的な面での操作に非常に役立つので貼っておきます。特にVolume Preserving Smooth（体積維持できるスムーズ）や、ラティス、Edge Flowやリラックスの活用など、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%CC%DC%A4%AB%A4%E9%CE%DA">目から鱗</a>のテクニックが満載で、まるでバイブルのように感じてすらいます。</p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fdskjal.com%2Fblender%2Floose-editing.html" title="Blender でアバター編集に便利な機能" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://dskjal.com/blender/loose-editing.html">dskjal.com</a></cite></p>
+
+<h2 id="４Quad-Remesherをフル活用する">４：Quad Remesherをフル活用する</h2>
+
+<p>最後に、Quad Remesherを使ったリ<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a>をフル活用することが、複雑なポリゴンをうまく制御する上では意外なポイントの一つです。<a href="https://funatsufumiya.hatenablog.com/archive/category/CAD%E2%86%92%E3%82%B9%E3%82%AB%E3%83%AB%E3%83%97%E3%83%88%EF%BC%88%E9%80%A3%E8%BC%89%E8%A8%98%E4%BA%8B%EF%BC%89">CAD→スカルプトをテーマにした連載記事</a>のなかでも、特にスカルプトを利用した場合のリ<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a>の大事さは何度か取り上げましたが、Quad Remesherに代表される自動リ<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a>は、<strong>意外と100ポリゴン程度のローポリでも大活躍</strong>します。</p>
+
+<p>特に、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a>を誤ってしまって妙な凹凸が出たりした場合に、一度数百ポリゴン程度に自動リトポして、もう一度subdivすると、非常に綺麗になることは多々あります。</p>
+
+<p><figure class="figure-image figure-image-fotolife" title="妙なポリゴンができて直せなくなったとき…"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617153528.png" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>妙なポリゴンができて直せなくなったとき…</figcaption></figure></p>
+
+<p><figure class="figure-image figure-image-fotolife" title="100ポリゴンくらいの少ないポリゴン数に自動リトポして…"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617153554.png" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>100ポリゴンくらいの少ないポリゴン数に自動リトポして…</figcaption></figure></p>
+
+<p><figure class="figure-image figure-image-fotolife" title="subdivをかけなおすと綺麗になる！"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617153626.png" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>subdivをかけなおすと綺麗になる！</figcaption></figure></p>
+
+<p>このやり方は、スカルプトでクセの強くなった表面を滑らかにする際に有用なのですが、同じポリゴン数でも<strong><a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a>の流れを一旦修正したいとき</strong>に活用できますし、増えすぎたポリゴン数を減らして、subdiv編集に戻したいときなんかは本当に有効です。</p>
+
+<p><figure class="figure-image figure-image-fotolife" title="トポロジーの流れが思うようにいかないとき…"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617165452.png" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption><a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a>の流れが思うようにいかないとき…</figcaption></figure></p>
+
+<p><figure class="figure-image figure-image-fotolife" title="自動リトポを頼ったり、参考にすると活路が見いだせることも"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617165518.png" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>自動リトポを頼ったり、参考にすると活路が見いだせることも</figcaption></figure></p>
+
+<p>ちなみにQuad Remesherは有料アドオンなので、ポリゴン数を減らすことを標準機能で実現したい場合は、「<strong>限定的溶解 (Limited Dissolve)</strong>」も便利です。（さらに<a href="https://dskjal.com/blender/loose-editing.html">前述の記事</a>にあるような辺のスムージングも活用すると吉。）</p>
+
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/musdH1507Uc?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="限定的溶解"></iframe><cite class="hatena-citation"><a href="https://www.youtube.com/watch?v=musdH1507Uc">www.youtube.com</a></cite></p>
+
+<p>とはいえ、もしスカルプトなどを検討されているなら、ZRemesher的なものは必須になってくるので、サブスクではなく買い切りでずっと使えるQuad Remesherは、非常にありがたいものであると思っています。（他のソフトでは、買い切りでも数万円と非常に高額であったり、月に数千円のサブスクであることもザラにありますので…。）</p>
+
+<h2 id="まとめ-見方を変えればポリゴン編集も便利">まとめ: 見方を変えればポリゴン編集も便利</h2>
+
+<p>さて、今回はあえてポリゴン編集に目を向けて、NURBSの弱点を補完するためにsubdivを活用していく上でのちょっとしたノウハウをご紹介しました。</p>
+
+<p><a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>にもNURBSカーブは存在するのですが、できることが非常に中途半端で、使いづらいことで有名なので、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>はsubdiv専用のツールとして、ポリゴンはあくまで制御点だと割り切って使うと、案外便利です。</p>
+
+<p>そう考えると、ポリゴンというのはいろんな側面があって、ドット絵のようなローポリをイメージして原始的な感じで制作を進めるのも、案外楽しいですし、制御点という意味でいえば、ローポリこそ実は完成形だったりします。</p>
+
+<p>あとは、プロポーショナル編集とスカルプト編集、そしてQuad Remesherのような自動リトポをうまく活用することで、高いポリゴン数でも柔軟に操作できることが、ポリゴン編集の要（かなめ）であるといえます。逆にいえば、NURBSのすごいところは線が増えてもあとから柔軟に消したり整理したりできる点にあって、subdivはその逆で、全部のポリゴンが空間上にある制御点として連結されている（だからこそ雲や身体のような複雑な立体的曲面をうまく扱える）ことが魅力だと私は思っています。</p>
+
+<p><figure class="figure-image figure-image-fotolife" title="subdiv編集"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617161033.png" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>subdiv編集</figcaption></figure></p>
+
+<p><figure class="figure-image figure-image-fotolife" title="NURBS編集"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240617/20240617161710.png" width="1200" height="675" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>NURBS編集</figcaption></figure></p>
+
+<p>正直、間くらいのものがあると便利なんですが、両方扱えるMayaも<a class="keyword" href="https://d.hatena.ne.jp/keyword/Rhino">Rhino</a>も高額ですね…。いまはQuad Remesherもありますし、<a href="https://dsculptor.gumroad.com/l/exportiges">Export IGES</a>のように相互変換できるアドオンもあるので、一つですべてを賄えるツールに頼るばかりでなく、うまく道具を使い分けてツール間を行き来するのがコストを抑えるコツだと思います。</p>
+
+<p>（CADとポリゴンとスカルプトの間という意味では、<a href="https://3dtotal.jp/news/40090/">SDFモデリング</a>という新しい考え方も、ツールが成熟してくれば強力なツールの一つになるかもしれません。）</p>
+
+<p>ところで余談ですが、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>のスカルプトツールは年々進化しているものの、ブラシの切れ味はまだまだ<a class="keyword" href="https://d.hatena.ne.jp/keyword/ZBrush">ZBrush</a>や<a class="keyword" href="https://d.hatena.ne.jp/keyword/Nomad">Nomad</a> Sculptに及ばない部分が多くあるので、もしポリゴンを素体として、細かな彫り込みを考えている場合は、個人的には<a class="keyword" href="https://d.hatena.ne.jp/keyword/Nomad">Nomad</a> Sculptなどにインポートするのを強くおすすめします。</p>
+
+<p>単に高いポリゴン数をうまく扱うための便利ツールとしては、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>のスカルプトも便利ですが、逆に超ハイポリになると重くなったりと、課題はまだまだあります。<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>もマルチレゾリューションがサポートされたり、年々進化しているので、今後に期待かなと思っています。（同じノリでNURBSも強化してくれたらいいのにな…。）</p>
+
+<p>話が少しそれましたが、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>のポリゴン<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%E2%A5%C7%A5%EA%A5%F3%A5%B0">モデリング</a>にスカルプトツールがだんだんと融合されているように、NURBSやCADの要素も同じくらい融合されていくと、3DCGのもっと楽しい未来がやってくるような気がしています。</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+厳密には<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>もNURBSは扱えますが、CADのそれとは程遠い、ごく限定的なものです…。<a href="#fnref:1" rev="footnote">&#8617;</a></li>
+</ol>
+</div>
+

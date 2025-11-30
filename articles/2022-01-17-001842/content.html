@@ -1,0 +1,15 @@
+<p>先日、<a href="https://github.com/funatsufumiya/pc-f-layout">PC-F配列</a>というものを考えついたという記事を書いて、その後少し練習してみたものの、楽しいは楽しいのだけど結構打鍵するのは大変だった。</p>
+<p>でも、しばらく練習していて気づいたのが、そもそも行段系配列って、<strong>段だけで実は成立するんじゃないか</strong>という仮説。</p>
+<p>具体的には、<a class="keyword" href="http://d.hatena.ne.jp/keyword/2ch%CD%D1%B8%EC">2ch用語</a>の <a class="keyword" href="http://d.hatena.ne.jp/keyword/kwsk">kwsk</a> (詳しく) とか <a class="keyword" href="http://d.hatena.ne.jp/keyword/wktk">wktk</a> (<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EF%A5%AF%A5%C6%A5%AB">ワクテカ</a>) みたいに、実はそもそも段だけでかなり単語は絞られる。</p>
+<p>ということは例えば、</p>
+<p>-「今日はとてもいい天気です。」は、「ky h ttm itk ds .」</p>
+<p>-「早速いろんな組み合わせを試してみたい。」は、「ssk irnn kmaws w tmst mti.」</p>
+<p>になる。</p>
+<p>この相互変換って、実はすごく実用的なんじゃないかと思って、これを<strong><a class="keyword" href="http://d.hatena.ne.jp/keyword/kwsk">kwsk</a>形式</strong> (クワシク形式って呼びにくいので、呼称はとりあえず<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AB%A5%EF%A5%B5%A5%AD">カワサキ</a>形式) と仮称することにして、<a class="keyword" href="http://d.hatena.ne.jp/keyword/kwsk">kwsk</a>形式を出力する<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EA%A5%D7%A5%C8">スクリプト</a>を書いてみた。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Ffunatsufumiya%2Fmecab-kwsk" title="GitHub - funatsufumiya/mecab-kwsk: mecab-kwsk" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;"></iframe><cite class="hatena-citation"><a href="https://github.com/funatsufumiya/mecab-kwsk">github.com</a></cite></p>
+<p>で、これで出力されたものを例えば<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQLite">SQLite</a>に保存してDB化すれば一旦試せそうと思って、DB保存部分だけ<a class="keyword" href="http://d.hatena.ne.jp/keyword/Ruby">Ruby</a>で書いてみた。（ホントは読みも一緒に保存できたほうが良いけど、執筆時点では未実装。）</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Ffunatsufumiya%2Fkwsk-db-api-ruby" title="GitHub - funatsufumiya/kwsk-db-api-ruby: f-input-manage-api-ruby" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;"></iframe><cite class="hatena-citation"><a href="https://github.com/funatsufumiya/kwsk-db-api-ruby">github.com</a></cite></p>
+<p>これを使って、<a class="keyword" href="http://d.hatena.ne.jp/keyword/kwsk">kwsk</a>形式から日本語になる<a class="keyword" href="http://d.hatena.ne.jp/keyword/IME">IME</a>を実用化すれば、普段使ってる<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%ED%A1%BC%A5%DE%BB%FA%C6%FE%CE%CF">ローマ字入力</a>で二倍の打鍵効率を全員が一瞬で享受できることになる可能性があるので、是非とも早く実装してみたい。（実現すればきっと素敵なので、誰かが既に実装してても全然良い。）</p>
+<p>まずは上記のスペース混じりを変換するところから始めて、将来的にはドバっと長く打っても直接かな漢字混じりに変換できると理想。実装は多分普通の<a class="keyword" href="http://d.hatena.ne.jp/keyword/IME">IME</a>みたいに実装できると素敵だし、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B5%A1%B3%A3%B3%D8%BD%AC">機械学習</a>で実装することもできそう。</p>
+<p>とりあえず今回はアイディアだけブログにメモしておいて、すでにこういう入力方式があったりしないか、似たようなこと考えてたとかないかなーと期待しつつ、自分でも少しずつ実装してみたいと思う。</p>
+<p>ちなみに、この発想の元になったのは実は英語版のステノタイプで、ステノタイプってほとんどが似たような発想で単語を省略することで一度に打鍵できるようにしている。日本語のステノタイプの情報はほとんど出てこなかったので不明なのだけれど、日本語ステノタイプの情報もあったら是非知りたいなと思う。</p>

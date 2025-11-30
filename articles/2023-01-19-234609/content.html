@@ -1,0 +1,192 @@
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fwww.typingbolt.com%2F" title="Typing Bolt ⚡ | Your AI Powered Personal Typing Tutor" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://www.typingbolt.com/">www.typingbolt.com</a></cite></p>
+
+<p>Typing Boltの頻出パターン生成が素晴らしいので、自分でも生成を試みてみることにする。今回はその初回の実験。</p>
+
+<h2 id="まずは英語">まずは英語</h2>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fwww3.nd.edu%2F~busiforc%2Fhandouts%2Fcryptography%2FLetter%2520Frequencies.html" title="Letter Frequencies" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://www3.nd.edu/~busiforc/handouts/cryptography/Letter%20Frequencies.html">www3.nd.edu</a></cite></p>
+
+<p>こちらのデータを元に、キー配列を高速で上達するためのワード集を構築してみたい。ChatGPTをうまく利用して作成する。</p>
+
+<h3 id="letter-bigram">letter bigram</h3>
+
+<ol>
+<li>th (92535489, 3.882543%)</li>
+<li>he (87741289, 3.681391%)</li>
+<li>in (54433847, 2.283899%)</li>
+<li>er (51910883, 2.178042%)</li>
+<li>an (51015163, 2.140460%)</li>
+<li>re (41694599, 1.749394%)</li>
+<li>nd (37466077, 1.571977%)</li>
+<li>on (33802063, 1.418244%)</li>
+<li>en (32967758, 1.383239%)</li>
+<li>at (31830493, 1.335523%)</li>
+<li>ou (30637892, 1.285484%)</li>
+<li>ed (30406590, 1.275779%)</li>
+<li>ha (30381856, 1.274742%)</li>
+<li>to (27877259, 1.169655%)</li>
+<li>or (27434858, 1.151094%)</li>
+<li>it (27048699, 1.134891%)</li>
+<li>is (26452510, 1.109877%)</li>
+<li>hi (26033632, 1.092302%)</li>
+<li>es (26033602, 1.092301%)</li>
+<li>ng (25106109, 1.053385%)</li>
+</ol>
+
+
+<h3 id="生成した文章">生成した文章</h3>
+
+<p>「th, he, in, er, an, re, nd, on, en を含む単語をできるだけ複数種類使い、それぞれ頭の中で列挙した上で、それらで最短の文章をそれぞれ作ってください。タイピング練習の文章にしたいと思っています。」
+とChatGPTに聞く形で作成した。</p>
+
+<pre class="code txt" data-lang="txt" data-unlink>th: The thread unraveled as the tailor sewed the cloth, but he was able to fix it with his deft fingers.
+
+he: He felt the weight of the world on his shoulders, as he walked through the city streets. He knew he had to keep moving, to overcome the hurdles.
+
+in: In the end, it was the little things that mattered, the moments of joy, the memories that were made.
+
+er: He never wavered, never faltered, never hesitated, he was determined to succeed, and he never wavered.
+
+an: The man stood on the platform, looking out at the vast expanse of the canyon, the grandeur of nature, the vastness of the landscape, the harmony of the colors.
+
+re: He knew that the only way to move on was to let go of the past, to reflect, to renew, to reshape the future.
+
+nd: He understood the importance of expanding his knowledge, of understanding the trends and demands of the market, of being able to adapt and be flexible in a constantly changing industry, so he took the initiative to learn and grow, to explore new opportunities, to make connections and build networks, to be ready for whatever challenges came his way.
+
+on: On one hand, he was optimistic, on the other hand, he was realistic, he knew that consistency, persistence, and planning were key to achieving his goals.
+
+en: He was determined to make a difference, to have an impact, to make it happen, he had the energy and enthusiasm, he just needed the right opportunity, the right encouragement..
+
+at: The cat sat on the mat, watching the rat, scratching its fat paw, before it took a nap.
+
+ou: You should shout out your doubts, and work out your issues, before you figure out your route, and head out on your journey.
+
+ed: He needed to be fed, he wanted to be led, he was determined to succeed, he was well-bred and well-educated.
+
+ha: I had a hat, I saw a rat, I heard a cat, I chased a bat, I caught a rat.
+
+to: I have to go, I want to know, I need to show, I am ready to grow, I am able to flow.
+
+or: He had to restore the old door, before he could install the new one, and he had to explore the shore, before he could go on a tour.
+
+it: It was a bit, of a hit and miss, but it was still, a worthwhile experience, it was a bit, of a challenge, but it was also, a lot of fun.
+
+is: Is it time, to make a decision, is it wise, to take a chance, is it right, to stand up for what you believe, is it wrong, to change your mind.
+
+hi: He hit the high notes perfectly, singing with precision and skill, as the audience cheered and applauded.
+
+es: She was impressed by his expertise, his ability to make complex tasks look easy, his attention to detail and his eagerness to learn new skills.
+
+ng: The king was reigning over the kingdom, ruling with wisdom, fairness and compassion, ensuring the well-being of his people, and maintaining peace and prosperity.</pre>
+
+
+<p>my typingに一応公開してみた。文字数制限の関係で割愛せざるをえず、ちょっと微妙な出来だけど、それでも十分に役に立つはず。</p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ftyping.twi1.me%2Fgame%2F267362" title="bigramを利用した高頻出パターンを含む英文 | タイピング練習の「マイタイピング」" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://typing.twi1.me/game/267362">typing.twi1.me</a></cite></p>
+
+<h2 id="次に日本語">次に日本語</h2>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fkouy.exblog.jp%2F9731073%2F" title="100万字日本語かなn-gramデータ | ローマ字入力でもなく、かな入力でもなく" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://kouy.exblog.jp/9731073/">kouy.exblog.jp</a></cite></p>
+
+<p>リストが長いので一部抜粋</p>
+
+<h3 id="文字-2gram">文字 2gram</h3>
+
+<p>15033   ょう
+7484    てい
+6341    しょ
+6117    って
+5998    ゅう
+5875    して
+5588    ない
+5389    かい
+5357    よう
+5318    こう
+5196    った
+5075    かん
+5059    うし
+5009    した
+4765    こと
+4724    せい
+4691    たい
+4319    じょ
+4239    す。
+4040    た。
+3950    する
+3904    から
+3840    とい
+3804    いし
+3743    ます
+3740    しゅ
+3661    は、
+3632    んし
+3497    です
+3469    る。
+3448    んの
+3443    きょ
+3382    いる
+3352    いの
+3326    いう
+3299    うに
+3279    さい
+3206    ある
+3169    しん</p>
+
+<h3 id="生成した文章-1">生成した文章</h3>
+
+<p>ChatGPTに何度もパターンを変えてあたってみたが、うまい文章が生成されなかった。一応以下に結果を添付。</p>
+
+<pre class="code txt" data-lang="txt" data-unlink>「ょう」: 洋貨を買うようにしましょう。
+「てい」: 程度が高いです。
+「しょ」: 書類を提出しよう。
+「って」: 一度聞いてみて。
+「ゅう」: 雨が降る予報だ。
+「して」: しっかりしていなさい。
+「ない」: 役に立たないこと
+「かい」: 会議が終わった
+「よう」: 様子を見に行こう
+「こう」: こう言った意見がある
+「った」: 言った通りにやって
+「かん」: 管理すること
+「うし」: 牛を飼うこと
+「した」: した事に対する責任
+「こと」: 今後のことについて
+「せい」: 正義のため
+「たい」: 目標を達成するため
+「じょ」: 女性のこと</pre>
+
+
+<p>あまりにひどい出来なので、自分が考えたバージョンを以下に加えておく。</p>
+
+<pre class="code txt" data-lang="txt" data-unlink>「ょう」: 少々故障が多いでしょう。
+「てい」: っていっても程度が低下している。
+「しょ」: 正直障子は処理でしょう。
+「って」: っていってもって感じって。
+「ゅう」: 吸収中の九州中央琉球乳牛。
+「して」: 指定した人をして、大してしていないとして。
+「ない」: 家内には案内させないので家内は来ない。
+「かい」: 開会式の会場を回顧かい。
+「よう」: 様子をみようとしよう。
+「こう」: 高校に高効率に試行。
+「った」: 去ったり打ったり立ったり。
+「かん」: あかん、これはカンカンになって管理されてる感。
+「うし」: 講師の後ろで牛が調子にのってるし。
+「した」: 死体に大した支度もしたことない。
+「こと」: ことの発端を隠したことはそことここ。
+「せい」: せいぜい考えて生徒とせい。
+「たい」: 大抵のガタイの良い体育の大会は行きたい。
+「じょ」: 徐々に女性が上手に上達する。</pre>
+
+
+<p>こちらは良い出来で、練習になりそうなので、mytypingに追加しておいた。
+<iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ftyping.twi1.me%2Fgame%2F267365" title="bigramを利用した高頻出の日本語文 | タイピング練習の「マイタイピング」" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://typing.twi1.me/game/267365">typing.twi1.me</a></cite></p>
+
+<p>ただ、あまりに作為的なので英語版に比べて不自然な文章なのが要改善か。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>今回はいまいちうまくいかなかったけれど、やはり2-gram (bigram) 等を利用した、digraphの活用は効率を上げることができるという体感は得られた。次は文字に限らず、2キーの対応のdigraphの作成をしつつ、効率的な練習文章の本格生成を進めたい。</p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ftyping.twi1.me%2Fgame%2F267362" title="bigramを利用した高頻出パターンを含む英文 | タイピング練習の「マイタイピング」" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://typing.twi1.me/game/267362">typing.twi1.me</a></cite></p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ftyping.twi1.me%2Fgame%2F267365" title="bigramを利用した高頻出の日本語文 | タイピング練習の「マイタイピング」" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://typing.twi1.me/game/267365">typing.twi1.me</a></cite></p>

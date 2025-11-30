@@ -1,0 +1,41 @@
+<p>下記Blueskyでのメモを、一応ブログにも整理して転記。</p>
+
+<p><blockquote class="bluesky-embed" data-bluesky-uri="at://did:plc:5yucnfnlru5566yidia722yz/app.bsky.feed.post/3lht7pnk6hc2g" data-bluesky-cid="bafyreiekcnhnhs4sghod565wu64aosnaouvwdm6mx5j2krjhd6wdhjorjq"><p lang="ja">ボクセルをやり始めて、改めて昔ブログに書いた、Quad Remesherを駆使する手法による &#34;清書&#34; の大切さを改めて感じる。 funatsufumiya.hatenablog.com/entry/2024/0...  ボクセルからスカルプトに流してスムージングして、Quad Remesherしたものは、一見綺麗に見えても、やはりメッシュは実は汚い。（スレッドに続く。）</p>&mdash; <a href="https://bsky.app/profile/did:plc:5yucnfnlru5566yidia722yz?ref_src=embed">Fumiya Funatsu (@funatsufumiya.bsky.social)</a> <a href="https://bsky.app/profile/did:plc:5yucnfnlru5566yidia722yz/post/3lht7pnk6hc2g?ref_src=embed">2025-02-10T13:09:30.763Z</a></blockquote><script async src="https://embed.bsky.app/static/embed.js" charset="utf-8"></script><cite class="hatena-citation"><a href="https://bsky.app/profile/funatsufumiya.bsky.social/post/3lht7pnk6hc2g">bsky.app</a></cite></p>
+
+<p>以前熱心に書いていた『CAD→スカルプト』の連携手法として、最近自分自身がボクセルツールを使い始めて、逆順としての『スカルプト→CAD』による清書の大事さに気付いたのでメモ。</p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ffunatsufumiya.hatenablog.com%2Farchive%2Fcategory%2FCAD%25E2%2586%2592%25E3%2582%25B9%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%2597%25E3%2583%2588%25EF%25BC%2588%25E9%2580%25A3%25E8%25BC%2589%25E8%25A8%2598%25E4%25BA%258B%25EF%25BC%2589" title="CAD→スカルプト（連載記事） カテゴリーの記事一覧 - しさくろく" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://funatsufumiya.hatenablog.com/archive/category/CAD%E2%86%92%E3%82%B9%E3%82%AB%E3%83%AB%E3%83%97%E3%83%88%EF%BC%88%E9%80%A3%E8%BC%89%E8%A8%98%E4%BA%8B%EF%BC%89">funatsufumiya.hatenablog.com</a></cite></p>
+
+<p>まず、大前提としてCADでは一発でラインが上手く引けないことがある。</p>
+
+<p>というか紙に清書するように空間に一発で良い線を書くのは難しいので、ボクセルないしスカルプトによって、空間にラフを書くことを考える。</p>
+
+<div class="images-row mceNonEditable"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250210/20250210222546.jpg" width="788" height="1200" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250210/20250210222557.jpg" width="788" height="1200" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></div>
+
+
+<p>これで作ったものを、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>のQuad Remesherや<a class="keyword" href="https://d.hatena.ne.jp/keyword/Nomad">Nomad</a> SculptのQuad Remeshによってローポリにすると、一見綺麗そうなメッシュが得られるものの、やはり手描き特有の癖のあるメッシュになってしまう。</p>
+
+<div class="images-row mceNonEditable"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250210/20250210222652.jpg" width="788" height="1200" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250210/20250210222717.png" width="1200" height="655" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></div>
+
+
+<p>そこで登場するのが、以前紹介したCAD→スカルプトの手法の逆バージョン。</p>
+
+<p>おそらく一度は記事中で書いたと思うけれど、一度得られたローポリメッシュを、例えばMoi3Dにインポートして、このメッシュの位置情報を元に、CADで線を清書する。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250210/20250210223019.png" width="1200" height="655" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>そして、PlasticityにCADデータ (ここでは3dm) をインポートして、Loft等により<a class="keyword" href="https://d.hatena.ne.jp/keyword/Surface">Surface</a>とSolidを得る。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250210/20250210223108.png" width="1200" height="655" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>この工程を経る理由は、Moi3Dでは複雑なパスから連続した<a class="keyword" href="https://d.hatena.ne.jp/keyword/Surface">Surface</a>やSolidを得るのはかなり難易度が高いため。その代わりにMoiは空間上の線をとても楽に高精度で引くことができる。これをPlasticityにより補い、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>等で利用できる連続したメッシュを得る。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250210/20250210223430.png" width="1200" height="655" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>こうして得られたメッシュの<a class="keyword" href="https://d.hatena.ne.jp/keyword/STL">STL</a>やOBJなどは、現時点で既に滑らかで綺麗ではあるけれども、Plasticityの制約で、あまり<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a>の良いメッシュを出力してはくれないので、一度<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>にかけてQuad Remesherを行うと、より<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a>の美しいメッシュが得られる。</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250210/20250210223228.png" width="1200" height="655" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+
+<p>一度慣れれば簡単でサクサクと進められるのだけれど、複数のツールをまたぐこともあり、ツールやアドオンのインストールなど、環境構築の時間はかかるかもしれない。</p>
+
+<p>なお、複数のツールをあえてまたぐのは、空間上に思った通りの線を引くためのラフ作業の精度を上げるためにある。既に三面図等がある場合は、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>やCADで直接作業するのが良いと思うが、考えながら試行錯誤するには、清書過程を経るのもあり、ちょうど良いプロセスのように思う。</p>

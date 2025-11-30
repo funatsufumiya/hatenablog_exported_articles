@@ -1,0 +1,108 @@
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/GcZwx6ejAOQ?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="My first Blender&#39;s Geometry Node (Theme: Film)"></iframe><cite class="hatena-citation"><a href="https://youtu.be/GcZwx6ejAOQ">youtu.be</a></cite></p>
+
+<p>Blueskyには少し経緯を書いていたのだけれど、以前からずっとやりたいと思っていた、Geometry Nodeによるジェネラティブ（生成的）、あるいはプロシージャル（手続生成的）な造形というものをやってみた。</p>
+
+<p>実はノードベースなものを扱うのは初めてではなくて、今までGodotやUnity、UE、HoudiniやNotchなどを触ってきたのだけれど、それらのほとんどがシェーダー（グラフ）部分あるいはメッシュ生成部分のみで、メッシュ生成からシェーダまで自分のプログラムで完結したのは、おそらく初めてではないかと思う。</p>
+
+<p>以下、少し長くなるかもしれないけれど、自分にとっては一つ大きな一歩だったので、このタイミングに思考整理を赤裸々に書き連ねておきたい。</p>
+
+<h2 id="3DCGの持つ様々な分野と分業について">3DCGの持つ様々な分野と、分業について</h2>
+
+<p>元々マルチにいろんなことをやっていた影響で、3DCG、特に<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B2%A1%BC%A5%E0%A5%A8%A5%F3%A5%B8%A5%F3">ゲームエンジン</a>の仕組みについては詳しい方ではあったのだけれど、自分は特にUV展開を不得意としていて、UVはいつもほぼ自動生成させていた。例えばHoudiniやNotchでは、メッシュ生成だけを楽しんでいて、色は単色をつけたり、出力したメッシュを一度保存して、自動UV展開して、ペイントしたり既存のテクスチャをつけて遊んでいた。（逆にGodotをはじめとする<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B2%A1%BC%A5%E0%A5%A8%A5%F3%A5%B8%A5%F3">ゲームエンジン</a>では、シェーダを中心に遊んでいた。）</p>
+
+<p>余談になるのだけれど、3DCGというのは、基本的には分業制のところが多いと思う。自分が経験してきた会社は中小ばかりなので、1人で完結しなければならない場合が多かったし、3DCGアーティストをもし内部に持てたとして1人とか数人みたいな、個々人がアーティストやクリエイターとして動く場合が多かったのだけれど、おそらく多くの場合は分業だろうと思う。</p>
+
+<p>例えばライティングならライティングの専門の人がいるし、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%E2%A5%C7%A5%EA%A5%F3%A5%B0">モデリング</a>専門の人がいる。テクスチャ描く人がいる。エンジニアがいる。それぞれの力で成り立っているというのが普通だと思う。</p>
+
+<p>自分の場合は<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B2%A1%BC%A5%E0%A5%A8%A5%F3%A5%B8%A5%F3">ゲームエンジン</a>のエンジニアとしてはシェーダを中心に仕事をしていて、趣味でずっと造形をしていた関係で個人的に<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%E2%A5%C7%A5%EA%A5%F3%A5%B0">モデリング</a>は詳しかった。で、元々あまり視覚優位な人間ではないので、テクスチャにはさほど興味がなくて、結果的にUV展開が苦手分野として残った。</p>
+
+<p>それでも自分はUV展開は自動ツールに頼っていたので、正直ほとんど不便はなかった。ツールさえ覚えれば作業はできるし、自分に（UV展開という意味での狭い分野で）求められるものにそこまでのクオリティは必要はなかった。</p>
+
+<h2 id="Geometry-Nodeに要求される知識-3DCGのフル知識">Geometry Nodeに要求される知識: 3DCGのフル知識</h2>
+
+<p>ただ、<a href="https://www.tixl.app/">TiXL (Tooll)</a> などのいわゆるVJツールや、今回のようなGeometry Nodeの場合は、やはりある程度広範囲にわたって知識を要求される。モデル生成から最終<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%EC%A5%F3%A5%C0%A5%EA%A5%F3%A5%B0">レンダリング</a>まで完結するということは、そういうことだし、ジェネラティブ（生成的）やプロシージャル（手続き生成的）に造形をするということになれば、それらの仕組みを理解していなければならなくなる。</p>
+
+<p>そういう意味で、自分はずっと<a href="https://x.com/cmzw_">celestialmaze</a>さんというアーティストさんをずっと尊敬していてこの分野の動画はたくさん観ながらも、実際に自分でやろうとは思わなかった理由は、やはり苦手分野をどこか無意識に自覚していたからかもしれない。</p>
+
+<p>ちなみに、celestialmaze さんの肉声というものを先日オンライン開催だった<a href="https://cgworld.jp/special/blenderfes/vol4/">Blender Fes 2025 SS</a>で初めて拝聴したのだけれど、目の前でリアルタイムに何かが組まれていく様子というのは、本当に感激するものだったし、胸を打たれるものがあった。</p>
+
+<p>その分野でまさか自分自身が一歩目に挑戦するとはちょっと想像もしていなかったのだけれど、本当に不思議なものだと思う。</p>
+
+<p>（ちなみにこの項のタイトルにある3DCGのフル知識について、話の流れ的に結局触れることがなかったので最後に補足しておくと、3DCGのフル知識があればあるに越したことはないし、ソロプレイに向いたツールであるのは確かだと思う。ただ、Geometry Nodeがあるからといって全分野を一人でやる必要はないので、ここでも分業は十分可能なはず。また、Processingなどがそうであるように、なんの知識もなくても普通に楽しい。）</p>
+
+<h2 id="Geometry-Nodeを始めようと思ったきっかけ-TiXLとクリエイティブコーディング">Geometry Nodeを始めようと思ったきっかけ: TiXLとクリエイティブ・コーディング</h2>
+
+<p>ちなみにGeometry Nodeをやり始めようと思ったきっかけは、実は celestialmaze さんの講演がきっかけではない。</p>
+
+<p>Geometry Nodeをやり始めたきっかけは、<a href="https://www.tixl.app/">TiXL (Tooll)</a> というツールが好きだからという理由が一番あった。</p>
+
+<p>厳密にはTiXL (v4) はまだリリースされていなくて、<a href="https://qiita.com/funatsufumiya/items/1314dd23c3894de20790">先日Preview版を使った入門記事</a>を自分で書いたばかり。それも、執筆時点でまだこのとき使った<a class="keyword" href="https://d.hatena.ne.jp/keyword/Preview">Preview</a> 3 以降のバージョンはまだ出ていない。</p>
+
+<p>TiXL (Tooll) 自体は1年くらい前からウォッチしていて、自分が<a class="keyword" href="https://d.hatena.ne.jp/keyword/Mac">Mac</a>ユーザだったので手が出ないでいた。開発用のデスクトップ機はあったのだけれど、実はこのためにわざわざ中古の5年前くらいのゲーミングノートPCを偶然格安で手に入れたことで、やり始めた。</p>
+
+<p>そもそも普段プログラミングをしていることの多い自分がノードベースのツールをなぜ急に使い始めようと思ったかについては、それはクリエイティブ・コーディングの一種だからという理由で、それ以上の深い意味はないと思う。別にノードだろうがプログラムだろうが、本質はあまり変わらないけれど、最近LuaJITなどの<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EA%A5%D7%A5%C8%B8%C0%B8%EC">スクリプト言語</a>を書くことが多かったので、リアルタイムに何かが変わっていく様子がわかるというライブコーディングに惹かれていた部分はあった。</p>
+
+<p>なお、「じゃあTiXL (Tooll) 中心にやれば？」といわれたら本当にその通りなのだけれど、まだまだ主に<a class="keyword" href="https://d.hatena.ne.jp/keyword/Mac">Mac</a>ユーザな自分にとってはハードルがある部分が若干あるのと、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%E2%A5%C7%A5%EA%A5%F3%A5%B0">モデリング</a>に関しての不足を補いたいという思いがGeometry Nodeに目を向けさせた。特に、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>の場合は元々自分が<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>についてはある程度操作の知識があるので、どんなノードが存在するかはなんとなく直感的に理解できる。そういう意味でGeometry Nodeは、自分が純粋に3DCGのメッシュをまるで映画<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%DE%A5%C8%A5%EA%A5%C3%A5%AF%A5%B9">マトリックス</a>の世界のように作為的に自由自在に操作できるまでの、つなぎとなるのかもしれないし、このままGeometry Nodeを中心に突き進むかもしれない。（実際、Bevyなどのプログラミングでも、メッシュの直接操作は自分の苦手分野の一つ。）</p>
+
+<p>あと、次の項で主にGeometry Nodeで得られるものについては書いていくつもりなのだけれど、EEVEE (Next)というレンダラーのおかげで、ほぼリアルタイムに様々なことが完結できるのがGeometry Nodeの強いところ。正直、最新の<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>（執筆時点で4.3）ではVulkanも実験的に採用されているし、このまま<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>を使ったリアルタイム・ライブ・コーディングとかVJとかが進化していけば、もう正直自分はそれで十分かもしれない。（この分野はまだ未成熟なので、今後に期待。）</p>
+
+<h2 id="Geometry-Nodeで得られるもの-規則的な内部構造人為性">Geometry Nodeで得られるもの: 規則的な内部構造＋人為性</h2>
+
+<p>Geometry Nodeで何が得られるかといえば、何かしら規則的な内部構造を持つ3DCGが作りやすくなる。</p>
+
+<p>これは昔はHoudiniという非常に高額な3DCGツール（いわゆるDCCツール）が持っていた機能でもあり、CADなどの分野でいえばGrasshopper（こちらも比較的高額…）などが担っていた分野でもあった。</p>
+
+<p>過去にHoudiniやNotchにハマっていたとき、高額なサブスクを契約しようかと思ったことも一瞬あったのだけれど、自分にはその勇気は出なかった。（個人でIndieプランを契約するのが精一杯だったし、それでも十分高額だった。）</p>
+
+<p>そういう意味で、とても良い時代になったなと思う。<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>がv3になり、v4になる過程で、スカルプト（彫刻）などのそれまで高額だった様々な機能を取り込んでいき、3DCG分野にとっては大きな変化だっただろうし、少し余談にはなるけれど、その間にPlasticityやMagicaCSGなどの新しい動きも生まれていった。</p>
+
+<p>Geometry Nodeは、プロシージャルな造形ができるツールとして、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>を中心にいろんなものの中核として既に動いている感があって、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Python">Python</a>（+ dll）のみが<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a><a class="keyword" href="https://d.hatena.ne.jp/keyword/%B3%C8%C4%A5%B5%A1%C7%BD">拡張機能</a>の中心だった時代からすれば、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>のアドオンもとても色彩豊かになった。</p>
+
+<p>自分はその分野への憧れがちょっとあったのかもしれないし、元々何かの内部構造を観察したり考えたりするのが好きで、かつ日々の実験や試行錯誤が好きな自分にとっては、もしかすると相性が良い分野なのかもしれない。</p>
+
+<p>なお、あえてGeometry Nodeと通常のプログラミングとの違いをあげるとすれば、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>などはグラフィカルにアーティストが使いやすい道具が揃ったなかでリアルタイムにノードを組み上げていけるので、人のタッチや感覚をすぐに反映できるというのがある。TiXLもそれは似た部分があるのだけれど、ぜひ通常のプログラミングなどでも、ImGuiなどが進化してそのあたりの<a class="keyword" href="https://d.hatena.ne.jp/keyword/Interop">Interop</a>（行き来）がスムーズになればと願う。（現時点でもBevyなどが徐々にそうなりつつはある。）</p>
+
+<h2 id="今後の造形の方向性">今後の造形の方向性</h2>
+
+<p>あまり能書きを書き連ねても仕方がないので、思考整理は一旦これくらいにしたい。</p>
+
+<p>今後の個人制作はおそらくGeometry Node等が中心になっていくだろうし、ひょっとすればテクスチャへのベイクなどの関係で<a class="keyword" href="https://d.hatena.ne.jp/keyword/Substance">Substance</a>シリーズくらいまでは手を広げる可能性はあるけれど、当面はGeometry Nodeというおもちゃで遊んでいくのではないかと思う。</p>
+
+<p>一方でTiXL (v4)の正式リリースが自分の本望（他力本願）ではあるので、TiXLが正式リリースされればまた少し方向性が変わってくるかもしれないけれど、いずれにしても当面は、ノードベースでリアルタイムに試行錯誤しながら造形を楽しむ方向性でいきたいなと思う。</p>
+
+<h2 id="余談-ライブコーディングの楽しさと少しだけTouchDesingerについての所感">余談: ライブコーディングの楽しさと、少しだけTouchDesingerについての所感</h2>
+
+<p>本当に余談だけれど、ライブコーディングというのはとても楽しくて、特に音楽分野でTidalCyclesや<a class="keyword" href="https://d.hatena.ne.jp/keyword/SuperCollider">SuperCollider</a>などのライブコーディングが積極的に行われている面白さに、Geometry NodeやTiXLの面白さはとても近いと思う。もちろんだけれど、それはTouchDesignerが流行っていることと（自分は詳しくはないけれど）おそらく直接的に関係している。</p>
+
+<p>ちなみにTouchDesignerはやらないのかといわれれば、たぶん今後もやらない。昔、流行ったときに少しだけ触って楽しかったのだけれど、TiXLとは内部構造が似ているようで根本的に違う部分が多々あるし、（本当に自分はTDには全く詳しくないのだけれど、）その多くが<a class="keyword" href="https://d.hatena.ne.jp/keyword/GPU">GPU</a>のパイプラインやバッファの扱い、そしてコンピュートシェーダに関する部分が多い。そういう意味で自分はなぜか不思議と <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> Geometry Node等のほうがTiXLとの親和性は高いように感じていて、TiXLで利用するモデルの生成という意味でも親和性は強く感じている。<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+
+<p>ただ、もし今後の開発動向に変化があれば、TDもウォッチしていくかもしれない。いずれにしても、クリエイティブ・コーディングの手段が多いこと、選択肢が多いことは、個人的には常に大歓迎だし、今後も自分はいろんなツールでいろんな楽しみ方ができればと願うばかり。</p>
+
+<h2 id="後日談その後作ったものについて">（後日談）その後作ったものについて</h2>
+
+<p>2025/06/07 追記</p>
+
+<div class="images-row mceNonEditable"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250607/20250607110252.jpg" width="1200" height="675" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250607/20250607110240.jpg" width="1200" height="675" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250607/20250607121550.png" width="1200" height="675" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></div>
+
+
+<p>この記事を書いたあと、毎日少しずつスケッチを重ねていて、Geometry Nodes <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup> は"画材"としてとても楽しいなと改めて感じている。</p>
+
+<p>日常の些細な風景をスケッチしたり、心象風景をスケッチしたり、そういうことができる画材として、クリエイティブ・コーディングのあるべき姿というのは、こういうものなのかもしれないという感慨を日々噛みしめている。</p>
+
+<p>日々のスケッチはBlueskyやCaraで少しずつ綴っていこうかなと思っているけれど、毎日いろんな日があると思うので、頻度や中身は日によって様々になると思う。そうした、日々の喜怒哀楽や苦楽を、そのままスケッチして残していけたらいいなと思う。</p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fbsky.app%2Fprofile%2Ffumisan86a.bsky.social" title="fumisan86a (@fumisan86a.bsky.social)" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://bsky.app/profile/fumisan86a.bsky.social">bsky.app</a></cite></p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fcara.app%2Ffumisan86a" title="fumisan86a (@fumisan86a)  | Cara - Artist Social &amp; Portfolio Platform" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://cara.app/fumisan86a">cara.app</a></cite></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+Geometry Nodeはたぶん基本的にはCPU処理なはずだと自分は思うのだけれど、実は内部構造がよくわかっていないので、このあたりの考察は勉強ポイントとして次回以降に回したい。ただ、EEVEE (Next) のおかげなのか、あるいは<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>の<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D6%A1%BC%A5%EA%A5%A2%A5%F3">ブーリアン</a>演算などが高速なおかげなのか、キャッシュのおかげなのか、不思議とリアルタイムにメッシュを生成したりいじったりできる謎さはある。<strong>【追記】2025/06/07</strong> <a class="keyword" href="https://d.hatena.ne.jp/keyword/GPU">GPU</a>実装は実験的なので、基本的にCPU処理であることは間違いないものの、fieldsという<a class="keyword" href="https://d.hatena.ne.jp/keyword/Python">Python</a>のnumpyでいうndarrayのようなもの（おそらくVBOやIBOなどの各種バッファに相当する概念）を基本的に使っていれば、例えば<a class="keyword" href="https://d.hatena.ne.jp/keyword/SIMD">SIMD</a>演算化したりなどの各種最適化が自動的に行われる様子。実際、Repeat Zoneなどのfor文にあたるものを直接使えば重いけれど、fieldsや<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>を意識して実装していくことで様々な最適化が図れる様子。このあたりも今後調査を進めてまとめていきたい。<a href="#fnref:1" rev="footnote">&#8617;</a></li>
+<li id="fn:2">
+一応TouchDesignerの肩をもっておくと、もちろんTDの良さはたくさんあって、豊富なアドオンでの拡張や、一応<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A5%A6%A5%F3%A5%C9">サウンド</a>（<a class="keyword" href="https://d.hatena.ne.jp/keyword/DSP">DSP</a>）なども直接扱えるなと、裾野の広さは魅力だと思う。<a href="#fnref:2" rev="footnote">&#8617;</a></li>
+<li id="fn:3">
+この記事を書いた当初時点では、Geometry Nodeと単数形で書いていたけれど、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%B1%D1%B8%EC%B7%F7">英語圏</a>ではGeometry Nodesと複数形での表記が多いようで、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%CF%A5%C3%A5%B7%A5%E5%A5%BF%A5%B0">ハッシュタグ</a>などもそちらが一般的のようなので、今後はそちらに統一していければと思っている。<a href="#fnref:3" rev="footnote">&#8617;</a></li>
+</ol>
+</div>
+

@@ -1,0 +1,27 @@
+<p>いろいろと考えた末に、最終的に<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>を再構築することにした。</p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fephemeral-mastodon.com%2F%40funatsu" title="Fumiya Funatsu (@funatsu@ephemeral-mastodon.com)" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://ephemeral-mastodon.com/@funatsu">ephemeral-mastodon.com</a></cite></p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fephemeral-mastodon.com%2Fabout" title="Ephemeral Mastodon" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://ephemeral-mastodon.com/about">ephemeral-mastodon.com</a></cite></p>
+
+<p><a href="https://funatsufumiya.hatenablog.com/entry/2023/02/07/195519">先日書いた記事</a>で、自分で消える系<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>を維持する意味があまり見いだせないでいたのだけれど、次の考え方から<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>は維持したほうが良いと決断した。</p>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a>の基本機能では、任意の期間を定期削除に指定することができない</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a>はユーザが増えても維持できるようにはできていないので、各人がそれぞれの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>に所属するのが理想</li>
+<li>他人が善意で維持しているサーバに長期間居候して、DB容量や計算リソースの負担をかけたくはない</li>
+<li>利用申請が来ても、その人が信頼できるか不明なので、一旦招待制にして、慣れたら承認制に移行</li>
+<li>NostrやBlueskyなどはまだ未完成で、しばらくは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a>が優勢</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Twitter">Twitter</a>はエコシステムとして完成度が高いものの、運営方針が安定するまで様子見</li>
+</ul>
+
+
+<p>ということで、現在はいわゆるお一人様<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>として維持をしているものの、利用したいユーザがいれば開放しようという考えは持った上でしばらく様子見をしてみます。</p>
+
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>の哲学としては、いまこの瞬間に集中するためのコミュニケーション環境という考え方は前と変わらず、果たして過去の投稿が自動で消えることがどういうエコシステムを生むのか、数ヶ月くらいの単位で静観してみたい。</p>
+
+<p>現状の維持費は月500円ほどで、人数が増えるようであれば増強する予定。今回の再構築によってDocker化したので、運用はだいぶ楽になって、投稿は自然に消えていくので、DBを真剣に維持しなきゃいけないプレッシャーがないのは良い。また、消える系<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a>としての変更点は以下だけで、注意した点はpg_repackでDBの肥大化を防ぐこと。</p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Ffunatsufumiya%2Fmastodon%2Fcommit%2F2e6018dcf36f40acc8d32900fa92803c484141ff" title="Update docker compose and crontab · funatsufumiya/mastodon@2e6018d" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/funatsufumiya/mastodon/commit/2e6018dcf36f40acc8d32900fa92803c484141ff">github.com</a></cite></p>
+
+<p>もし<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>への参加希望があれば、当面は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Twitter">Twitter</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mastodon">Mastodon</a>にDMをいただいて、理由を伺った上で招待する予定。</p>

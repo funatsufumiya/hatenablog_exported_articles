@@ -1,0 +1,53 @@
+<p>Astarte配列を練習していて、久々にバックスペースとエンターを多用しているので、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BF%C6%BB%D8%A5%B7%A5%D5%A5%C8">親指シフト</a>にあたるキー、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mac">Mac</a>でいう英数・かな、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Windows">Windows</a>でいう無変換・変換をバックスペースやエンターに変換して活用している。</p>
+
+<p>Karabiner-ElementsのComplex Modificationだと以下のような感じ。</p>
+
+<pre class="code lang-json" data-lang="json" data-unlink><span class="synSpecial">{</span>
+  &quot;<span class="synStatement">title</span>&quot;: &quot;<span class="synConstant">jp_eisuu_to_backspace</span>&quot;,
+  &quot;<span class="synStatement">rules</span>&quot;: <span class="synSpecial">[</span>
+    <span class="synSpecial">{</span>
+      &quot;<span class="synStatement">description</span>&quot;: &quot;<span class="synConstant">英数 を Enter に変換</span>&quot;,
+      &quot;<span class="synStatement">manipulators</span>&quot;: <span class="synSpecial">[</span>
+        <span class="synSpecial">{</span> &quot;<span class="synStatement">type</span>&quot;: &quot;<span class="synConstant">basic</span>&quot;,
+          &quot;<span class="synStatement">from</span>&quot;: <span class="synSpecial">{</span> &quot;<span class="synStatement">key_code</span>&quot;: &quot;<span class="synConstant">japanese_eisuu</span>&quot; <span class="synSpecial">}</span>,
+          &quot;<span class="synStatement">to</span>&quot;: <span class="synSpecial">[</span>
+            <span class="synSpecial">{</span> &quot;<span class="synStatement">key_code</span>&quot;: &quot;<span class="synConstant">return_or_enter</span>&quot; <span class="synSpecial">}</span>
+          <span class="synSpecial">]</span>
+        <span class="synSpecial">}</span>
+       <span class="synSpecial">]</span>
+     <span class="synSpecial">}</span>
+  <span class="synSpecial">]</span>
+<span class="synSpecial">}</span>
+</pre>
+
+
+
+
+<pre class="code lang-json" data-lang="json" data-unlink><span class="synSpecial">{</span>
+  &quot;<span class="synStatement">title</span>&quot;: &quot;<span class="synConstant">jp_kana_to_enter</span>&quot;,
+  &quot;<span class="synStatement">rules</span>&quot;: <span class="synSpecial">[</span>
+    <span class="synSpecial">{</span>
+      &quot;<span class="synStatement">description</span>&quot;: &quot;<span class="synConstant">かな を Backspace に変換</span>&quot;,
+      &quot;<span class="synStatement">manipulators</span>&quot;: <span class="synSpecial">[</span>
+        <span class="synSpecial">{</span> &quot;<span class="synStatement">type</span>&quot;: &quot;<span class="synConstant">basic</span>&quot;,
+          &quot;<span class="synStatement">from</span>&quot;: <span class="synSpecial">{</span> &quot;<span class="synStatement">key_code</span>&quot;: &quot;<span class="synConstant">japanese_kana</span>&quot; <span class="synSpecial">}</span>,
+          &quot;<span class="synStatement">to</span>&quot;: <span class="synSpecial">[</span>
+            <span class="synSpecial">{</span> &quot;<span class="synStatement">key_code</span>&quot;: &quot;<span class="synConstant">delete_or_backspace</span>&quot; <span class="synSpecial">}</span>
+          <span class="synSpecial">]</span>
+        <span class="synSpecial">}</span>
+       <span class="synSpecial">]</span>
+     <span class="synSpecial">}</span>
+  <span class="synSpecial">]</span>
+<span class="synSpecial">}</span>
+</pre>
+
+
+<p>それ以外にも、例えばCtrl-Hをバックスペースに割り当てるだとか、そういった工夫も良いかもしれない。（個人的にはCtrl系を多用すると小指でずっと抑えつけたりして<a class="keyword" href="http://d.hatena.ne.jp/keyword/Emacs">Emacs</a>のヘビーユーザーのように小指が痛くなったりするのを避けたいので、あまり多用はしないようにしてる。）</p>
+
+<p>これらの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BF%C6%BB%D8%A5%B7%A5%D5%A5%C8">親指シフト</a>活用の意図としては、Programmer Astarte++のように記号をフルに活用するキー配列だとバックスペースや改行に割り当てる余裕が残っていないのと、Astarte+配列のもつ、右手小指をやや遠く持っていく傾向が実際はどうなのかを、エンターやバックスペースの多用による副作用と切り分けるという意図がある。</p>
+
+<p>ちなみにこうすることで、いまのところ右手小指への影響は思ったほどではなさそうと感じている。</p>
+
+<p>多分キー配列を練習し始めた当初は普段よりバックスペースを多く使うので、加えて慣れない運指もあり、その作用での指への負荷はあるように感じる。</p>
+
+<p>それよりも、慣れないキー配列で打つと妙に頭が疲れるので、できるだけ頭を使わずに打てる段階まで早くもっていきたいところ。</p>

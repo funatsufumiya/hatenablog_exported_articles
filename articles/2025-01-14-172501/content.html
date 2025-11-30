@@ -1,0 +1,15 @@
+<p>主にQiitaに書いた内容になるけれど、正月休みから三連休にかけて、いろんな検証や各種コミットなどを行ってきた。</p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fqiita.com%2Ffunatsufumiya%2Fitems%2Fe8df03e0ccad284ede82" title="2025年1月: 個人的クリエイティブコーディングフレームワーク選定 - Qiita" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://qiita.com/funatsufumiya/items/e8df03e0ccad284ede82">qiita.com</a></cite></p>
+
+<p>様々な<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>を横断して、その裾野の広さを改めて感じた数週間だったけれど、結局のところ、記事中にも書いている<a href="https://godotengine.org/">Godot</a>と<a href="https://bevyengine.org/">Bevy</a>を中心に個人制作を進めていくことになるだろうなと思う。</p>
+
+<p>特にBevyを中心に進めていきたくて、理由としては、ECSの恩恵として自動的にマルチスレッドに対応してくれることと、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%EC%A5%F3%A5%C0%A5%EA%A5%F3%A5%B0">レンダリング</a>・パイプラインにも自動対応してくれることが大きい。開発のスケーラビリティや、開発環境や各種ライブラリの利用が最もしやすく使いやすいというのも大きい。</p>
+
+<p>ただ今回の活動のルーツとして、その分だけ厚いレイヤーで構成されていて、自分の中では<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D6%A5%E9%A5%C3%A5%AF%A5%DC%A5%C3%A5%AF%A5%B9">ブラックボックス</a>が多い状態なので、今後はBevyのコードリーディングなども進めていきたいと思っている。（BGFX等を使った描画エンジンの実験も、またどこかでやるかもしれない。）</p>
+
+<p>時々、ガッツリとエディタがあったほうが便利な場合もあって、そういうときはGodotを使うと思うし、作った3Dモデルを気軽に試して動かしたいときなんかはそっちが便利。もちろんBevyにもエディタがないわけではなくて、GLTF自体が<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>等をエディタにできるようなものだし、<a href="https://ldtk.io/">LDtk</a>のような汎用エディタを使えば2Dにも問題なく対応できる。</p>
+
+<p>あとはRustを採用することの賛否だけれど、どうしても<a class="keyword" href="https://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>で書かなければならないときは従来通り<a href="https://openframeworks.cc/">OpenFrameworks</a>や、あるいは<a href="https://github.com/RavEngine/RavEngine">RavEngine</a>を使っていくことになると思う。</p>
+
+<p>たぶんホビーな小さい実験とかは、今まで通りその時々の気分でいろんなツールを使うだろうし、<a href="https://github.com/roman01la/minimax">minimax</a>などを使った<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>で開発していく夢も捨てたわけではないので、例えば<a href="https://jank-lang.org/">Jank言語</a>などの開発状況等をみながらまた都度再選定していくことになるのだろうなと思う。</p>
