@@ -12,3 +12,8 @@ GitHubが適切な配置場所だとは思っていないので、より適切�
 
 GitHub上での公開に伴うオープンソースライセンス等は検討中ですが、CC-BY-SAなどが適切とはあまり思えないので精査中です。現状はGitHubの利用規約にしたがって利用していただければと思います。（[参考記事: GitHubでライセンスをつけないとどうなるの？ - Qiita](https://qiita.com/Tatamo/items/ae7bf4878abcf0584291)）
 
+## License
+
+- Files under [`/scripts`](./scripts): MIT License (c) 2025 Fumiya Funatsu
+- Others: Currently **unspecified** (under consideration.)
+  - Please use them under the GitHub's terms of use.
