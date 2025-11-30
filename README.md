@@ -2,7 +2,7 @@
 
 https://funatsufumiya.hatenablog.com/ の閉鎖に伴うバックアップです。
 
-現状未整理で、今後少しずつ整理してGitHub上（あるいは GitHub Pages 上）で読めるようにしていく予定です。
+https://funatsufumiya.github.io/hatenablog_exported_articles/index.html で読むことができます。
 
 ## 補足（閉鎖の経緯）
 
@@ -17,3 +17,4 @@ GitHub上での公開に伴うオープンソースライセンス等は検討�
 - Files under [`/scripts`](./scripts): MIT License (c) 2025 Fumiya Funatsu
 - Others: Currently **unspecified** (under consideration.)
   - Please use them under the GitHub's terms of use.
+
