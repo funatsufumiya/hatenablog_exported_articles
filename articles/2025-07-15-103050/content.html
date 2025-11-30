@@ -1,9 +1,9 @@
 <h1>Blenderだけでラフに作る2 〜 Blob Fusionでお手軽SDF 〜</h1>
 <p>投稿日: 2025/07/15 10:30:50</p>
 <p>カテゴリ: スカルプト</p>
-<p>サムネイル: <img src="fhttps://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715083324.jpg"></p><hr>
+<p>サムネイル: <img src="../../images/20250715083324.jpg"></p><hr>
 
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715083324.jpg" width="1200" height="1200" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715083324.jpg" width="1200" height="1200" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p><a href="https://funatsufumiya.hatenablog.com/entry/2025/07/14/073334">前回の記事</a>でSketch N'CarveやGrid Modelerを使ったファスト・スカルプトを紹介したのだけれど、今回も「ラフに作る」という共通点で、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>でSDF造形を可能にするBlob Fusionというアドオンを紹介したい。</p>
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fbartoszstyperek.gumroad.com%2Fl%2Fblob_fusion" title="Blob Fusion" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://bartoszstyperek.gumroad.com/l/blob_fusion">bartoszstyperek.gumroad.com</a></cite></p>
 <p>Blob Fusionが何なのかは、以下の記事が詳しい。</p>
@@ -28,25 +28,25 @@
 </ul>
 <h2 id="SDFとは">SDFとは</h2>
 <p>ここではSDFが何なのかの厳密な説明はしないけれど、Blob Fusionのページにある以下の画像がイメージしやすい。</p>
-<p><figure class="figure-image figure-image-fotolife" title="Blob Fusion公式より引用"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715084416.png" width="700" height="449" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>Blob Fusion公式より引用</figcaption></figure></p>
+<p><figure class="figure-image figure-image-fotolife" title="Blob Fusion公式より引用"><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715084416.png" width="700" height="449" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>Blob Fusion公式より引用</figcaption></figure></p>
 <p>まるで<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%E1%A5%BF%A5%DC%A1%BC%A5%EB">メタボール</a>のように、境界面が溶け合っているのがわかる。（注: 混ざり度合いは調整できる。）</p>
 <p>ちなみにSDFを扱うソフトやアドオンは複数あって、<a href="https://ephtracy.github.io/index.html?page=magicacsg">MagicaCSG</a>などの専用のソフトを使うという手もあるのだけれど、SDFは今までの<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%E2%A5%C7%A5%EA%A5%F3%A5%B0">モデリング</a>とは全く違う概念なのもあって、操作性に慣れるのが面倒だった。（あと、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Windows">Windows</a>でしか使えないツールが多くて、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Mac">Mac</a>では利用できないことが多かった。）</p>
 <p>その点、Blob Fusionは結構手軽にSDFを扱うことができて、特に<a class="keyword" href="https://d.hatena.ne.jp/keyword/ZBrush">ZBrush</a>でZSphereというものを使ったことがある人には、よりわかりやすいと思う。</p>
-<p><figure class="figure-image figure-image-fotolife" title="ZSphere (Maxonヘルプページより引用)"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715084908.jpg" width="700" height="546" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>ZSphere (Maxonヘルプページより引用)</figcaption></figure></p>
+<p><figure class="figure-image figure-image-fotolife" title="ZSphere (Maxonヘルプページより引用)"><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715084908.jpg" width="700" height="546" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>ZSphere (Maxonヘルプページより引用)</figcaption></figure></p>
 <p>個人的にBlob Fusionは、<strong>ZSphereとSDFの良い点を混ぜ合わせた</strong>ところが画期的だと思っていて、ZSphereにおける通常の操作も可能でありながら、SDF造形での基本操作も可能。かつ、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>のショートカットやUIと極力馴染みやすいように工夫されていて、とてもありがたい。</p>
 <h2 id="SDFを利用する上での注意点-計算負荷の高さ">SDFを利用する上での注意点: 計算負荷の高さ</h2>
 <p>SDF系のツールやアドオンを利用する上で一つだけ注意点として、SDFは原理上、計算負荷が高い傾向にある。</p>
 <p>Blob FusionではResolution（解像度）というパラメータでそれを調整したり、計算範囲を限定することで負荷を下げているのだけれど、例えば前述のMagicaCSGというSDFツールも要求スペックがかなり高いように、一般論としては必要スペックは高めだということを念頭に置いておいたほうがいいかもしれない。</p>
 <h2 id="SDFを使うと何が嬉しいのか">SDFを使うと何が嬉しいのか</h2>
 <p>次の画像は、左が元のオブジェクトで、右がBlob Fusionにメッシュを取り込んで、SDF造形したもの。</p>
-<div class="images-row mceNonEditable"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715090510.png" width="998" height="1006" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715090513.png" width="962" height="1134" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></div>
+<div class="images-row mceNonEditable"><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715090510.png" width="998" height="1006" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715090513.png" width="962" height="1134" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></div>
 
 <p>手前部分の造形が変化しているので比較としてはあんまりよくないけれど、<strong>オブジェクトの境界面が滑らかになって、自然なベベルがついている</strong>ことがわかると思う。</p>
 <p>このベベルというかスムージングというか、一見簡単そうに見えるのだけれど、手でつけようとすると案外むずかしいし、特に、基本的に破壊編集である<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>ではベベルやスムージングをすると制御点が増えるので、結構扱いづらいものの一つ。</p>
 <p>もちろん<a href="https://extensions.blender.org/add-ons/nd/">ND</a>とかみたいな非破壊編集アドオンを使うという手もあるし、やり方はたくさんあるのだけれど、SDFは<a class="keyword" href="https://d.hatena.ne.jp/keyword/%BF%F4%C3%CD%B7%D7%BB%BB">数値計算</a>の滑らかさと人為的なダイナミックさのバランスが取れているのが個人的には美しいと思う。</p>
 <h2 id="SDFの難点-解像度の調整とアーティファクト">SDFの難点: 解像度の調整と<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%A2%A1%BC%A5%C6%A5%A3%A5%D5%A5%A1%A5%AF%A5%C8">アーティファクト</a></h2>
 <p>ちなみにさっきのモデル、実は一つだけトリックを使っていて、美しくみせていた。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715091141.png" width="1200" height="702" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715091141.png" width="1200" height="702" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>左が元のSDF計算モデルで、右がそのトリックを使ったもの。</p>
 <p>何が違うかというと、右は<strong>Quad Remesherによってリ<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a>し、メッシュが綺麗になるよう再計算させている</strong> (注: 標準機能のリメッシュでも一応代用可) ので、明らかに滑らかに見えることがわかる。</p>
 <p>Blob Fusion自体でも、Resolution (解像度) を上げれば、ある程度は綺麗になる。ただ、デジタルスカルプトをやったことがある人なら直感的にわかると思うのだけれど、解像度ベースの計算にはどうしても限界がある。</p>
@@ -58,38 +58,38 @@
 <h3 id="-ドメイン-Blob-Domain">◆ <a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C9%A5%E1%A5%A4%A5%F3">ドメイン</a> (Blob Domain)</h3>
 <p>さて、ここまで書いてBlob Fusionの使い方を書かないのもあれなので、一応操作説明をオマケ程度に書いておく。（詳細については<a href="https://joseconseco.github.io/blob_fusion_docs/">公式ドキュメント</a>を参照してほしい。）</p>
 <p>Blob Fusionでは、Blob Domainと呼ばれる、<strong>計算結果を入れる箱のようなもの</strong>がまず必要になる。Tools > Blob Fusionの「＋」ボタンより作成できる。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715110833.jpg" width="1200" height="520" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715110833.jpg" width="1200" height="520" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>先ほど書いたように、Blob Fusionでは領域や解像度を制限することで、計算負荷を下げている。XYZに対応する赤緑青（<strong><span style="color: #d32f2f">X</span><span style="color: #286f2c">X</span><span style="color: #1464b3">X</span></strong>）の<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D0%A5%C4">バツ</a>印（X）が、その領域を広げるためのドラッグできるハンドルで、その先にある緑（<span style="color: #286f2c"><strong>◆</strong></span>）の点は、変更できないようにロックするためのトグルスイッチになっている。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715093139.jpg" width="1108" height="1026" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715093139.jpg" width="1108" height="1026" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>なんでロックするためのトグルスイッチがあるかというと、Blob Fusionには領域の自動<a class="keyword" href="https://d.hatena.ne.jp/keyword/%B3%C8%C4%A5%B5%A1%C7%BD">拡張機能</a> (Auto Fit Domain Size) があって、うまくロックしておかないとこの領域計算で縦横無尽に<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C9%A5%E1%A5%A4%A5%F3">ドメイン</a>のサイズが変わってしまう。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715092925.jpg" width="756" height="700" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715092925.jpg" width="756" height="700" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>なお、Blob Domainを移動させても、SDFオブジェクトの位置自体は変わらない。あくまで計算領域なので、位置を変えたり操作したりは、次に説明する各Blobオブジェクト側で操作する。</p>
 <h3 id="-Blobオブジェクト">◆ Blobオブジェクト</h3>
 <p>一度Blob Domainを作ると、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>で普段オブジェクトをAddするときと同じように、Add Blobから好きなBlobを追加できる。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715093532.png" width="1090" height="941" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715093532.png" width="1090" height="941" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>試しに<a class="keyword" href="https://d.hatena.ne.jp/keyword/Sphere">Sphere</a>を追加するとこんな感じ。シーンツリーに、Blobという名前のEmptyが増えていることがわかる。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715093633.png" width="1200" height="514" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715093633.png" width="1200" height="514" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>ここからどんな操作ができるかは、Hotkeysというメニューで確認できる。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715093802.png" width="942" height="1028" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715093802.png" width="942" height="1028" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>自分がよく使うのは、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Sphere">Sphere</a>（カプセル）を増やすE (Extrude) と、大きさ調整の S (Scale)、移動のG、そして、どれくらい<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%E1%A5%BF%A5%DC%A1%BC%A5%EB">メタボール</a>同士 (SDF同士) がくっつくかのファクターを調整する Alt + B。</p>
 <p>EとかSとかGとかで適当にZSphereっぽく操作していくと、以下のような感じになる。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715094221.png" width="1200" height="786" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715094221.png" width="1200" height="786" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <h3 id="-ハマりどころ-Free-MoveとBlobの選択ドメイン領域の指定">◆ ハマりどころ: Free Moveと、Blobの選択、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C9%A5%E1%A5%A4%A5%F3">ドメイン</a>領域の指定</h3>
 <p>ちなみにBlob Fusionにはいくつか<strong>ハマりどころ</strong>があって、全然何も描画されないとか、全く思ったとおりに操作できないみたいな陥るポイントがいくつもある。</p>
 <p>一つはFree Moveで、初期状態はFKという、インバース<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%AD%A5%CD%A5%DE%A5%C6%A5%A3%A5%AF%A5%B9">キネマティクス</a> (IK) のような操作感になっている。これはこれで便利なのだけれど、これのせいで他のオブジェクトも一緒にドラッグされて個人的には操作しづらいので、いつもFree Moveに変更する。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715094348.jpg" width="1200" height="819" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715094348.jpg" width="1200" height="819" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>もう一つはBlobの選択で、いつも全然思ったオブジェクトが選択されなくて操作しづらいので、あえてシーンツリーからBlobを選んで是正することはよくある。（一応、3Dビュー内の同じところを何回もポチポチしていれば切り替わってくれたりもする。）</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715094612.jpg" width="1124" height="726" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715094612.jpg" width="1124" height="726" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>以下の２つの画像は、左が<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C9%A5%E1%A5%A4%A5%F3">ドメイン</a>が選ばれている状態で、右がBlobが選ばれている状態。</p>
-<div class="images-row mceNonEditable"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715095101.png" width="1200" height="561" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715095107.png" width="1200" height="569" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></div>
+<div class="images-row mceNonEditable"><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715095101.png" width="1200" height="561" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715095107.png" width="1200" height="569" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></div>
 
 <p>そして一番のハマりどころである<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C9%A5%E1%A5%A4%A5%F3">ドメイン</a>領域について。<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C9%A5%E1%A5%A4%A5%F3">ドメイン</a>領域がおかしいと、以下のように<strong>Blobの一部しか表示されなかったり、全く表示されなかったりする</strong>。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715095356.png" width="1128" height="998" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715095356.png" width="1128" height="998" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>これが初心者にとっては結構曲者で、何をどうしていいかわからなくなってしまう。</p>
 <p>対処法は2つあって、１つ目は、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C9%A5%E1%A5%A4%A5%F3">ドメイン</a>の方を選択して、領域を手動で広げる方法。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715095640.jpg" width="1128" height="998" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715095640.jpg" width="1128" height="998" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>もう一つは、領域の再計算を強制実行する方法。<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C9%A5%E1%A5%A4%A5%F3">ドメイン</a>の歯車メニューより、「Auto Fit Domain Size」をオンにしている状態で、「Update Blobs Nodes」をクリックする。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715095935.jpg" width="1200" height="698" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715095935.jpg" width="1200" height="698" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>これでうまくいくときもあればうまくいかないときもあって、<strong>アドオンなのでどうしても<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>の現在の状態と齟齬が起きることがある</strong>。後述するメッシュの追加では特に初期状態がおかしいことは自分は何度も経験していて、その場合は条件を変えて何度もトライしたりする。</p>
 <h3 id="-メッシュBlobの追加">◆ メッシュBlobの追加</h3>
 <p>さて、あまり長くなってもしょうがないが、メッシュの追加方法を紹介する。</p>
@@ -102,19 +102,19 @@
 </ul>
 
 <p>の4つの手順が必要になる。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715100619.jpg" width="1200" height="507" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715100619.jpg" width="1200" height="507" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>慣れるまでちょっとわかりにくいけれど、これさえできればほぼ使いこなせるはず。</p>
 <p>なお、選択したメッシュは完全にBlob用に作り変えられてしまうため、別の場所にコピーしてバックアップしておくことをおすすめする。</p>
 <p>また、メッシュの追加は、特にモディファイアが絡む場合などでしばしば<strong>計算結果がおかしくなる</strong>ことが多く、モディファイアは先に全て適用済みにしたり、Normalが正しいかなどを点検することをおすすめする。また、どうしてもうまくいかないときはオブジェクトの原点を調整することでもうまくいったりするし、自分の場合は本当に何度もBlob Domainを作り直してリトライしたりしている。</p>
 <h3 id="-Blobの正負の反転">◆ Blobの正負の反転</h3>
 <p>ちなみに余談として、SDFの計算は合成だけでなく差分を取ることもできて、Hotkeysに記載があるが「ー」（マイナス）キーを押すと正負が反転する。穴を開けたりしたいときに便利。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715101504.jpg" width="1200" height="885" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715101504.jpg" width="1200" height="885" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <h3 id="-BlobのFinalize-メッシュ化">◆ BlobのFinalize (メッシュ化)</h3>
 <p>さて、こうして作ってきたBlobを最後に完全にメッシュにしたいときは、「V」メニューから「Finalize Blob」を選択する。すると別のメッシュオブジェクトを作ってくれるので、あとは煮るなり焼くなり好きにできる。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715101753.jpg" width="1200" height="735" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715101753.jpg" width="1200" height="735" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>ちなみにこのときに高解像度でFinalizeするなどできたら便利なのだけれど、どうやら手動で解像度を調整するしかない様子。解像度を上げると重くなるので、調整が悩ましい。</p>
 <p>最後になるが、最冒頭に挙げた画像も、こうしてBlob Fusionで素体を作って、Quad Remesherなどでリメッシュしたり、さらにSubDivしたりして作ったもの。（<a href="https://sketchfab.com/3d-models/watering-88d0b19cd72d4eb99b3ead2d60a1e603">Sketchfab</a>でブラウザで3Dでも観れる。）</p>
-<div class="images-row mceNonEditable"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715083324.jpg" width="1200" height="1200" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250715/20250715104133.png" width="1200" height="907" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></div>
+<div class="images-row mceNonEditable"><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715083324.jpg" width="1200" height="1200" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250715104133.png" width="1200" height="907" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></div>
 
 <p>Blob Fusionが出力するメッシュは、解像度（ポリゴン数）が高かったり低かったりまちまちで、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a>的にもちょっと微妙だったりするので、個人的にはスカルプトと同じく、リメッシュやリ<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a>は必須かなと思う。ただ、この後のまとめ内で議論するように、SDFだけで本当に完結したい場合は、Blob Fusionではなく別のツールを検討したほうが良いと思う。（Blob Fusionはあくまで素体作成用として割り切ったほうが良い気がする。）</p>
 <h2 id="まとめ">まとめ</h2>

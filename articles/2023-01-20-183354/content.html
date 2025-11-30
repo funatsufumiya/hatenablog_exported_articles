@@ -1,7 +1,7 @@
 <h1>ローマ字頻度表 (N-gram)</h1>
 <p>投稿日: 2023/01/20 18:33:54</p>
 <p>カテゴリ: N-gram</p>
-<p>サムネイル: <img src="fhttps://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230120/20230120222854.png"></p><hr>
+<p>サムネイル: <img src="../../images/20230120222854.png"></p><hr>
 
 <p>かなや英語の文字別<a class="keyword" href="http://d.hatena.ne.jp/keyword/N-gram">N-gram</a>についてはすぐ見つかるものの、日本語のローマ字タイピング向けの<a class="keyword" href="http://d.hatena.ne.jp/keyword/N-gram">N-gram</a>はなかなかなかったので、作ってみた。</p>
 <p>これが<a class="keyword" href="http://d.hatena.ne.jp/keyword/N-gram">N-gram</a> (1,2,3-gram) を収録したタブ区切り表 (TSV) ファイル。</p>
@@ -11,11 +11,11 @@
 <h2 id="対応頻度表">対応頻度表</h2>
 <h3 id="ローマ字-一部英語含む">ローマ字 (※一部英語含む)</h3>
 <p>2-gramをもとに作成。1文字目が左、2文字目が上。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230120/20230120222854.png" width="1200" height="834" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20230120222854.png" width="1200" height="834" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p><a href="https://gist.github.com/funatsufumiya/f84f2a47ffb61deef43151303ff0f507#file-table_romaji_2gram-tsv">https://gist.github.com/funatsufumiya/f84f2a47ffb61deef43151303ff0f507#file-table_romaji_2gram-tsv</a></p>
 <h3 id="英語">英語</h3>
 <p>比較のために、英語の2-gramの対応表も貼っておく。(元データは <a href="http://practicalcryptography.com/cryptanalysis/letter-frequencies-various-languages/english-letter-frequencies/">http://practicalcryptography.com/cryptanalysis/letter-frequencies-various-languages/english-letter-frequencies/</a> の <a href="http://practicalcryptography.com/media/cryptanalysis/files/english_bigrams_1.txt">english_bigrams_1.txt</a>)</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20230120/20230120222938.png" width="1200" height="836" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20230120222938.png" width="1200" height="836" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p><a href="https://gist.github.com/funatsufumiya/f84f2a47ffb61deef43151303ff0f507#file-table_en_2gram-tsv">https://gist.github.com/funatsufumiya/f84f2a47ffb61deef43151303ff0f507#file-table_en_2gram-tsv</a></p>
 <h2 id="作成手順やルールなど">作成手順やルールなど</h2>
 <p>元になる文章や、集計量によっても変わってくるので、今回は約10万文字 (ローマ字・半角換算)、Web小説や<a class="keyword" href="http://d.hatena.ne.jp/keyword/Wikipedia">Wikipedia</a>、ニュース記事、対談記事などを中心に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EC%A5%A4%A5%D4%A5%F3%A5%B0">スクレイピング</a>し、ウェブサイトのヘッダ・フッタ部分は手動で除去した。</p>
