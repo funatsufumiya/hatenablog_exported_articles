@@ -1,0 +1,109 @@
+<p>前回、<a class="keyword" href="http://d.hatena.ne.jp/keyword/kwsk">kwsk</a>入力という名前で、<strong>打鍵数が半分で済むかもしれない</strong>新しい入力方式ができるのではないかという記事を書いた。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ffunatsufumiya.hatenablog.com%2Fentry%2F2022%2F01%2F17%2F001842" title="kwsk入力で日本語入力を2倍効率化できる？という夢 - fu-log / 書く瞑想の記録" class="embed-card embed-blogcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 190px; max-width: 500px; margin: 10px 0px;"></iframe><cite class="hatena-citation"><a href="https://funatsufumiya.hatenablog.com/entry/2022/01/17/001842">funatsufumiya.hatenablog.com</a></cite></p>
+<p>それ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A4%AB%A4%E9%A4%B7">からし</a>ばらくが経ち、呼び名を<a class="keyword" href="http://d.hatena.ne.jp/keyword/kwsk">kwsk</a>入力じゃなくて<strong>「<a class="keyword" href="http://d.hatena.ne.jp/keyword/wktk">wktk</a>入力」</strong>とすることにしたのだけれど (その方が楽しそうな名前なので)、なかなか実装する時間が取れないので、せめてGPT-2という<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B5%A1%B3%A3%B3%D8%BD%AC">機械学習</a>モデルを使って、以前の記事中にある<a class="keyword" href="http://d.hatena.ne.jp/keyword/wktk">wktk</a>記法から普通の文章に変換する組み合わせをひたすら学習させて、その実力を検証してみることにした。</p>
+<p>学習にはとりあえず手元にあった<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%C4%B6%F5%CA%B8%B8%CB">青空文庫</a>のデータを使い、以下のようなデータを30MB分くらい使って学習素材とした。</p>
+<pre class="code txt" data-lang="txt" data-unlink>===
+srykohhansgtwttdmd
+それよかお母あの仕事を手伝うもんだ
+===
+n
+な
+===
+sstrkdaskshtrtkkry
+そしたらこんだ浅草へ連れてくからよ
+===
+sgkmdstnej
+小学校も出てねえじゃ
+===
+imdk
+今時
+===
+kznmdrrnekry
+小僧にも出られねえからよ
+===
+tttoygktwhsmndat
+と父親が口を挾むのであった
+===
+tmzhhtsthhoywmt
+富次はほっとして母親を視た
+===</pre>
+
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%C4%B6%F5%CA%B8%B8%CB">青空文庫</a>なのでちょっと文体が古風なのだけが玉にキズだけど、仮検証には十分。</p>
+<p>ちなみに実際のコードは以下で、gistとして公開済み（中身は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a> Colab用）。ただし、前処理の <code>aozora_all_texts.txt</code> には<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%C4%B6%F5%CA%B8%B8%CB">青空文庫</a>の文章（文章であれば違うものでも大丈夫）が事前に入っているものとして書かれていて、<code>/content/drive/Shareddrives/colab/wktk_aozora_220220</code> は個々人の環境に応じて別のフォルダに書き換える前提。</p>
+<ul>
+<li>前処理: <a href="https://gist.github.com/funatsufumiya/b00da2046bd7e4f9b1a9875c3464b475">wktk_Aozora_Preprocess_220220.ipynb &middot; GitHub</a></li>
+<li>学習: <a href="https://gist.github.com/funatsufumiya/5f9cc63ed845b9419d63ce9dc39c07aa">wktk_GPT-2_Aozora_Transformer_train_220220.ipynb &middot; GitHub</a></li>
+<li>推論: <a href="https://gist.github.com/funatsufumiya/ea36bb6dd983783fef04044cec988c3a">wktk_GPT2_Aozora_tester_220220.ipynb &middot; GitHub</a></li>
+</ul>
+
+<p>で、1時間くらい学習させたところで試しに実行させてみた。</p>
+<p>まずは <code>ohygzms</code> (おはようございます、のつもり)。毎回10パターン生成させてみることにした。</p>
+<pre class="code txt" data-lang="txt" data-unlink>=== ohygzms  お早うございます
+=== ohygzms  おはようございます
+=== ohygzms  お早うございます
+=== ohygzms  遅くございます
+=== ohygzms  お早うございますの
+=== ohygzms  お早うございます
+=== ohygzms  お早く御座います
+=== ohygzms  お早うございます
+=== ohygzms  お早うございまする
+=== ohygzms  お早うございます</pre>
+
+<p>おお、この時点でもうめちゃくちゃ感動。正直全く文章にならないと思っていたので、GPT-2 (rinna/japanese-gpt2-medium) の実力に驚きを隠せない。</p>
+<p>（GPT-2でこのレベルだと、GPT-3に生成させたくなってくるけど、自分GPT-3は検証環境持ってないや…。）</p>
+<p>次は、<code>sieb</code> (そういえば、のつもり)。</p>
+<pre class="code txt" data-lang="txt" data-unlink>=== sieb  そういえば今晩は』
+=== sieb  そういえば ===
+=== sieb  そういえば今年は
+=== sieb  そういえばいゝね
+=== sieb  そういえばこの界隈では
+=== sieb  そういえばん』 『よしいえばん』
+=== sieb  そういえば 去年あたり
+=== sieb  そういえば今晩は
+=== sieb  そういえばさっきまで
+=== sieb  そういえば) ===</pre>
+
+<p>おお、ちゃんとできてるのもあるし、その先まで生成しちゃってるのがGPT-2らしくて可愛い。続きの文章はいかにも<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%C4%B6%F5%CA%B8%B8%CB">青空文庫</a>という感じ。</p>
+<p>もう少し長い文章も生成させたいので、次は <code>kynghnhnnksr</code> (今日のご飯は何かしら、のつもり)。</p>
+<pre class="code txt" data-lang="txt" data-unlink>=== kynghnhnnksr  今夜の御飯は何にかしら
+=== kynghnhnnksr  急に五百の兵の中に去り
+=== kynghnhnnksr  きょうの御辺の不運に苦し
+=== kynghnhnnksr  きょうのごはいはいにぬけされ
+=== kynghnhnnksr  巨きな画風にはなにかしら
+=== kynghnhnnksr  今日の御船は七輛の計らしい
+=== kynghnhnnksr  今日の御船は何かしら
+=== kynghnhnnksr  きょうの群盗はなにか知らん
+=== kynghnhnnksr  こや人間は人にのこされ
+=== kynghnhnnksr  きょうの御本人はなにか知らん</pre>
+
+<p>奇跡的に最初の一つはほぼ正解してるけど、kyが「今日」じゃなくて「今夜」になってるし、他の候補も、ghn =「ご飯」 のつもりが、ごふね？とか「画風に」とか「ご本人」とかになっているのが面白い。kyn も「急に」になってたり、kyとnghで区切られて「こや人間は」と謎の文章になっていたりして、この辺が<a class="keyword" href="http://d.hatena.ne.jp/keyword/wktk">wktk</a>記法の曖昧さを物語っている。</p>
+<p>最後に、<a class="keyword" href="http://d.hatena.ne.jp/keyword/kwsk">kwsk</a> (詳しく) を出させたいので、<code>kwskosetkds</code> (詳しく教えてください、のつもり)。</p>
+<pre class="code txt" data-lang="txt" data-unlink>=== kwskosetkds  こわさけ教えてください
+=== kwskosetkds  会わせる顔を添えてくだせ
+=== kwskosetkds  詳しい記憶を添えてください
+=== kwskosetkds  気をしっかり教えて下さい
+=== kwskosetkds  子をしっかりおすえつけ下さい
+=== kwskosetkds  小きを教えてください
+=== kwskosetkds  詳しくお教え戴戴戴す
+=== kwskosetkds  気をしかおすえて下さい
+=== kwskosetkds  香を挿しおしつけ出す
+=== kwskosetkds  気をすこし抑えて下さい</pre>
+
+<p>なかなか面白い結果になった (笑)。「気をすこし抑えて下さい」とか、確かにそうも読めるのがなるほどなという感じ。「詳しく」という単語は１パターンでしか登場しなかったけど、学習データの特徴がそのまま出てて面白い。</p>
+<p>ちなみにこんなうまくいった結果ばっかりでは全然なくて、例えば <code>snsnjksknkt</code> (先生の次回作に期待、のつもり) と入れるとこんな感じ。</p>
+<pre class="code txt" data-lang="txt" data-unlink>=== snsnjksknkt  そんな品じゃない高価すぎな刀
+=== snsnjksknkt  その真に邪な感情か
+=== snsnjksknkt  その信念に確信して来た
+=== snsnjksknkt  その死の十九カ月間
+=== snsnjksknkt  その真の乗客
+=== snsnjksknkt  その才能に驚かぬこと
+=== snsnjksknkt  その三の述懐のこつゝきに
+=== snsnjksknkt  その少年ジャケツケの件
+=== snsnjksknkt  その少年も若しこんな事
+=== snsnjksknkt  その死に殉かなかつた</pre>
+
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%C4%B6%F5%CA%B8%B8%CB">青空文庫</a>的にはこの<a class="keyword" href="http://d.hatena.ne.jp/keyword/wktk">wktk</a>記法はそう見えるのかと思うと面白いし、よく見ると雰囲気だけ合わせてるのがGPT-2の特徴を物語っている。「そんな品じゃない高価すぎな刀」ってどんな刀なの…。</p>
+<h2>まとめ</h2>
+<p>ということで今回は、<a class="keyword" href="http://d.hatena.ne.jp/keyword/wktk">wktk</a>記法の実力を仮検証してみるために、1時間程度だけ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%C4%B6%F5%CA%B8%B8%CB">青空文庫</a>をもとに学習させた<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B5%A1%B3%A3%B3%D8%BD%AC">機械学習</a>モデルがどんな文章を作ってくれるかを観察してみた。</p>
+<p>このままもっと現代的な文章を使ったらどうなるのかも気になるけど、通常の<a class="keyword" href="http://d.hatena.ne.jp/keyword/IME">IME</a>で使われているよ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A4%A6%A4%CA%BD%C5">うな重</a>み付けをつけて普通に実装しても、意外と実用性をもった入力方法になるんじゃないかなという予感がした。</p>
+<p>年度末は忙しくて次は一体いつ進展があるかわからないけれど、いつかこの入力方式を<a class="keyword" href="http://d.hatena.ne.jp/keyword/IME">IME</a>にして実際の文章を打ってみたいなと思う。（似たような入力方式って<a class="keyword" href="http://d.hatena.ne.jp/keyword/GitHub">GitHub</a>とかにないのかな…？<a class="keyword" href="http://d.hatena.ne.jp/keyword/IME">IME</a>作ったことないので、本気で作るとたらベースにできるコードが欲しい…。）</p>

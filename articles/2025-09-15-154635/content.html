@@ -1,3 +1,8 @@
+<h1>Ebitengine as a Processing Reborn</h1>
+<p>投稿日: 2025/09/15 15:46:35</p>
+<p>カテゴリ: クリエイティブコーディング</p>
+<p>サムネイル: なし</p><hr>
+
 <p>最近<a href="https://ebitengine.org/">Ebitengine</a>というものに興味が出てきて、熱心に調べたりアドオンを書いたりしているのだけれど、自分がProcessing Rebornと勝手に呼んでいる最近の活動について、思考整理のために経緯を最初からまとめたいと思う。</p>
 <p>忙しい人は <a href="#Ebitengine">#Ebitengine</a> まで飛ばしていただければ。</p>
 <h2 id="前置き-今まで自分がやってきたこと">前置き: 今まで自分がやってきたこと</h2>
@@ -38,6 +43,7 @@
 <li>言語・記法の飛躍、煩雑さ (Racket、minimax、odin、Zig)</li>
 <li><a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C7%A5%D0%A5%C3%A5%B0">デバッグ</a>の大変さ、保守の大変さ (Nim、LÖVE、LÖ<a class="keyword" href="https://d.hatena.ne.jp/keyword/VR">VR</a>、minimax）</li>
 </ul>
+
 <p>特に惜しかったのはV言語で、V言語の場合はggのおかげで描画もサクッとできて<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%AF%A5%ED%A5%B9%A5%D7%A5%E9%A5%C3%A5%C8%A5%D5%A5%A9%A1%BC%A5%E0">クロスプラットフォーム</a>で動いていたことから、各種アドオンなどを移行してみようと努力したものの、移植過程特有のハードルの高さに阻まれて事実上頓挫した。</p>
 <p>ただV言語の場合は本当に惜しいので、また折を見て再挑戦しようとは思っているけれど、V言語自体や<a class="keyword" href="https://d.hatena.ne.jp/keyword/TCC">TCC</a> (Tiny C Compiler) の問題もいろいろあるので、V言語がアーリーステージである間は安心しては使えないかもしれない。</p>
 <p>それにV言語はトランスパイラゆえにCやMake、CMakeの知識が必須となるので、Nim同様、あまり人には気軽には勧められない。</p>
@@ -70,6 +76,7 @@
 <li><a href="https://github.com/funatsufumiya/ebiten_fade">ebiten_fade</a></li>
 <li><a href="https://github.com/funatsufumiya/go_ae_easing_loader">go_ae_easing_loader</a></li>
 </ul>
+
 <p>OpenFrameworks自体も枯れていていろんな用途に使えて楽しいのだけれど、まあ正直<a class="keyword" href="https://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>と向き合うのが疲れることもRust同様にあって、そういうときにEbitengineやGodotで遊んで<a class="keyword" href="https://d.hatena.ne.jp/keyword/SAN%C3%CD">SAN値</a>を回復させていければと思う。</p>
 <p>Ebitengineは、シンプルさが売りなのだけれど、<a href="https://github.com/hajimehoshi/ebiten/issues/867">圧縮テクスチャがまだ使えない</a>など、成長の余地はいろいろあるので、様子をみつついろいろ試していきたい。</p>
 <h2 id="余談-Processing-Python">余談: Processing <a class="keyword" href="https://d.hatena.ne.jp/keyword/Python">Python</a></h2>

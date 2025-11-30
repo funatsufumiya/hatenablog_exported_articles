@@ -1,0 +1,13 @@
+<p>先日、<a href="https://funatsufumiya.hatenablog.com/entry/2021/12/26/223107">PC-F配列というものを作った</a>という記事を書いたのだけれど、動画撮影用にPC-F配列の練習をしていて、ふと、</p>
+<ul>
+<li>月配列のように <strong>前置シフト</strong> を巧みに使えば、片手フリック (っぽい打鍵) もできるのではないか</li>
+</ul>
+
+<p>という思いつきがあり、早速作ってみた。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Ffunatsufumiya%2Ffl-layout" title="GitHub - funatsufumiya/fl-layout: FL配列（PC上でフリックを再現する実験的配列）" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;"></iframe><cite class="hatena-citation"><a href="https://github.com/funatsufumiya/fl-layout">github.com</a></cite></p>
+<p>ちなみにここでいう片手フリックっぽい打鍵というのは、指がフリックのごとく上下左右←↑↓→に動いて打鍵できることで、いわゆる<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%EB%A5%DA%A5%B8%A5%AA">アルペジオ</a>打鍵でフリック風の配列を実現し、片手だけで打てることを目指した。</p>
+<p>これもPC-F配列と同様に、後ほど動画を撮ってみようと思うけれど、打ってみるとわかるように、意外にもフリック風の打鍵が一応できる。</p>
+<p>もちろん、PCキーボードは完全な格子状にはなっていないのと、キーの数が上下に足りないので、いくつか工夫はしていて、通常のフリックでは使われない、斜め上であったり、２つ横を活用して定義している。</p>
+<p>また、前置シフトの性質から、通常のフリックのように「あ」と打ったまま「あ」にできないので、しぶしぶ、２つ右を打つと元の文字になるようにした。（この点は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%DF%A5%E5%A5%EC%A1%BC%A5%BF">エミュレータ</a>の実装によって改善すれば、案外この片手フリック風打鍵も実用的になるかもしれない。そうすれば普通のフリックのように「あかさたな」がサクサク打てるようになるし、前置シフトを意識することが軽減されそう。）</p>
+<p>実用性がある配列だったかというと全くそうではないのだけれど、前置シフトや同時シフトを巧みに使うといろんな夢をみれる、という、ちょっとしたワクワク感のある実験だった。</p>
+<p>いつも実用性ばかり考えて実装していたけれど、たまにはこうやって遊び心をもってツールを使ってみると、意外な発見があって面白い。</p>

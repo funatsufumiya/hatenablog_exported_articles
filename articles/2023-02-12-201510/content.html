@@ -1,15 +1,14 @@
+<h1>Qwerty RGT (ローマ字互換単打) for Yamabuki-R</h1>
+<p>投稿日: 2023/02/12 20:15:10</p>
+<p>カテゴリ: RGT (ローマ字互換単打)</p>
+<p>サムネイル: なし</p><hr>
+
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fqiita.com%2Fdulunoj%2Fitems%2F95ebe5e40031183c5eea" title="RGT(ローマ字互換単打)による日本語入力の効率化 - Qiita" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://qiita.com/dulunoj/items/95ebe5e40031183c5eea">qiita.com</a></cite></p>
-
 <p>やまぶきRでローマ字互換単打を実装してみた。前置シフトとして実装し、<code>;</code> キーでRGTの打消キャンセルができるように実装した。</p>
-
 <p><a href="https://gist.github.com/funatsufumiya/c31f45933fe9c922ad89564355f258e1">Qwerty RGT (&#x30ED;&#x30FC;&#x30DE;&#x5B57;&#x4E92;&#x63DB;&#x5358;&#x6253;) for Yamabuki-R &middot; GitHub</a></p>
-
 <p>打ってみるとわかるのだけれど、思想としては面白いと思った割に、実際にちゃんと打つのはかなり難しく、自分はとても使いこなせそうにない。もしかすると、前置シフトではなく、一度かなが見えて打ち消すのが学習に有効な可能性があるけれど、それだと独自のソフトが必要であるため、ハードルが高い。</p>
-
 <p>ただ、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%ED%A1%BC%A5%DE%BB%FA%C6%FE%CE%CF">ローマ字入力</a>との互換性は高く、通常の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%ED%A1%BC%A5%DE%BB%FA%C6%FE%CE%CF">ローマ字入力</a>は何ら問題なくできるのはさすがだと思う。</p>
-
 <p>ちなみに<a class="keyword" href="http://d.hatena.ne.jp/keyword/GitHub">GitHub</a> Copilotはこういうルールに基づいた文章（プログラム）を生成するのが得意で、一度草案を作って一つちゃんと作ってからは、Copilotがほぼ全自動で出力してくれた。</p>
-
 <pre class="code txt" data-lang="txt" data-unlink>; Qwerty-RGT
 
 [英数シフト無し]
@@ -154,4 +153,3 @@
 Ｑ,Ｗ,Ｅ,Ｒ,Ｔ,Ｙ,Ｕ,Ｉ,Ｏ,Ｐ,｀,｛
 Ａ,Ｓ,Ｄ,Ｆ,Ｇ,Ｈ,Ｊ,Ｋ,Ｌ,＋,＊,｝
 Ｚ,Ｘ,Ｃ,Ｖ,Ｂ,Ｎ,Ｍ,＜,＞,？,＿</pre>
-

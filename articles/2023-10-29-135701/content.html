@@ -1,3 +1,8 @@
+<h1>両腕を自由にするゲームパッド入力レイアウト</h1>
+<p>投稿日: 2023/10/29 13:57:01</p>
+<p>カテゴリ: なし</p>
+<p>サムネイル: なし</p><hr>
+
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Ffunatsufumiya%2Fgamepad-keyboard-layout" title="GitHub - funatsufumiya/gamepad-keyboard-layout: gamepad-keyboard-layout" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/funatsufumiya/gamepad-keyboard-layout">github.com</a></cite></p>
 <p>現段階では大半が未実装で、草稿段階ではあるものの、一旦<a class="keyword" href="https://d.hatena.ne.jp/keyword/GitHub">GitHub</a>に公開してみることにする。</p>
 <p>最近年齢のせいもあってか、キーボードとマウスでパソコンに向かうことが辛く感じる日が多くある。また、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A5%DB">スマホ</a>や<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%BF%A5%D6%A5%EC%A5%C3%A5%C8">タブレット</a>もそれはそれで疲れるようにも感じる。理想的には、両腕が自由にできて、好きな姿勢で動きながらでも仕事ができれば、と考えているうちに、SwitchのJoyConのようなもので文字入力やカーソル操作ができればと考えるようになった。</p>
@@ -6,6 +11,7 @@
 <li><p><a href="https://www.jstage.jst.go.jp/article/his/23/4/23_383/_pdf">https://www.jstage.jst.go.jp/article/his/23/4/23_383/_pdf</a></p></li>
 <li><p><a href="https://nlab.itmedia.co.jp/games/articles/1102/09/news088.html">&#x30B2;&#x30FC;&#x30E0;&#x30B3;&#x30F3;&#x30C8;&#x30ED;&#x30FC;&#x30E9;&#x5411;&#x3051;&#x30D5;&#x30EA;&#x30C3;&#x30AF;&#x5165;&#x529B;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x300C;Circboard&#x300D;&#x304C;&#x9762;&#x767D;&#x3044;&#xFF1A;&#x65E5;&#x3005;&#x662F;&#x904A;&#x622F; - &#x306D;&#x3068;&#x3089;&#x307C;</a></p></li>
 </ul>
+
 <p>今回の重きは文字入力にあるのだけれど、こうした先行研究にある<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EA%A5%C3%A5%AF%C6%FE%CE%CF">フリック入力</a>的なものを<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B2%A1%BC%A5%E0%A5%D1%A5%C3%A5%C9">ゲームパッド</a>に実装して感じたのは、思ったほどサクサク入力するのは大変だということ。多分慣れの問題が大きくあるものの、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B8%A5%E7%A5%A4%A5%B9">ジョイス</a>ティックで8方向入力を正確に行うのは意外に難しいため、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%BF%C6%BB%D8%A5%B7%A5%D5%A5%C8">親指シフト</a>と同様にデ<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D0%A5%A4%A5%B9">バイス</a>を選びそうな感じがした。</p>
 <p>実装の過程で重視したのは<a class="keyword" href="https://d.hatena.ne.jp/keyword/Mac">Mac</a>でも<a class="keyword" href="https://d.hatena.ne.jp/keyword/Windows">Windows</a>でも(<a class="keyword" href="https://d.hatena.ne.jp/keyword/Linux">Linux</a>でも)動作することなのだけれど、特に<a class="keyword" href="https://d.hatena.ne.jp/keyword/Mac">Mac</a>では<a class="keyword" href="https://d.hatena.ne.jp/keyword/pygame">pygame</a>や<a href="https://pypi.org/project/inputs/">inputs</a>で認識するハードの種類に限りが見られたので、HIDレベルで入力処理をする羽目になり、手こずった。特に<a class="keyword" href="https://d.hatena.ne.jp/keyword/DirectInput">DirectInput</a>については手元の<a class="keyword" href="https://d.hatena.ne.jp/keyword/Logicool">Logicool</a> F310でしかテストを行っていないので、実用性・汎用性のためには多くの課題がありそうに思う。</p>
 <p>ベースはできつつあるので少しずつ練習して改良していけば、例えば最近多くあるSteam Deckのようなゲームデ<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D0%A5%A4%A5%B9">バイス</a>風ポータブルパソコンでも役に立つかもしれない。</p>

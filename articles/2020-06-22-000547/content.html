@@ -1,12 +1,17 @@
+<h1>ドメイン特化言語の進化形としてのUE4ブループリント</h1>
+<p>投稿日: 2020/06/22 00:05:47</p>
+<p>カテゴリ: DSL</p>
+<p>サムネイル: <img src="fhttps://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20200621/20200621225824.png"></p><hr>
+
 <p>最近あんまり<a href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E5%9B%BA%E6%9C%89%E8%A8%80%E8%AA%9E"><strong>ドメイン特化言語 (DSL)</strong></a>について前ほど深く考えてこなかったけど、<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/Visual%20Basic">Visual Basic</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Max/MSP">Max/MSP</a>、Houdiniなどのいろんな<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSL">DSL</a>に触れてきた言語マニアとして、最近、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unreal%20Engine">Unreal Engine</a> 4 (<a class="keyword" href="http://d.hatena.ne.jp/keyword/UE4">UE4</a>) の<strong>ブループリント</strong>が<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSL">DSL</a>・ビジュアル<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%ED%A5%B0%A5%E9%A5%DF%A5%F3%A5%B0%B8%C0%B8%EC">プログラミング言語</a>としてすごく良くできてるなぁと思う。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20200621234713.jpg" alt="f:id:funatsufumiya:20200621234713j:plain" title="f:id:funatsufumiya:20200621234713j:plain" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20200621/20200621234713.jpg" alt="f:id:funatsufumiya:20200621234713j:plain" title="f:id:funatsufumiya:20200621234713j:plain" class="hatena-fotolife" itemprop="image"></span></p>
 <p>(※上記画像は公式ドキュメントより引用。)</p>
 <p>普通の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%ED%A5%B0%A5%E9%A5%DF%A5%F3%A5%B0%B8%C0%B8%EC">プログラミング言語</a>に慣れてると、ブループリントのようなビジュアル言語って初見では逆にマウス操作が多くて辛そうな気がするけれど、流石いろんな工夫がされていて、かなり普通に使えて生産性が高いと感じる。</p>
 <p>以下は、<strong><a class="keyword" href="http://d.hatena.ne.jp/keyword/DSL">DSL</a>・ビジュアル言語としての特徴に主眼を置いて</strong>、ブループリントを他の言語と比較したときに興味深い点を挙げてみた。( ブループリントを知らない人にも読めるように書いたつもりなので、入門としてもどうぞ。 )</p>
 <h2>実行とデータの分離 + フロー制御 の最強コンビ</h2>
 <p>以下の図で、白い線が<strong>実行ワイヤ</strong>で、その他のカラフルな線が<strong>データワイヤ</strong>。データワイヤは型によって大雑把に色が違う。実行ワイヤが<strong>実行される順序や時間的推移</strong>を示していて、データワイヤが<strong>データの流れ</strong>を示す。</p>
 <p>ちなみに<strong>実行順序は左から右 (→方向)</strong>で、上下は実行順序に直接関係はない。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20200621230303.png" alt="f:id:funatsufumiya:20200621230303p:plain" title="f:id:funatsufumiya:20200621230303p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20200621/20200621230303.png" alt="f:id:funatsufumiya:20200621230303p:plain" title="f:id:funatsufumiya:20200621230303p:plain" class="hatena-fotolife" itemprop="image"></span></p>
 <p>仮想的に<a class="keyword" href="http://d.hatena.ne.jp/keyword/JavaScript">JavaScript</a>で同じ処理を書くとすればこんな感じ。（※ <a class="keyword" href="http://d.hatena.ne.jp/keyword/UE4">UE4</a>では<a class="keyword" href="http://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>で同等の処理を書くこともできるけど、今回はわかりやすさ優先で仮想言語。）</p>
 <pre class="code lang-javascript" data-lang="javascript" data-unlink><span class="synIdentifier">var</span> tableActor;
 
@@ -17,10 +22,11 @@
 <span class="synIdentifier">}</span>
 <span class="synComment">// BeginPlay();</span>
 </pre>
+
 <p>実行ワイヤとデータワイヤの2種類が分かれているおかげで、一つは、<strong>時間の流れとデータの流れが分離</strong>されていて分かりやすく、逐次処理が書きやすい。</p>
 <p>さらに、実行ワイヤでは<strong>各種フロー制御</strong>や<strong>時間遅延 (Delay)</strong> が使えて、特に後者を使って<strong>すごく直感的に非同期が実現できる</strong>のはすごいと思う。</p>
 <p>例えば以下の例だと、<code>A</code>、<code>D</code> が同時に表示されたあと、0.5秒後に <code>B</code>、さらに0.5秒後に <code>C</code> が表示される。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20200621225208.png" alt="f:id:funatsufumiya:20200621225208p:plain" title="f:id:funatsufumiya:20200621225208p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20200621/20200621225208.png" alt="f:id:funatsufumiya:20200621225208p:plain" title="f:id:funatsufumiya:20200621225208p:plain" class="hatena-fotolife" itemprop="image"></span></p>
 <p>途中にある<code>Sequence</code>というノードと組み合わせてあるのがポイントで、<a class="keyword" href="http://d.hatena.ne.jp/keyword/JavaScript">JavaScript</a>で仮想的に同様のコードを書くとこんな感じ。</p>
 <pre class="code lang-javascript" data-lang="javascript" data-unlink>PrintString(<span class="synConstant">&quot;A&quot;</span>)
 
@@ -34,14 +40,15 @@ setTimeout(() =&gt; <span class="synIdentifier">{</span>
 
 PrintString(<span class="synConstant">&quot;D&quot;</span>)
 </pre>
+
 <p>この<code>Delay</code>を使ったコードは、Unityなどの<a class="keyword" href="http://d.hatena.ne.jp/keyword/C%23">C#</a>でいうコルーチンを使ったコードと似ていて、時間推移をすごく自然に表現できるのが素晴らしい。TimelineノードやLerpノードと組み合わせるとさらに自然になる。</p>
 <p>また、全く別の例を挙げると、例えばステージ終了演出など、あるイベントを1回だけ実行させたいとき (2回以上呼ばれると困るとき) は、<code>DoOnce</code>を使う。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20200621225824.png" alt="f:id:funatsufumiya:20200621225824p:plain" title="f:id:funatsufumiya:20200621225824p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20200621/20200621225824.png" alt="f:id:funatsufumiya:20200621225824p:plain" title="f:id:funatsufumiya:20200621225824p:plain" class="hatena-fotolife" itemprop="image"></span></p>
 <p>これも普通に考えると変数とかを準備したくなるので、ちょっと意外な書き方だと思う。でも慣れると自然。もちろん変数とIF (ブランチノード) を使って書くこともできる。</p>
 <p>ブループリントにはこういう痒いところに手が届く機能が多数用意されていて、<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSL">DSL</a>としてとても便利。</p>
 <h2>データ型の特徴を活かした補完機能や、コーディング機能群の充実さ</h2>
 <p>ちなみにデータワイヤの方にも様々な特徴があって、<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSL">DSL</a>として特筆すべき点としては、型が事前にわかるおかげで、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Visual%20Studio">Visual Studio</a>とかでいうところのIntelliSense、つまり<strong>自動補完</strong>が使える。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20200621231103.png" alt="f:id:funatsufumiya:20200621231103p:plain" title="f:id:funatsufumiya:20200621231103p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20200621/20200621231103.png" alt="f:id:funatsufumiya:20200621231103p:plain" title="f:id:funatsufumiya:20200621231103p:plain" class="hatena-fotolife" itemprop="image"></span></p>
 <p>また、微妙に型が違うときに<strong>
 自動的に変換を挿入</strong>してくれる便利機能もある。ほかにも型としては配列や構造体、ループも使えるので、普通の言語さながらの書き方もできる。型の特徴はフル活用できる印象。</p>
 <p>さらに重複や繰り返しを避ける機能として、<strong>関数</strong>や<strong>マクロ</strong>を独自に作ったり、イベントを独自に定義して<strong>イベントドリブン</strong>の手法を使うこともできる。</p>
@@ -49,22 +56,22 @@ PrintString(<span class="synConstant">&quot;D&quot;</span>)
 <p>ビジュアル<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%ED%A5%B0%A5%E9%A5%DF%A5%F3%A5%B0%B8%C0%B8%EC">プログラミング言語</a>に特有の苦労については、こうした機能やUIの補助で随分楽になっている。整列や検索の充実、後述の差分機能なども嬉しい。</p>
 <h2>用意されている関数自体が便利</h2>
 <p>ブループリントにはいくつか便利な関数が準備されていて、例えば <code>Set View Target with Blend</code> なんかは、カメラの移動ができ、かつこの関数単体でイージングもできるスグレモノ。一応他の関数群を組み合わせて同じことができるので、一種の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B7%A5%F3%A5%BF%A5%C3%A5%AF%A5%B9">シンタックス</a>シュガー的な感じ。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20200622100950.png" alt="f:id:funatsufumiya:20200622100950p:plain" title="f:id:funatsufumiya:20200622100950p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20200622/20200622100950.png" alt="f:id:funatsufumiya:20200622100950p:plain" title="f:id:funatsufumiya:20200622100950p:plain" class="hatena-fotolife" itemprop="image"></span></p>
 <p>こういう気が利く関数が他にも多数あって、ブループリントが<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSL">DSL</a>として便利なのは、やはり<a class="keyword" href="http://d.hatena.ne.jp/keyword/UE4">UE4</a>が<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B2%A1%BC%A5%E0%A5%A8%A5%F3%A5%B8%A5%F3">ゲームエンジン</a>として生産性を上げる機能や関数を複数搭載しているからだと思う。</p>
 <h2>マテリアルBPとアニメーションBPは別種として存在</h2>
 <p>ちなみに、同じブループリントという名前でも、マテリアル記述用のブループリント（マテリアルBP）とアニメーション設定用のブループリント（アニメーションBP）は<strong>種類が異なっている</strong>。通常のブループリントととは、一部類似性はあるけれど全く別の言語。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20200621232709.png" alt="f:id:funatsufumiya:20200621232709p:plain" title="f:id:funatsufumiya:20200621232709p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20200621/20200621232709.png" alt="f:id:funatsufumiya:20200621232709p:plain" title="f:id:funatsufumiya:20200621232709p:plain" class="hatena-fotolife" itemprop="image"></span></p>
 <p>これはマテリアルに関しては<a class="keyword" href="http://d.hatena.ne.jp/keyword/GPU">GPU</a>上のパイプライン処理される点を考えると別言語になっていて当然だし、一種の<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSL">DSL</a>として見たときにすごく簡潔で使いやすい。</p>
 <p>ちなみにマテリアルBPには<strong>実行ワイヤは存在しない</strong> ( 上図の白線は実行ワイヤでなくデータワイヤ )。シェーダーは基本パイプライン処理であることを考えると、データフロー型の方が相性が良く理解しやすいという判断なのだと思う。</p>
 <p>( なお従来のシェーダ言語が使いたいときはCustomノードに直接シェーダ言語を書くこともできるし、例えばコンピュートシェーダが必要な場面では、<a class="keyword" href="http://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>から独自シェーダを呼ぶこともできる。また、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Niagara">Niagara</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/Cascade">Cascade</a>などのパーティクルシステムがそもそも<a class="keyword" href="http://d.hatena.ne.jp/keyword/GPU">GPU</a>パーティクルを扱えることもあり、ブループリントで出来ない処理は意外に少ない。)</p>
 <h2><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D0%A5%C3%A5%B0">デバッグ</a>・差分が視覚的にわかる</h2>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20200622010100.jpg" alt="f:id:funatsufumiya:20200622010100j:plain" title="f:id:funatsufumiya:20200622010100j:plain" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20200622/20200622010100.jpg" alt="f:id:funatsufumiya:20200622010100j:plain" title="f:id:funatsufumiya:20200622010100j:plain" class="hatena-fotolife" itemprop="image"></span></p>
 <p>(※上記画像は公式ドキュメントより引用。)</p>
 <p>ちなみに、ブループリントは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D0%A5%C3%A5%B0">デバッグ</a>や差分が目で見てわかるのも便利。</p>
 <p>今実行されているノードがどれかわかるシミュレーションモードがあったり、エラーしているノードが視覚的にわかったりと、ビジュアル言語の特性がすごく生かされていると思う。</p>
 <p>差分についてはチームで開発するときは必須だと思うのでありがたい。個人的にはブループリントがバイナリで保存されているのが、gitとの相性を考えるとたまにキズかなと思うけれど、ビジュアル言語としては差分や<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D0%A5%C3%A5%B0">デバッグ</a>がちゃんと見れるのは珍しいと思うし、ブループリントを実用的にしてくれている必須機能だと思う。</p>
 <p>ちなみに、マテリアルブループリントの数値<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D0%A5%C3%A5%B0">デバッグ</a>機能もすごく便利。普通、シェーダ言語の結果ってとても<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D0%A5%C3%A5%B0">デバッグ</a>しづらいので、この機能はGLSLやHLSLとかの普通のシェーダ言語にも標準装備でほしいくらい。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20200622010807.png" alt="f:id:funatsufumiya:20200622010807p:plain" title="f:id:funatsufumiya:20200622010807p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20200622/20200622010807.png" alt="f:id:funatsufumiya:20200622010807p:plain" title="f:id:funatsufumiya:20200622010807p:plain" class="hatena-fotolife" itemprop="image"></span></p>
 <h2>まとめ：BPのようなビジュアル言語がゲーム以外の分野にもあったらな</h2>
 <p>さて、早足になったけれど、ブループリントの面白さはなんとなく理解してもらえたかなと思う。こうしてみると本当に汎用性が高いし、速度面でもネイティブ化機能を搭載していたりと実用的。</p>
 <p>そういった点も含めて、ブループリントは<strong>より汎用言語に近い実用的ビジュアル言語</strong>といった感じで、ビジュアル言語の一種のモデルケースといえると思う。これが実際のゲームなどで実用的かつ生産的に使われていると思うと流石だしすごい。</p>

@@ -1,0 +1,9 @@
+<p>自宅では<a class="keyword" href="http://d.hatena.ne.jp/keyword/Ubuntu">Ubuntu</a>マシンを作っているのだけれど、久々にUSBで持ち歩ける<a class="keyword" href="http://d.hatena.ne.jp/keyword/Ubuntu">Ubuntu</a> (Liveかつ永続ストレージあり (persistent) )を作成しようとして地味に苦戦したので、最も参考になった記事をメモ。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fqiita.com%2F9ever%2Fitems%2F35288e99c0dc80098327" title="潔癖症のためのUSBメモリで持ち運びできる開発環境 - Qiita" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;"></iframe><cite class="hatena-citation"><a href="https://qiita.com/9ever/items/35288e99c0dc80098327">qiita.com</a></cite></p>
+<p>ポイントはmkusbを使うところ。Live環境で以下を実行し、mkusbからブータブルなPersistent Live USBを作る。</p>
+<pre class="code bash" data-lang="bash" data-unlink>sudo add-apt-repository ppa:mkusb/ppa
+sudo apt update
+sudo apt install --install-recommends mkusb mkusb-nox usb-pack-efi</pre>
+
+<p>mkusbでは、<a class="keyword" href="http://d.hatena.ne.jp/keyword/grub">grub</a>を<a class="keyword" href="http://d.hatena.ne.jp/keyword/msdos">msdos</a>ではなくusb-pack-<a class="keyword" href="http://d.hatena.ne.jp/keyword/efi">efi</a>を選択するのもポイント。</p>
+<p>ちなみにUSB起動だといろいろ時間がかかるので、外付け<a class="keyword" href="http://d.hatena.ne.jp/keyword/SSD">SSD</a>が使えるとベスト。</p>

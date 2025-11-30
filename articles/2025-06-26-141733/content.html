@@ -1,4 +1,9 @@
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250626142850.jpg" width="1200" height="808" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<h1>グリースペンシルでアルファブレンディングを実現したり、Z-Sphere代わりに使ったりする</h1>
+<p>投稿日: 2025/06/26 14:17:33</p>
+<p>カテゴリ: グリースペンシル</p>
+<p>サムネイル: <img src="fhttps://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250626/20250626142850.jpg"></p><hr>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250626/20250626142850.jpg" width="1200" height="808" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>最近<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>のグリースペンシルでいろいろやっているのだけれど、実はグリースペンシルは背面にある半透明オブジェクトが描画されないなど、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%A2%A5%EB%A5%D5%A5%A1%A5%D6%A5%EC%A5%F3%A5%C7%A5%A3%A5%F3%A5%B0">アルファブレンディング</a>に関して実は制約が多い。（<a class="keyword" href="https://d.hatena.ne.jp/keyword/iPad">iPad</a>でグリースペンシルライクに使えるFeatherというアプリも同様で、半透明オブジェクトの後ろに半透明オブジェクトがあると描画されない。）</p>
 <p>この制約を打ち破るため、<a href="https://3dnchu.com/archives/deep-paint-v1-0/">Deep Paint</a>のメッシュ変換機能に着想を得て、頂点カラーおよび太さも反映したメッシュを生成できる機能をアドオンで実現させた。</p>
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Ffunatsufumiya%2FGP_to_colored_curves" title="GitHub - funatsufumiya/GP_to_colored_curves: Convert grease pencil (GP) to colored curves (meshes)" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/funatsufumiya/GP_to_colored_curves">github.com</a></cite></p>
@@ -6,10 +11,11 @@
 <p>そのおかげで、ジオメ<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%EA%A5%CE">トリノ</a>ードでは制約上、頂点カラーを直接更新できなくて擬似的なAttributeになってしまっている部分が、きちんと頂点カラーになっているので、シェーダーノードでもシンプルにColor Attributeが使えるし、GLTFなどでもちゃんとエクスポートができる。</p>
 <p>これを使ってどんなことができるかというと、頂点カラーなどを反映させたままメッシュにできるので、半透明の透過オブジェクトとして使いやすくなる。</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/RthlU2Gab_E?si=k96CB2I8q3NPD_wV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 <p>上記動画の光の表現がまさにそれにあたるのだけれど、以下のようにメッシュ化されているおかげで半透明にできている。</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250626140856.png" width="1200" height="845" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250626/20250626140856.png" width="1200" height="845" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>ちなみに当然ながらシェーダノードを自前で書く必要があって、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%B3%C8%C4%A5%B5%A1%C7%BD">拡張機能</a>のREADMEにも記載の疑似トゥーンシェーダーを使っている。（動画中ではさらにこの先にMix ShaderでEmissiveを混ぜ、光の表現をしていたりする。）</p>
-<p><span itemscope itemtype="http://schema.org/Photograph"><img src="../../images/20250626140956.png" width="1200" height="955" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250626/20250626140956.png" width="1200" height="955" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
 <p>余談として、このシェーダーノードはPrinciple BSDFをAlpha 0で使うというハックを使っていて、これによってTransparent BSDFをMixしたときに起こりやすい、半透明の黒ずみが解消される。</p>
 <p>実はこの黒ずみ現象、グリースペンシル自体（グリースペンシルで使われている<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%EC%A5%F3%A5%C0%A5%EA%A5%F3%A5%B0">レンダリング</a>方式）でも起こってしまう。つまり半透明なグリースペンシルが重なると、たまに裏のオブジェクトが描画されないばかりか、どんどん黒ずんでいってしまう。個人的にこれも困っていて、メッシュに変換することで黒ずみを避けれるという一石二鳥にもなっている。（<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a> 5.1以降では、グリースペンシル周りの<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%A2%A5%EB%A5%D5%A5%A1%A5%D6%A5%EC%A5%F3%A5%C7%A5%A3%A5%F3%A5%B0">アルファブレンディング</a>を通常のオブジェクトのようにシェーダーノード等で調整できるようにしてほしいなぁ…。）</p>
 <h2 id="グリースペンシルをZ-Sphereライクに使う">グリースペンシルをZ-<a class="keyword" href="https://d.hatena.ne.jp/keyword/Sphere">Sphere</a>ライクに使う</h2>

@@ -1,0 +1,87 @@
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240601/20240601211204.jpg" width="1200" height="700" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><strong><em>(全体の4記事目になります。他パートへのリンク: <a href="https://funatsufumiya.hatenablog.com/entry/2024/05/31/194416">Part1</a>, <a href="https://funatsufumiya.hatenablog.com/entry/2024/06/01/204016">Part2</a>, <a href="https://funatsufumiya.hatenablog.com/entry/2024/06/02/073000">Part3</a>, <a href="https://funatsufumiya.hatenablog.com/entry/2024/06/02/091844">Part4</a>, <a href="https://funatsufumiya.hatenablog.com/entry/2024/06/05/092534">Part5</a>, <a href="https://funatsufumiya.hatenablog.com/entry/2024/06/09/171112">Part6</a> )</em></strong></p>
+<p><a href="https://funatsufumiya.hatenablog.com/entry/2024/06/02/073000">前回の記事</a>で、「いいとこ取り」手法における、CAD側のポイントを解説しました。今回は後半として、主にスカルプトツール側のノウハウを記載していきます。</p>
+<h2 id="ポイントのおさらい">ポイントのおさらい</h2>
+<ul>
+<li>✅ １: CAD上で完璧を求めない</li>
+<li>✅ ２: 立体化するときは、一度直線でアタリをつけて、中点を加えたカーブで肉付けをする</li>
+<li>３: 「接線」「近接点」「端点」などのヒントに注意を払う</li>
+<li>４: スカルプト上で穴埋めを行う</li>
+<li>５: スムースが効きづらくなったら、フラット化ブラシを使う</li>
+<li>６: 複数ツール間を行き交うときは、ファイル形式とスケール、座標軸に注意</li>
+<li>７: レイヤーは色分けなどすると作業しやすい</li>
+</ul>
+
+<p>今回はこの目次の中から、3以降を解説していきます。（1, 2は<a href="https://funatsufumiya.hatenablog.com/entry/2024/06/02/073000">前記事</a>を参照。）</p>
+<h2 id="３-接線近接点端点などのヒントに注意を払う">３: 「接線」「近接点」「端点」などのヒントに注意を払う</h2>
+<p>振り返りを兼ねて、少し前回の最終部分に関する、CADの話から入りたいと思います。</p>
+<p>前回は、以下のGIFアニメの部分、つまり、CADでの立体化まで出来上がりました。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602072421.gif" width="600" height="338" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>結構サクサクと作業をすすめていましたが、実はCADでは、<strong>3D空間の何をいま自分が操作しているのか</strong>を知ることがとても大事になります。</p>
+<p>そのために実は、Moi3Dでも、Plasticityでも、点の上にヒントが表示されています。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602082430.jpg" width="1200" height="727" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602082441.jpg" width="1200" height="659" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>これをヒントにしていくというのがとても大事で、実はこれ（端点、交点、接点など）を意識していないと、一見ちゃんと線がひけているようでも、おかしな線をひいてしまうことがあります。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602082613.png" width="1200" height="659" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>例えば上の画像では、右上の3Dビューで見ると、綺麗なテニスラケットの形をしているように見えますが、左下や右下の三面図を見ると、実はぐにゃぐにゃして縦横無尽に線を引いてしまっています。</p>
+<p>点の上に表示されるヒント（今回は「<a class="keyword" href="https://d.hatena.ne.jp/keyword/X%C0%FE">X線</a>上」）を意識すると、失敗をなくしていくことができます。</p>
+<p><figure class="figure-image figure-image-fotolife" title="ガイド表示をもとに、修正していく様子"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602082950.png" width="1200" height="656" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>ガイド表示をもとに、修正していく様子</figcaption></figure></p>
+<p><figure class="figure-image figure-image-fotolife" title="ガイドのおかげで、綺麗に一直線上にできた。"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602083018.png" width="1200" height="659" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>ガイドのおかげで、綺麗に一直線上にできた。</figcaption></figure></p>
+<h2 id="４-スカルプト上で穴埋めを行う">４: スカルプト上で穴埋めを行う</h2>
+<p>さて、おさらいを終えたところで、ここからがこの記事の本編です。</p>
+<p>前回CADで作ったモデルを<a class="keyword" href="https://d.hatena.ne.jp/keyword/Nomad">Nomad</a> Sculptというスカルプトツールにインポートして、細かな部分を修正していきます。</p>
+<p>今回は<a class="keyword" href="https://d.hatena.ne.jp/keyword/STL">STL</a>形式でエクスポートして、<a class="keyword" href="https://d.hatena.ne.jp/keyword/iCloud">iCloud</a> Driveを経由して<a class="keyword" href="https://d.hatena.ne.jp/keyword/Nomad">Nomad</a> Sculptに持ってきてみました。</p>
+<p><figure class="figure-image figure-image-fotolife" title="PlasticityでのSTLエクスポートの様子"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602083325.png" width="1200" height="727" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>Plasticityでの<a class="keyword" href="https://d.hatena.ne.jp/keyword/STL">STL</a>エクスポートの様子</figcaption></figure></p>
+<p><figure class="figure-image figure-image-fotolife" title="Nomad Sculptにインポートした様子"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602083541.png" width="800" height="1067" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption><a class="keyword" href="https://d.hatena.ne.jp/keyword/Nomad">Nomad</a> Sculptにインポートした様子</figcaption></figure></p>
+<p>前回の作業でちょっと丁寧にやりすぎたのもあって、とても綺麗にインポートできましたが、穴が空いていたりするときは、<strong>「膨張ブラシ → リメッシュ → 膨張ブラシ → リメッシュ」を繰り返して</strong>、穴埋めを行います。</p>
+<p><figure class="figure-image figure-image-fotolife" title="膨張ブラシとリメッシュ"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602084420.png" width="1200" height="675" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>膨張ブラシとリメッシュ</figcaption></figure></p>
+<p>これで、リメッシュの特性によって、何回も繰り返すことで自動的に穴埋めされていきます。</p>
+<h2 id="５-スムースが効きづらくなったらフラット化ブラシを使う">５: スムースが効きづらくなったら、フラット化ブラシを使う</h2>
+<p>ところで、作業中に解像度が足りなくなってきて、解像度を上げると、スムーズブラシが効かなくなってくることがあります。</p>
+<p>そんなときは、「<strong>フラット化（平坦化）ブラシ</strong>」を使うと、高解像度でもスムージングを行うことができます。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602084848.png" width="700" height="933" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>逆に角をハッキリと立てたいときは、「トリム」や「クリース」をうまく使います。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602085321.png" width="800" height="1067" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>この辺のノウハウは、他の<a class="keyword" href="https://d.hatena.ne.jp/keyword/ZBrush">ZBrush</a>や<a class="keyword" href="https://d.hatena.ne.jp/keyword/Nomad">Nomad</a> Sculptの記事のほうが詳しいかと思いますので、いろんな記事や動画を参考にされてください。（レビュワーの方に教えていただいた、Dave Readさんの<a class="keyword" href="https://d.hatena.ne.jp/keyword/YouTube">YouTube</a>チャンネルを参考に挙げておきます: <a href="https://www.youtube.com/@drugfreedave">Dave Reed - YouTube</a>）</p>
+<p>〜〜〜</p>
+<p>さて、こうやってスカルプトツールでいろいろと補正や、手癖を加えていったものが、以下になります。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602090416.png" width="800" height="1067" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602090436.png" width="1200" height="667" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>最初のモデルからすると、ディ<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C6%A5%A3%A1%BC">ティー</a>ルなどがだいぶ綺麗になっているのが分かるのではないかと思います。</p>
+<p>実際には、スカルプト特有の問題である、角の部分にちょっとノイズのようなものが出たり、最後にリ<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a>という作業を行う必要がありますが、その辺は他の記事のほうが詳しいと思いますので今回は割愛します。（※ Dave Readさんの参考動画: <a href="https://www.youtube.com/watch?v=n7fs8BRx2uc">Quad Remesher for Noobs // I&#39;m the noob - YouTube</a>）</p>
+<p>「いいとこ取り」手法では、作りたいと思っている目的の形が一番うまく出るやり方を、CAD、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>、スカルプトの中から<strong>うまく選んでいくのがコツ</strong>なので、スカルプトツールは（あるいはCADさえも）必ずしも必須ではないというのは覚えておいてください。</p>
+<p>あとはこうやって作ったモデルを、3DCoatやArmorPaintで色付けするなり、3Dプリントしてみるなり、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B2%A1%BC%A5%E0%A5%A8%A5%F3%A5%B8%A5%F3">ゲームエンジン</a>に貼り付けるなり、自由に試行錯誤してみてください。<a class="keyword" href="https://d.hatena.ne.jp/keyword/Happy%20Hacking">Happy Hacking</a> :)</p>
+<p><figure class="figure-image figure-image-fotolife" title="3DCoatでPBRペイントして、Affinity Photoなどで調整を加えたレンダリング結果"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602122750.jpg" width="1200" height="712" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>3DCoatでPBRペイントして、Affinity Photoなどで調整を加えた<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%EC%A5%F3%A5%C0%A5%EA%A5%F3%A5%B0">レンダリング</a>結果</figcaption></figure></p>
+<h2 id="６-複数ツール間を行き交うときはファイル形式とスケール座標軸に注意">６: 複数ツール間を行き交うときは、ファイル形式とスケール、座標軸に注意</h2>
+<p>ここからは全体的なTipsになりますが、「いいとこ取り」手法では、いろんなツール間を行き来します。</p>
+<p>そのたびに、ちょっとずつファイル形式が変化したり、うまく表示されなかったりするのですが、以下を押さえておくことがポイントです。</p>
+<ul>
+<li>ポリゴンの<strong>書き出し形式</strong>は、<code>GLTF (GLB)</code>、<code>FBX</code>、<code>STL</code>、<code>OBJ</code>から最適なものを選ぶ。
+
+<ul>
+<li><code>GLTF</code>: 基本的に万能。シーンを丸ごと扱うのに向いてる。</li>
+<li><code>FBX</code>: メッシュ + マテリアルが一つのファイルになる。物体をまとめて扱うのに向いてる。</li>
+<li><code>STL</code>: 三角ポリゴン形式。CADからポリゴンだけを出力するときに最適。スカルプトの形だけ出力するときもOK。</li>
+<li><code>OBJ</code>: 昔からあるやつ。互換性は最高。ただファイルが何かとばらける。</li>
+</ul>
+</li>
+<li><strong>不可逆な変換</strong>（もとに戻せないファイル変換）に気をつける。特にCAD形式からポリゴン形式。（一応インポートはできるのでなぞり直したりすることはできる。）</li>
+<li>CADは単位 (mmなど) が異なっていると<strong>スケール（大きさ）</strong>が小さすぎて表示されなかったりするので、思い切って100倍や1000倍にすると見えたりする。</li>
+<li>3DCGソフトによって、<strong>X,Y,Z軸（座標系）の取り方</strong>が違うことがあるので、注意する。（書き出し時に注意し、一応回転や反転すれば直る。）（<a href="https://tascube.com/archives/867">→参考記事</a>）</li>
+<li>Applinkなど、3DCGソフト間を行き来する<a class="keyword" href="https://d.hatena.ne.jp/keyword/%B3%C8%C4%A5%B5%A1%C7%BD">拡張機能</a>はうまく使う。</li>
+</ul>
+
+<p>今回の「いいとこ取り」手法では、いろんなツールを行き来するので、ツールが持っている機能に目移りしてしまいがちです。それもクリエイティビティを広げるという意味で良いことなのですが、<strong>全ての機能を無理に使おうとしない</strong>ということも、今回の手法のポイントになります。</p>
+<p>また、複数のツールを購入すると<strong>金銭的にも負担</strong>があるので、体験版や<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EA%A1%BC%A5%BD%A5%D5%A5%C8">フリーソフト</a>を利用して、自分の肌感に合うツールを選ぶというのも、クオリティを高めたり、時間等を節約するためのヒントになります。</p>
+<p>（余談ですが、無料ソフトである<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>で、<a href="https://blendermarket.com/">Blender Market</a>や<a href="https://gumroad.com/">Gumroad</a>でアドオンを買いすぎて結局有料ソフト並になる、なんていうのも、あるあるなのかもしれません…😂）</p>
+<h2 id="７-レイヤーは色分けなどすると作業しやすい">７: レイヤーは色分けなどすると作業しやすい</h2>
+<p>最後に、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Photoshop">Photoshop</a>や<a class="keyword" href="https://d.hatena.ne.jp/keyword/Illustrator">Illustrator</a>でもそうだと思いますが、レイヤー別にうまくフォルダ（グループ）を分けたり、色分けすると作業がとてもしやすいです。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602105008.png" width="1200" height="659" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240602/20240602091339.png" width="1200" height="727" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>例えば上の2つ目の画像では、<code>needed</code>というフォルダ（グループ）を作って赤色にして目立つようにし、一つ作業が終わったら<code>other</code>というフォルダに入れて非表示にして、ぐちゃぐちゃになりやすいパスを整理しています。</p>
+<h2 id="まとめ">まとめ</h2>
+<p>さて、結果的に4記事分にもなってしまいましたが、<strong>CAD for Artist → スカルプト を使った「いいとこ取り」手法</strong>の良さが少しでも伝われば嬉しいです。</p>
+<p>私自身、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>などのポリゴン<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%E2%A5%C7%A5%EA%A5%F3%A5%B0">モデリング</a>の難しさに何度も挫折していて、MoiやPlasticityなどの新しい直感的なCADソフトなどが登場することで、思い通りのイメージを形にできる喜びを日々実感しています。</p>
+<p>ぜひ、楽しく制作する喜びを知ってほしいなというのがあり、今回書いた全4作に渡る記事となりました。是非感想などをコメントくださると嬉しいです。このやり方をぜひ皆さんなりにアレンジして、楽しく制作してほしいなと思います。</p>
+<p>ちなみに今回紹介したソフトは、どれも<strong>あくまで一例</strong>に過ぎません。無料のソフトも続々と出ているし、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>自体もスカルプトを機能として内包したりなど、どんどん進化しています。ぜひ考え方の良いところだけをうまく転用して、日々生まれる新しいソフト（例えば<a href="https://www.youtube.com/watch?v=kUuLwAw1HsY">Substance 3D Modeler</a>や<a href="https://youtu.be/U3DwkkBfr6w?si=SKpY7vbIK9mU4saT">Adobe Neo</a>なども今後に期待、<a href="https://3dnchu.com/archives/feather/">Feather</a>なんかも楽しそう）や、新しい考え方に応用していただければと思います。</p>
+<p>（1記事目にも書きましたが、今回の手法は<a href="https://creativecommons.jp/sciencecommons/aboutcc0/">CC0</a>として、自由に翻案・翻訳・転載などしていただければと思います。みなさんが自由に楽しく制作活動ができますように。）</p>

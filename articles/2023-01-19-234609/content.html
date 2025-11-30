@@ -1,15 +1,14 @@
+<h1>N-gramに基づいたキー配列練習文章 (ChatGPTによる試行1)</h1>
+<p>投稿日: 2023/01/19 23:46:09</p>
+<p>カテゴリ: N-gram</p>
+<p>サムネイル: なし</p><hr>
+
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fwww.typingbolt.com%2F" title="Typing Bolt ⚡ | Your AI Powered Personal Typing Tutor" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://www.typingbolt.com/">www.typingbolt.com</a></cite></p>
-
 <p>Typing Boltの頻出パターン生成が素晴らしいので、自分でも生成を試みてみることにする。今回はその初回の実験。</p>
-
 <h2 id="まずは英語">まずは英語</h2>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fwww3.nd.edu%2F~busiforc%2Fhandouts%2Fcryptography%2FLetter%2520Frequencies.html" title="Letter Frequencies" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://www3.nd.edu/~busiforc/handouts/cryptography/Letter%20Frequencies.html">www3.nd.edu</a></cite></p>
-
 <p>こちらのデータを元に、キー配列を高速で上達するためのワード集を構築してみたい。ChatGPTをうまく利用して作成する。</p>
-
 <h3 id="letter-bigram">letter bigram</h3>
-
 <ol>
 <li>th (92535489, 3.882543%)</li>
 <li>he (87741289, 3.681391%)</li>
@@ -33,12 +32,9 @@
 <li>ng (25106109, 1.053385%)</li>
 </ol>
 
-
 <h3 id="生成した文章">生成した文章</h3>
-
 <p>「th, he, in, er, an, re, nd, on, en を含む単語をできるだけ複数種類使い、それぞれ頭の中で列挙した上で、それらで最短の文章をそれぞれ作ってください。タイピング練習の文章にしたいと思っています。」
 とChatGPTに聞く形で作成した。</p>
-
 <pre class="code txt" data-lang="txt" data-unlink>th: The thread unraveled as the tailor sewed the cloth, but he was able to fix it with his deft fingers.
 
 he: He felt the weight of the world on his shoulders, as he walked through the city streets. He knew he had to keep moving, to overcome the hurdles.
@@ -79,19 +75,12 @@ es: She was impressed by his expertise, his ability to make complex tasks look e
 
 ng: The king was reigning over the kingdom, ruling with wisdom, fairness and compassion, ensuring the well-being of his people, and maintaining peace and prosperity.</pre>
 
-
 <p>my typingに一応公開してみた。文字数制限の関係で割愛せざるをえず、ちょっと微妙な出来だけど、それでも十分に役に立つはず。</p>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ftyping.twi1.me%2Fgame%2F267362" title="bigramを利用した高頻出パターンを含む英文 | タイピング練習の「マイタイピング」" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://typing.twi1.me/game/267362">typing.twi1.me</a></cite></p>
-
 <h2 id="次に日本語">次に日本語</h2>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fkouy.exblog.jp%2F9731073%2F" title="100万字日本語かなn-gramデータ | ローマ字入力でもなく、かな入力でもなく" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://kouy.exblog.jp/9731073/">kouy.exblog.jp</a></cite></p>
-
 <p>リストが長いので一部抜粋</p>
-
 <h3 id="文字-2gram">文字 2gram</h3>
-
 <p>15033   ょう
 7484    てい
 6341    しょ
@@ -131,11 +120,8 @@ ng: The king was reigning over the kingdom, ruling with wisdom, fairness and com
 3279    さい
 3206    ある
 3169    しん</p>
-
 <h3 id="生成した文章-1">生成した文章</h3>
-
 <p>ChatGPTに何度もパターンを変えてあたってみたが、うまい文章が生成されなかった。一応以下に結果を添付。</p>
-
 <pre class="code txt" data-lang="txt" data-unlink>「ょう」: 洋貨を買うようにしましょう。
 「てい」: 程度が高いです。
 「しょ」: 書類を提出しよう。
@@ -155,9 +141,7 @@ ng: The king was reigning over the kingdom, ruling with wisdom, fairness and com
 「たい」: 目標を達成するため
 「じょ」: 女性のこと</pre>
 
-
 <p>あまりにひどい出来なので、自分が考えたバージョンを以下に加えておく。</p>
-
 <pre class="code txt" data-lang="txt" data-unlink>「ょう」: 少々故障が多いでしょう。
 「てい」: っていっても程度が低下している。
 「しょ」: 正直障子は処理でしょう。
@@ -177,16 +161,10 @@ ng: The king was reigning over the kingdom, ruling with wisdom, fairness and com
 「たい」: 大抵のガタイの良い体育の大会は行きたい。
 「じょ」: 徐々に女性が上手に上達する。</pre>
 
-
 <p>こちらは良い出来で、練習になりそうなので、mytypingに追加しておいた。
 <iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ftyping.twi1.me%2Fgame%2F267365" title="bigramを利用した高頻出の日本語文 | タイピング練習の「マイタイピング」" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://typing.twi1.me/game/267365">typing.twi1.me</a></cite></p>
-
 <p>ただ、あまりに作為的なので英語版に比べて不自然な文章なのが要改善か。</p>
-
 <h2 id="まとめ">まとめ</h2>
-
 <p>今回はいまいちうまくいかなかったけれど、やはり2-gram (bigram) 等を利用した、digraphの活用は効率を上げることができるという体感は得られた。次は文字に限らず、2キーの対応のdigraphの作成をしつつ、効率的な練習文章の本格生成を進めたい。</p>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ftyping.twi1.me%2Fgame%2F267362" title="bigramを利用した高頻出パターンを含む英文 | タイピング練習の「マイタイピング」" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://typing.twi1.me/game/267362">typing.twi1.me</a></cite></p>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ftyping.twi1.me%2Fgame%2F267365" title="bigramを利用した高頻出の日本語文 | タイピング練習の「マイタイピング」" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://typing.twi1.me/game/267365">typing.twi1.me</a></cite></p>

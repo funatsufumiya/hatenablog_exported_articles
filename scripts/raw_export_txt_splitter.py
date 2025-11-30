@@ -113,11 +113,32 @@ if __name__ == "__main__":
             # print(f"title: {title}")
             dir = out_dir + sp + id
             os.makedirs(dir)
-            body = article["body"]
+            body:str = article["body"]
+            body = body.replace(">\n\n", ">\n")
+            date_raw: str = article["date"]
+            image = None
+            if "image" in article:
+                image = article["image"]
+            dt = datetime.strptime(date_raw, "%m/%d/%Y %H:%M:%S")
+            date = dt.strftime("%Y/%m/%d %H:%M:%S")
             del article["body"]
             header = article
             header_json_str = json.dumps(header, ensure_ascii=False, indent=2)
-            with open(dir + sp + "content.html", "w", encoding='utf-8') as f:
+            appendix = f"<h1>{title}</h1>\n"
+            appendix += f"<p>投稿日: {date}</p>\n"
+            if "category" in article:
+                category: str = article["category"]
+                appendix += f"<p>カテゴリ: {category}</p>\n"
+            else:
+                appendix += f"<p>カテゴリ: なし</p>\n"
+            if "image" in article:
+                appendix += f"<p>サムネイル: <img src=\"f{image}\"></p>"
+            else:
+                appendix += f"<p>サムネイル: なし</p>"
+            appendix += f"<hr>\n\n"
+            with open(dir + sp + "content_only.html", "w", encoding='utf-8') as f:
                 f.write(body)
+            with open(dir + sp + "content.html", "w", encoding='utf-8') as f:
+                f.write(appendix + body)
             with open(dir + sp + "headers.json", "w", encoding='utf-8') as f:
                 f.write(header_json_str)

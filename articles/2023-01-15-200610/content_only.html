@@ -1,0 +1,24 @@
+<p>最近、自分の使っているキー配列について、改めて評価を行いたいと思ったのだけれど、現在よく用いられている統計的な評価法だとなかなか正確な評価が難しそうなので、digraphとtrigraphのデータを集めてみたいと思った。</p>
+<p>ちなみに一般的にキー配列の評価に用いられてるものとしては、</p>
+<ul>
+<li>打鍵数</li>
+<li>所要時間</li>
+<li>交互打鍵率</li>
+<li>指ごとの打鍵率</li>
+<li>行ごとの打鍵率</li>
+<li>同指打鍵率</li>
+<li>跳躍率</li>
+<li>距離</li>
+<li>ヒートマップ</li>
+</ul>
+
+<p>などが挙げられている。（例: <a href="http://patorjk.com/keyboard-layout-analyzer/">Keyboard Layout Analyzer</a>）</p>
+<p>少し脱線するが、新下駄配列の制作に使われた <a class="keyword" href="http://d.hatena.ne.jp/keyword/N-gram">N-gram</a> (uni-gramやbi-gram、tri-gram) は、連続するN文字 (例えば2文字や3文字) の出現頻度を分析するもので、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BC%AB%C1%B3%B8%C0%B8%EC%BD%E8%CD%FD">自然言語処理</a>において重要とされる。</p>
+<p>同様に、あるキー<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%C8%A5%ED%A1%BC%A5%AF">ストローク</a>の打ちやすさの指標として、キー対応における N-graph (gramではなくてgraph。2対応の場合はdigraph、3対応の場合はtrigraph) の表を作れば、簡単にその配列の打ちやすさが評価できるのではないかと考えた。</p>
+<p>簡単なアイディアなので先行研究や評価コードなどが<a class="keyword" href="http://d.hatena.ne.jp/keyword/GitHub">GitHub</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google%20Scholar">Google Scholar</a>等に上がっていそうなものだけれど、意外と探すと見つからない。</p>
+<p>既存研究では、打鍵にかかった時間によるdigraph、trigraphを測定するような研究もあるよう。自分は打鍵にかかる身体的ストレスのdigraph、trigraphがほしいのだけれど、ひょっとすると論文を購入すればデータが入っているかもしれない。</p>
+<p>以下参考になりそうな先行研究。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fwww.academia.edu%2F61790497%2FTowards_detecting_programmers_stress_on_the_basis_of_keystroke_dynamics" title="Towards detecting programmers’ stress on the basis of keystroke dynamics" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://www.academia.edu/61790497/Towards_detecting_programmers_stress_on_the_basis_of_keystroke_dynamics">www.academia.edu</a></cite></p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fwww.academia.edu%2F5675358%2FNon_Invasive_Human_Stress_Detection_Using_Keystroke_Dynamics_and_Pattern_Variations" title="Non Invasive Human Stress Detection Using Keystroke Dynamics and Pattern Variations" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://www.academia.edu/5675358/Non_Invasive_Human_Stress_Detection_Using_Keystroke_Dynamics_and_Pattern_Variations">www.academia.edu</a></cite></p>
+<p>まずは感覚値で自分なりのdigraph、trigraphを作ることから始めてみようかと思うのだけれど、おそらく人によって手の大きさ・指の大きさは異なると思われるので、色んな人のデータを簡単に採取できる方法を見つけたいところ。</p>
+<p>ただ、digraphやtrigraphを作ったところで、例えばシフト動作における同時打鍵をどう評価すべきかは、難しいところ。まずは先行シフトとして評価することから始めるか…？</p>

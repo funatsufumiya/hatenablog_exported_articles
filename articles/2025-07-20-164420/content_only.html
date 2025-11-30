@@ -1,0 +1,238 @@
+<p><a href="https://github.com/funatsufumiya/jis_geta">JIS下駄配列</a>を作ってみたはいいものの、客観的指標がなければ良い配列なのかどうかもよくわからない。</p>
+<p>【追記】後から思い出したけど、<a href="https://github.com/eswai/keyboard_analyzer">eswai/keyboard_analyzer</a>を使えばよかったかもしれない。この存在がどうしても思い出せなくて、この記事では以下に記載の方法をとったが、またこれを使った方法もいつか試してみたい。（★ → <a href="https://funatsufumiya.hatenablog.com/entry/2025/07/21/130110">次記事</a>で実際にやってみました。）</p>
+<h2 id="目次">目次</h2>
+<ul class="table-of-contents">
+    <li><a href="#目次">目次</a></li>
+    <li><a href="#測定方法">測定方法</a></li>
+    <li><a href="#計測">計測</a><ul>
+            <li><a href="#-入力1おはようございます今日の調子はいかがですか">◆ 入力1:「おはようございます。今日の調子はいかがですか？」</a></li>
+            <li><a href="#-結果1">◆ 結果1</a></li>
+            <li><a href="#-入力2少々お待ち下さいありがとうございます">◆ 入力2:「少々お待ち下さい。ありがとうございます。」</a></li>
+            <li><a href="#-結果2">◆ 結果2</a></li>
+            <li><a href="#-入力3入力効率を測る対決をしてみる">◆ 入力3:「入力効率を測る対決をしてみる」</a></li>
+            <li><a href="#-結果3">◆ 結果3</a></li>
+        </ul>
+    </li>
+    <li><a href="#結果まとめ">結果まとめ</a><ul>
+            <li><a href="#スコア">スコア</a></li>
+            <li><a href="#単打率">単打率</a></li>
+        </ul>
+    </li>
+    <li><a href="#分析考察">分析・考察</a></li>
+</ul>
+<h2 id="測定方法">測定方法</h2>
+<p>自分が人間逆変換器になって、入力された日本語をJIS配列上のアルファベットに直し（例えば<a class="keyword" href="https://d.hatena.ne.jp/keyword/QWERTY">QWERTY</a>の場合、「おはよう」→「ohayou」）、<a href="https://patorjk.com/keyboard-layout-analyzer">Keyboard Layout Analyzer</a>に定義した<a href="https://gist.github.com/funatsufumiya/8562dcbb8d468812dfe4febab87f8fe8">JIS配列のアルファベットキーボード</a>での<strong>スコア</strong>と<strong>ヒートマップ</strong>を確認してみることにする。</p>
+<p>また、参考として<strong>単打率</strong>も計算する。単打の基準は1モーラが単打で打てているかどうかとし、「きょ」などの拗音も今回は1モーラとしてカウントする。（例えば "a" や "4" などを純粋な単打とし、"&lt;" などShiftが要るもの、"di" などの複数同時打鍵は単打としない。）</p>
+<p>人力変換を使った実験なので、短い文章しか測定できないのはあしからず。</p>
+<p>ちなみに表示されたアルファベットを実際にJISの<a class="keyword" href="https://d.hatena.ne.jp/keyword/QWERTY">QWERTY</a>で打ってみれば、なんとなく難しさと偏りは体感できるかもしれない。</p>
+<p>（なお、現時点でのJIS下駄のバージョンはv1.1.4。）</p>
+<h2 id="計測">計測</h2>
+<h3 id="-入力1おはようございます今日の調子はいかがですか">◆ 入力1:「おはようございます。今日の調子はいかがですか？」</h3>
+<ul>
+<li>JIS（かな入力）:
+
+<ul>
+<li><code>6 f 9 4 b@ x@ e j r &gt; g) 4 k a) 4 d f e t t@ w@ r t ?</code></li>
+<li>(<code>6f94b@x@ejr&gt;g)4ka)4dfett@w@rt?</code>)</li>
+</ul>
+</li>
+<li>JIS下駄:
+
+<ul>
+<li><code>6 f 9 j bk xk e 4 r &gt; go j k ao j d f e t tk wk r t ?</code></li>
+<li>(<code>6f9jbkxke4r&gt;gojkaojdfettkwkrt?</code>)</li>
+</ul>
+</li>
+<li>新下駄:
+
+<ul>
+<li><code>dl e di j qk xl k x z . fi j a gi j l e k d o , z d jn</code></li>
+<li>(<code>dledijqkxlkxz.fijagijlekdo,zdjn</code>)</li>
+</ul>
+</li>
+</ul>
+
+<h3 id="-結果1">◆ 結果1</h3>
+<ul>
+<li>JIS: スコア 22.65、単打率 16/24 = 0.67</li>
+</ul>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250720/20250720152801.png" width="1200" height="410" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<ul>
+<li>JIS下駄: スコア 42.90、単打率 16/24 = 0.67</li>
+</ul>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250720/20250720152939.png" width="1200" height="413" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<ul>
+<li>新下駄: スコア 57.03、単打率 17/24 = 0.70</li>
+</ul>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250720/20250720153032.png" width="1200" height="414" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<h3 id="-入力2少々お待ち下さいありがとうございます">◆ 入力2:「少々お待ち下さい。ありがとうございます。」</h3>
+<ul>
+<li>JIS（かな入力）:
+
+<ul>
+<li><code>d) 4 d) 4 6 j a h q@ x e &gt; 3 l t@ s 4 b@ x@ e j r &gt;</code></li>
+<li>(<code>d)4d)46jahq@xe&gt;3lt@s4b@x@ejr&gt;</code>)</li>
+</ul>
+</li>
+<li>JIS下駄:
+
+<ul>
+<li><code>do j do j 6 4 a h qk x e &gt; 3 l tk s j bk xk e 4 r &gt;</code></li>
+<li>(<code>dojdoj64ahqkxe&gt;3ltksjbkxke4r&gt;</code>)</li>
+</ul>
+</li>
+<li>新下駄:
+
+<ul>
+<li><code>ei j ei j dl x t h sm sl k . dj fl o s j wk xl k x z .</code></li>
+<li>(<code>eijeijdlxthsmslk.djflosjwkxlkxz.</code>)</li>
+</ul>
+</li>
+</ul>
+
+<h3 id="-結果2">◆ 結果2</h3>
+<ul>
+<li>JIS: スコア 31.72、単打率 15/23 = 0.65</li>
+</ul>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250720/20250720155232.png" width="1200" height="411" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<ul>
+<li>JIS下駄: スコア 45.87、単打率 15/23 = 0.65</li>
+</ul>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250720/20250720155327.png" width="1200" height="414" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<ul>
+<li>新下駄: スコア 63.02、単打率 14/23 = 0.61</li>
+</ul>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250720/20250720155424.png" width="1200" height="414" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<h3 id="-入力3入力効率を測る対決をしてみる">◆ 入力3:「入力効率を測る対決をしてみる」</h3>
+<p><strong>※ 「を」を計測するために、0のシフト面を「≈（U+2248、Almost Equal To）」と仮に定義して計測。</strong></p>
+<ul>
+<li>JIS（かな入力）:
+
+<ul>
+<li><code>i( 4 l) h b 4 l z ≈ f t . q e : z ≈ d w n .</code></li>
+<li>(<code>i(4l)hb4lz≈ft.qe:z≈dwn.</code>)</li>
+</ul>
+</li>
+<li>JIS下駄:
+
+<ul>
+<li><code>ei j rl h b j l @ d0 f t . q e : @ d0 d w n .</code></li>
+<li>(<code>eijrlhbjl@d0ft.qe:@d0dwn.</code>)</li>
+</ul>
+</li>
+<li>新下駄:
+
+<ul>
+<li><code>to j ao h i j fl b al e d v m k el b al l n od v</code></li>
+<li>(<code>tojaohijflbaledvmkelballnodv</code>)</li>
+</ul>
+</li>
+</ul>
+
+<h3 id="-結果3">◆ 結果3</h3>
+<ul>
+<li>JIS: スコア 23.30、単打率 17/21 = 0.81</li>
+</ul>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250720/20250720161137.png" width="1200" height="413" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<ul>
+<li>JIS下駄: スコア 39.41、単打率 17/21 = 0.81</li>
+</ul>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250720/20250720161233.png" width="1200" height="414" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<ul>
+<li>新下駄: スコア 51.45、単打率 14/21 = 0.67</li>
+</ul>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250720/20250720161733.png" width="1200" height="416" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<h2 id="結果まとめ">結果まとめ</h2>
+<h3 id="スコア">スコア</h3>
+<table>
+<thead>
+<tr>
+<th> </th>
+<th>計測1</th>
+<th>計測2</th>
+<th>計測3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JIS</td>
+<td>22.65</td>
+<td>31.72</td>
+<td>23.30</td>
+</tr>
+<tr>
+<td>JIS下駄</td>
+<td>42.90</td>
+<td>45.87</td>
+<td>39.41</td>
+</tr>
+<tr>
+<td>新下駄</td>
+<td>57.03</td>
+<td>63.02</td>
+<td>51.45</td>
+</tr>
+</tbody>
+</table>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250720/20250720162836.png" width="1174" height="712" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<h3 id="単打率">単打率</h3>
+<table>
+<thead>
+<tr>
+<th> </th>
+<th>計測1</th>
+<th>計測2</th>
+<th>計測3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JIS</td>
+<td>0.67</td>
+<td>0.65</td>
+<td>0.81</td>
+</tr>
+<tr>
+<td>JIS下駄</td>
+<td>0.67</td>
+<td>0.65</td>
+<td>0.81</td>
+</tr>
+<tr>
+<td>新下駄</td>
+<td>0.70</td>
+<td>0.61</td>
+<td>0.67</td>
+</tr>
+</tbody>
+</table>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250720/20250720162848.png" width="1158" height="710" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<h2 id="分析考察">分析・考察</h2>
+<p>まず、人力変換によるものなので、選定した文章によって結果が変動することは念頭に置いておきたい。今回、拗音が比較的多く含まれていることには注意が必要。</p>
+<p>スコアを線形的に見てよいものか（また効率という言葉が妥当かどうか）迷うのだけれど、<strong>仮に単純に線形的に捉えるなら</strong>、ざっとみて、JIS下駄はJISの1.5〜2倍ほど効率が良く、新下駄はJISの2〜3倍ほど効率が良いという結果とも読み取れる。新下駄はJIS下駄の1.3倍〜1.5倍ほどの効率の良さということになりそうだ。<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+<p>単打率については、今回句読点を含めたことも一応影響して、あまり差がないという結果になった。（JISがShiftも含めたときに思ったより単打ではないという見方もできるし、新下駄の単打率が高いという見方もできる。）</p>
+<p>この結果を果たしてどう考えるのか、そしてKeyboard Layout Analyzerの指標をどう捉えるかがかなり難しいところなのだけれど、配列を覚えるのが大変な新下駄配列でこれは当然の結果だとみるのか、何も覚えていなくても打てるJISは健闘しているとみるのか（そして打鍵最適化をどう捉えるか）、JIS下駄はJISから改善していると考えるか否か。</p>
+<p><strong>最後の考察については、自分はノーコメントということにしておきたい</strong>。というのも、Keyboard Layout Analyzerでスコアがたいてい低く出る<a class="keyword" href="https://d.hatena.ne.jp/keyword/QWERTY">QWERTY</a>について、事実として自分は日々常用していて（自分の利用している複数の配列のなかで事実として）最も打鍵効率が良いし、他の配列で簡単に代替できるものだと思えない。（もちろん実用や結果は一旦置いておいたときに、複数の配列を使っていて、スコアと比例する効率の良さを体験できる瞬間も素朴にあるのは確か。）</p>
+<p>ただ少なくともいえるのは、新下駄配列のJIS配列アルファベットに変換した結果は、<strong>パッと見でも打ちやすそうなアルファベットになっていて</strong>、時々記号が出てくるJISやJIS下駄に比べれば、誰もが打ちやすそうだなと感じるんじゃないだろうか。<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+<p>あとはこれと同時打鍵をどう評価するか次第だけれど、自分は同時シフトと非同時シフト（前置・後置シフト）を比較できる指標を持っていないし、比較したところで「指がしゃべる」配列としての価値が失われたりと比較の意味を現時点であんまり感じないので、そのあたりは後学に任せたいと思う。</p>
+<p>最後にJIS下駄について、こうしたデータを今後も総合しつつ、今回の計測からは読み取ることのできない、記憶の負荷や、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%DB%A1%BC%A5%E0%A5%DD%A5%B8%A5%B7%A5%E7%A5%F3">ホームポジション</a>によらない打鍵最適化、直感性などをどう評価するかが、JIS下駄を評価するポイントとなると思う。例えば、直感的でJISに近いながらも、まぁまぁの打鍵効率を持っていると評価するか、否か。（そして橋渡しとしての役割をどう評価するか。）</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+このスコア、本来このような比較に使う指標ではない（本来は文章ごとの比較ではなく、配列ごとの比較）ので、指標の使い方の妥当性は若干懐疑的ではあるが、例えば記号だけをいくつか入れてみたり、アルファベットだけを入れてみたときのスコアを比較すると、一応直感に即した結果は出ているのかなという気はする。<a href="#fnref:1" rev="footnote">&#8617;</a></li>
+<li id="fn:2">
+打ちやすそうに見えるアルファベットについて言及したものの、これが中指シフトなどで同時打鍵するということになると、急に打ちづらい<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B9%A5%C8%A5%ED%A1%BC%A5%AF">ストローク</a>が熟練度や人によっては登場してしまうのが、同時打鍵や中指・薬指シフトの評価の難しいところ。（ただし、これは同時打鍵等でなくてもありえる可能性もある。ただこれを比較研究したデータというのがないので自分はわからない。）<a href="#fnref:2" rev="footnote">&#8617;</a></li>
+</ol>
+</div>

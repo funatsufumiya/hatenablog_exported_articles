@@ -1,67 +1,40 @@
+<h1>第二の脳としてのLogseq / 対話駆動開発とシンプルさを実用するために</h1>
+<p>投稿日: 2024/01/09 21:23:53</p>
+<p>カテゴリ: 技術記事</p>
+<p>サムネイル: <img src="fhttps://m.media-amazon.com/images/I/51RCHbILAFL._SL500_.jpg"></p><hr>
+
 <p>あけましておめでとうございます。</p>
-
 <p>普段はですます調で記事を書くことはほぼないのですが、挨拶文から冒頭始まるということで、今回はですます調で統一してみます。</p>
-
 <p>また、このブログにガジェットやキーボード以外の技術記事を書くこともあまりなかったのですが、今回は少し抽象的で思考整理が多分に含まれているので、QiitaやZennではなく、あえてこのブログに書くことにします。</p>
-
 <h2 id="第二の脳としてのLogseq">第二の脳としてのLogseq</h2>
-
 <p>昨年は<a class="keyword" href="https://d.hatena.ne.jp/keyword/SNS">SNS</a>などを大きく整理した年で、発信したり見たりをしないままのアカウントをどうするか迷い、このブログ自体も非公開にしたり公開に戻したりを繰り返していますが、折り合いがつくまではしばらくその状態が続くかなと思っています。</p>
-
 <p>ちなみに発信していない情報やコンテンツについては、以前はNotionやObsidianに記録していましたが、Logseqで落ち着きつつあります。</p>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Flogseq.com%2F" title="A privacy-first, open-source knowledge base" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://logseq.com/">logseq.com</a></cite></p>
-
 <p>Logseqの素晴らしいところは、日誌形式で適当に書きなぐったものが、いつの間にか綺麗に整理されていくところにあります。さらに普通の<a class="keyword" href="https://d.hatena.ne.jp/keyword/Wiki">Wiki</a>と違うところは、いわゆる内部リンクを貼っていない記事についても自動で「Unlinked References（非リンク参照）」としてまとまったり、強力なクエリ言語により、クエリ結果自体を記事に貼り付けれるところにあります。</p>
-
 <p>元々、Logseqを使う前はObsidianやNotionを使っており、ObsidianとLogseqの似ている点としては、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D7%A5%E9%A5%B0%A5%A4%A5%F3">プラグイン</a>システムが充実している点や、アウトラインエディタ的に使えるという点が類似しています。自分は、よりアウトラインエディタ的にDynalistやWorkflowyなどに原点回帰しようとしたのがきっかけでLogseqを知りました。Workflowyとは、ドラッグや<a href="https://workflowy.com/ja/help/bullets/#zoom-in">ズーム</a>などの機能面でもよく似ています。 <a href="#f-50c35cbf" id="fn-50c35cbf" name="fn-50c35cbf" title="ちなみにObsidianはDynalistの開発チームが作ったものとのことで、よく棲み分けされていると思います。">*1</a></p>
-
 <p>NotionとLogseqの似ている点と違う点は、Notionはデータベース (DB、テーブル) と文章を分けているのに対して、Logseqは分けずに基盤となっているグラフデータベースシステムから直接クエリによりテーブルを生成できる点が異なります。はじめ自分はこの点をよく理解していなくて、Notion DBの代替機能としての <a href="https://github.com/blacksmithgu/obsidian-dataview">Dataviewプラグイン</a> などを検討していました。</p>
-
 <p>実際、それでもLogseqと似たことはできるはずですが、Logseqの場合はページ単位だけでなくブロック単位でクエリが可能であることと、前述の非リンク参照があること、ページは自動で作成されること、タスク管理機能を内在していること、そしてテーブルを直接書かずにクエリで好きな観点でデータを収集・分析・表示でき、雑多な思考をいつの間にか整理できることを決め手にLogseqを使い始めました。</p>
-
 <p>元々Obsidianでも、自分は毎日その日の日付が入ったファイル名で日誌・日記を付けるスタイルをとっていたので、日誌形式をメインにしているLogseqへの移行はスムーズで、かえって日付を一つのページとして参照でき、かつバックリンクが自動で貼られるので、リマインダやTODOを非常に忘れにくくなったと感じています。 <a href="#f-05203fc2" id="fn-05203fc2" name="fn-05203fc2" title="管理にGitなどを使ったり等、ローカルで好きにできるのもObsidianとLogseqは似ている面が多くあります。LogseqもObsidianみたいにモバイル側でもプラグインが使えたらなお良いなと思ったり。">*2</a></p>
-
 <p>ObsidianやNotionは今後もきっと使っていくと思いますし、Obsidianはきちんと文章を書きたいとき、Notionはチームで連携したいとき、あえてリレーショナルDB (テーブル) を使いたいときなど、自分のなかで使い方を棲み分けていくと思います。そういう意味では、NotionがリレーショナルDB + 構造化文書だとすれば、LogseqはグラフDB + 構造化文書と、わかりやすく対比できるかもしれません。</p>
-
 <h2 id="ClojureとREPL駆動開発とシンプルさ"><a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>とREPL駆動開発とシンプルさ</h2>
-
 <p>さて、次の話題に直接的には無関係なのですが、運命的だなと思ったのが、<a href="https://github.com/logseq/logseq/blob/master/CODEBASE_OVERVIEW.md">LogseqがClojureで開発されていること</a>です。</p>
-
 <p>自分自身の座右の書になっている、『7つの言語 7つの世界』で<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>に触れて以来、度々、自分は<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>のようなスタイルの開発をしたいとずっと考えてきました。</p>
-
 <p><div class="hatena-asin-detail"><a href="https://www.amazon.co.jp/dp/4274068579?tag=mvnhatenadiar-22&amp;linkCode=osi&amp;th=1&amp;psc=1" class="hatena-asin-detail-image-link" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/51RCHbILAFL._SL500_.jpg" class="hatena-asin-detail-image" alt="７つの言語 ７つの世界" title="７つの言語 ７つの世界"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="https://www.amazon.co.jp/dp/4274068579?tag=mvnhatenadiar-22&amp;linkCode=osi&amp;th=1&amp;psc=1" target="_blank" rel="noopener">７つの言語 ７つの世界</a></p><ul class="hatena-asin-detail-meta"><li><span class="hatena-asin-detail-label">作者:</span><a href="https://d.hatena.ne.jp/keyword/Bruce%20A.%20Tate" class="keyword">Bruce A. Tate</a></li><li><a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%AA%A1%BC%A5%E0%BC%D2">オーム社</a></li></ul><a href="https://www.amazon.co.jp/dp/4274068579?tag=mvnhatenadiar-22&amp;linkCode=osi&amp;th=1&amp;psc=1" class="asin-detail-buy" target="_blank" rel="noopener">Amazon</a></div></div></p>
-
 <p><a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>や<a class="keyword" href="https://d.hatena.ne.jp/keyword/Lisp">Lisp</a>に特徴的なのは、REPL駆動開発というもので、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Python">Python</a>や<a class="keyword" href="https://d.hatena.ne.jp/keyword/Ruby">Ruby</a>などにあるような補助的なREPLではなく、REPLを中心に対話的に開発をするスタイルがとられています。</p>
-
 <p>また、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>では特に「シンプル」を言語設計のキーワードとしており、様々な観点でそのシンプルさが際立ちます <a href="#f-ace9a033" id="fn-ace9a033" name="fn-ace9a033" title="Clojureで掲げられている「シンプル」についての参考記事: https://logmi.jp/tech/articles/321965">*3</a> 。</p>
-
 <p>この両方の観点で、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>を超える言語はなかなかないのではないかと個人的に考えているのですが、当時<a class="keyword" href="https://d.hatena.ne.jp/keyword/JVM">JVM</a> (<a class="keyword" href="https://d.hatena.ne.jp/keyword/Java">Java</a><a class="keyword" href="https://d.hatena.ne.jp/keyword/%B2%BE%C1%DB%A5%DE%A5%B7%A5%F3">仮想マシン</a>) 上で動く言語であることなどがネックとなり、自分が仕事で<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>を使うことはありませんでした。</p>
-
 <p><a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>界隈でも例えば<a class="keyword" href="https://d.hatena.ne.jp/keyword/Android">Android</a>開発に<a class="keyword" href="https://d.hatena.ne.jp/keyword/JVM">JVM</a>版の<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>を使うと起動時間がネックになることなどから、現在の<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>のメインストリームはClojureScript、つまり<a class="keyword" href="https://d.hatena.ne.jp/keyword/JavaScript">JavaScript</a>版に移っているようで、例えば<a class="keyword" href="https://d.hatena.ne.jp/keyword/Android">Android</a>開発もClojureScript + React Nativeで行うのが主流とのこと。</p>
-
 <p>きっと、サーバ周りだけでなく、Logseqのような身近なツールが<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>で動くようになったのも、こうしたことのおかげだと思います。</p>
-
 <p>時代は変わってきたなと思うと共に、変わらないものを<a class="keyword" href="https://d.hatena.ne.jp/keyword/%B0%A6%A4%B9%A4%EB%BF%CD">愛する人</a>もいるのだなと嬉しくなります。</p>
-
 <h2 id="対話駆動開発とシンプルさを実用するために">対話駆動開発とシンプルさを実用するために</h2>
-
 <p>自分もこの流れで、いつかClojureScriptを仕事で使いたいと思う一方で、やはり<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%E9">コンパイラ</a>基盤が<a class="keyword" href="https://d.hatena.ne.jp/keyword/JVM">JVM</a>であることはネックになってきます。今はGraalVMなどで起動時間が短くなったりインストールが簡単になったり (例えば <a href="https://github.com/babashka/nbb">nbb</a> や <a href="https://github.com/babashka/babashka">babashka</a> など ) しているので、近い未来にそのまま活用できると思うのですが、自分自身はリアルタイムよりで<a class="keyword" href="https://d.hatena.ne.jp/keyword/C/C%2B%2B">C/C++</a>に近いレイヤーでの仕事が多い傾向にあるため、何か代替策はないかと調べてきました。</p>
-
 <p>そして最近有力視しているのが、<a href="https://janet-lang.org/">Janet言語</a> と <a href="https://macoy.me/code/macoy/cakelisp">Cakelisp</a> です。Janetは<a class="keyword" href="https://d.hatena.ne.jp/keyword/C/C%2B%2B">C/C++</a>と連携できる<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>-like言語として最有力に感じており、まるで<a class="keyword" href="https://d.hatena.ne.jp/keyword/Python">Python</a>のようなBattery Includedな雰囲気も個人的に好きです。</p>
-
 <p>Cakelispについては、REPL駆動開発という意味では脱線するものの、<a class="keyword" href="https://d.hatena.ne.jp/keyword/C/C%2B%2B">C/C++</a>との<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D0%A5%A4%A5%F3%A5%C7%A5%A3%A5%F3%A5%B0">バインディング</a>を書くことなく、そのまま<a class="keyword" href="https://d.hatena.ne.jp/keyword/C/C%2B%2B">C/C++</a>に綺麗にトランスパイルされる点 <a href="#f-c56a371b" id="fn-c56a371b" name="fn-c56a371b" title=" こちらの記事のLisp分類でいうところのType-Aにあたる。 ">*4</a> で優れていると感じています。Cakelispの作者自身が<a href="https://macoy.me/code/macoy/cakelisp/src/branch/master/doc/VsOtherLanguages.org">他の言語との比較記事</a>を出していますが、Zig言語に対する<a href="https://github.com/dundalek/liz">Liz言語</a>のような位置づけでありつつ、Zig言語自体のようにビルドシステムを内包している点が興味深い点です。 <a href="#f-4fa380ec" id="fn-4fa380ec" name="fn-4fa380ec" title="CakelispはまるでNimのように、ホットリローディングができる機能 (参考記事) があるとのことだったのですが、自分はまだホットリローディングを動かすことには成功していません…。Nimでその強力さと機構は実感しているので、期待したいところ。">*5</a> 。</p>
-
 <p>Cakelispはさしあたり使える<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B7%A5%F3%A5%BF%A5%C3%A5%AF%A5%B9">シンタックス</a>ハイライター ( <a href="https://github.com/funatsufumiya/vscode-cakelisp">VSCode用</a> / <a href="https://github.com/funatsufumiya/cakelisp.vim">Vim用</a> ) を書いたりする過程でだいたいの機能は理解したのですが、Janetとはまた違う意味で非常に魅力的で、<a class="keyword" href="https://d.hatena.ne.jp/keyword/C/C%2B%2B">C/C++</a>の<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D0%A5%A4%A5%F3%A5%C7%A5%A3%A5%F3%A5%B0">バインディング</a>が不要だというのは強みであり、面白い使い方ができそう。</p>
-
 <p>Janetでも実際に<a href="https://github.com/funatsufumiya/janet-interactive-repl-demos/">対話しながらリアルタイムにコードを書き換えるデモ</a>を書いてみて、対話駆動開発と<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>/<a class="keyword" href="https://d.hatena.ne.jp/keyword/Lisp">Lisp</a>ルーツのシンプルさの強力さを実感しています。<a href="https://github.com/Olical/conjure/">Conjure</a>という対話開発支援ツールがとても便利そうで、次はJanetの<a href="https://github.com/Olical/conjure/wiki/Quick-start%3A-Janet-%28netrepl%29">netrepl</a>と<a class="keyword" href="https://d.hatena.ne.jp/keyword/VSCode">VSCode</a>が連携できるツールを探すか開発したいところ。</p>
-
 <h2 id="まとめ-考え方は伝播していく">まとめ: 考え方は伝播していく</h2>
-
 <p>今年は、こうした自分自身が本当はやりたかったことを仕事でも活用していきたいと思っていて、こうした技術が直接的に利用できるかはさておき、こうした地道な活動が、自分自身の原点を思い出させてくれたり、別の形で理念を応用するきっかけをつくると信じています。</p>
-
 <p>Logseqは直接活用できるとして、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>については、ひょっとしたら例えばNode.jsにいろんな<a class="keyword" href="https://d.hatena.ne.jp/keyword/C/C%2B%2B">C/C++</a><a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D0%A5%A4%A5%F3%A5%C7%A5%A3%A5%F3%A5%B0">バインディング</a>を書いてClojureScriptや<a class="keyword" href="https://d.hatena.ne.jp/keyword/JavaScript">JavaScript</a> (あるいはTypeScript)で対話開発を始めるかもしれないし、あるいは <a href="https://fennel-lang.org/">Fennel</a> や<a class="keyword" href="https://d.hatena.ne.jp/keyword/Lua">Lua</a>などで折り合いを付けるかもしれないし、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Python">Python</a>などの<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EA%A5%D7%A5%C8%B8%C0%B8%EC">スクリプト言語</a>やJupyter Notebookなどの対話開発のルーツは<a class="keyword" href="https://d.hatena.ne.jp/keyword/Lisp">Lisp</a>にあるともいわれているように、これらの道具を直接的に利用できなくても、良い考えは他の分野に浸透していっていて、既に仕事で使っている技術も多いと感じています。</p>
-
 <p>そうした原点を時々思い出しながら、新しい考え方も少しずつ取り入れつつ、実際に自分がそれをどんな形でどこに見出していくかは、今年の楽しみにしたいと思っています。</p>
 <div class="footnote">
 <p class="footnote"><a href="#fn-50c35cbf" id="f-50c35cbf" name="f-50c35cbf" class="footnote-number">*1</a><span class="footnote-delimiter">:</span><span class="footnote-text">ちなみにObsidianはDynalistの開発チームが作ったものとのことで、よく棲み分けされていると思います。</span></p>

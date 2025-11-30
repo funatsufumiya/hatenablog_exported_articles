@@ -1,63 +1,38 @@
+<h1>BGFX研究の一区切り</h1>
+<p>投稿日: 2025/01/05 17:36:32</p>
+<p>カテゴリ: 描画エンジン</p>
+<p>サムネイル: <img src="fhttps://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250105/20250105173812.png"></p><hr>
+
 <p>年末年始の休みを利用して、<a href="https://github.com/bkaradzic/bgfx">BGFX</a>の研究に時間を割いていて、ある程度一区切りしたので、思考整理も兼ねてまとめておきたい。</p>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Ffunatsufumiya%2Flwjgl-bgfx-studies%2F" title="GitHub - funatsufumiya/lwjgl-bgfx-studies: lwjgl-bgfx-studies" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/funatsufumiya/lwjgl-bgfx-studies/">github.com</a></cite></p>
-
 <h2 id="BGFX研究を始めた理由">BGFX研究を始めた理由</h2>
-
 <p>ちなみになぜBGFXを研究していたかというと、もう5年前になるけれど、以下の記事を書いてから、どこかで低レ<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D9%A5%EB%A5%B0">ベルグ</a>ラフィックス<a class="keyword" href="https://d.hatena.ne.jp/keyword/API">API</a>を使って<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EB%A5%B9%A5%AF%A5%E9%A5%C3%A5%C1">フルスクラッチ</a>で何かを書きたいという思いがあった。</p>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fqiita.com%2Ffunatsufumiya%2Fitems%2F98ca9aca0c9f8b608ca1" title="C++で使える、クロスプラットフォームな低レベルグラフィックスライブラリ比較 - Qiita" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://qiita.com/funatsufumiya/items/98ca9aca0c9f8b608ca1">qiita.com</a></cite></p>
-
 <p>最初は<a href="https://github.com/floooh/sokol">Sokol</a>を使って遊ぼうと思っていたのだけれど、最近、Xiaomiの<a class="keyword" href="https://d.hatena.ne.jp/keyword/Android">Android</a>端末を買ったこともあって、Vulkanは切り捨てたくないなと思っていて、そこで重い腰を上げてBGFXを研究し始めた。</p>
-
 <p><a href="https://funatsufumiya.hatenablog.com/entry/2025/01/03/052733">一つ前の記事</a>で書いた通り、長期的にはProcessingやOpenFrameworksをMetal以降の新しいグラフィックス<a class="keyword" href="https://d.hatena.ne.jp/keyword/API">API</a>に置き換えたいという思いもあった。</p>
-
 <h2 id="BGFXの特徴">BGFXの特徴</h2>
-
 <p>結論からいえば、BGFXはある程度<a class="keyword" href="https://d.hatena.ne.jp/keyword/OpenGL">OpenGL</a>に歩み寄っている印象で、前の記事でも紹介した<a href="https://github.com/RavEngine/RGL/">RGL</a>やVulkan/Metal自体からすれば、<a class="keyword" href="https://d.hatena.ne.jp/keyword/OpenGL">OpenGL</a>からの過渡期にちょうど良い<a class="keyword" href="https://d.hatena.ne.jp/keyword/API">API</a>設計だと感じた。</p>
-
 <p>例えば<a href="https://qiita.com/lriki/items/934804030d56fd88dcc8">Descriptor (ディスクリプタ)</a>を使わずに今まで通りUniformなどを使えるようにしてあったり、<a href="https://github.com/bkaradzic/bgfx/issues/1556">View (ビュー)</a>という高次の描画概念（<a class="keyword" href="https://d.hatena.ne.jp/keyword/OpenGL">OpenGL</a>のコンテキストみたいなもの）があることで、<a href="https://qiita.com/tositada_nakada/items/928617160a683af6872c">RenderPass (レンダーパス)</a>を意識せずにコードを書くことができる。</p>
-
 <p>もちろんこれはおそらく諸刃の剣でもあって、本当にミッションクリティカルな高性能な描画を行いたいなら、自分で直接Vulkan/Metal/DX12を書くべきだろうなと思う。</p>
-
 <p>あと、コードを書き始める前から悩んでいたのが、シェーダやテクスチャを事前<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>しなければならないことと、その際のシェーダに独自のマクロが含まれることで、これも設計上の取捨選択かなと思う。</p>
-
 <p><a href="https://github.com/RavEngine/RavEngine">RavEngine</a>などのように、素のGLSLなどが書けたほうが望ましい場合もあるだろうし、テクスチャについても、<a class="keyword" href="https://d.hatena.ne.jp/keyword/png">png</a>やjpgなどを直接読み込んでくれて必要に応じて<a class="keyword" href="https://d.hatena.ne.jp/keyword/ktx">ktx</a>やddsなどに<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>してくれるほうが良い場合もあるかと思う。</p>
-
 <p>実際、多くの<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B2%A1%BC%A5%E0%A5%A8%A5%F3%A5%B8%A5%F3">ゲームエンジン</a>がそうなっているし、BGFXでもやろうと思えば（シェーダマクロを除いては）利用するアプリケーション側でshadercなどを呼ぶことはできる<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>と思うけれど、BGFXはおそらく、<a class="keyword" href="https://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>から直接利用する場合の利便性を一番に考えてこの設計にしたのだと思う。</p>
-
 <p>例えばBGFXのシェーダは、オプションを指定すると<a class="keyword" href="https://d.hatena.ne.jp/keyword/C/C%2B%2B">C/C++</a>用のヘッダファイルを出力してくれる。これは<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%B9%A5%B3%A1%BC%A5%C9">ソースコード</a>に埋め込みたいときにとても便利だし、テクスチャも呼び出し前から事前<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>されていれば、オーバーヘッドは小さくなる。</p>
-
 <h2 id="BGFX研究の振り返り">BGFX研究の振り返り</h2>
-
 <p>さて、こうしてBGFX研究をして、何に繋げていくかというところなのだけれど、一番大きいと思ったのは、このBGFXを書くという行為自体の学習効果はとても大きいように思えた。</p>
-
 <p>先程も紹介したように、<a class="keyword" href="https://d.hatena.ne.jp/keyword/OpenGL">OpenGL</a>からその後のモダン<a class="keyword" href="https://d.hatena.ne.jp/keyword/API">API</a>への過渡期として、ちょうど良い<a class="keyword" href="https://d.hatena.ne.jp/keyword/API">API</a>設計がされているので、Metal/Vulkan/DX12を直接書く前段階として、程よいステップになる。</p>
-
 <p>そして一度書くと<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%AF%A5%ED%A5%B9%A5%D7%A5%E9%A5%C3%A5%C8%A5%D5%A5%A9%A1%BC%A5%E0">クロスプラットフォーム</a>で動くというのは魅力で、それが<a href="https://github.com/LWJGL/lwjgl3">LWJGL3</a>（<a class="keyword" href="https://d.hatena.ne.jp/keyword/Java">Java</a>用の描画ライブラリ）に含まれている理由だと思うのだけれど、ただ、メンテが不十分なのかユーザが少ないのか情報が少ないのか、Write Once, Run Anywhere、と一筋縄ではいかないのはちょっと残念なところ。</p>
-
 <p>LWJGL自体、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Java">Java</a>の他のライブラリと違って、基本的に<a class="keyword" href="https://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>ライクに実装されているので、それが今回選んだ理由の一つ（oFは<a class="keyword" href="https://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>で書かれていて、Processingは<a class="keyword" href="https://d.hatena.ne.jp/keyword/Java">Java</a>で書かれていて、良い塩梅なので）だったのだけれど、各プラットフォームで描画がちゃんとできているかを確認するのは大変なことだと感じた。</p>
-
 <p>ただ、一度基盤が整えば、描画結果がほぼ（自分の観測上は今のところ完全に）Win/<a class="keyword" href="https://d.hatena.ne.jp/keyword/Mac">Mac</a>/<a class="keyword" href="https://d.hatena.ne.jp/keyword/Linux">Linux</a>で一致するのは素晴らしいと思った。最近の<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B2%A1%BC%A5%E0%A5%A8%A5%F3%A5%B8%A5%F3">ゲームエンジン</a>では当たり前のことなのだけれど、その当たり前が一番難しいことだったりする。</p>
-
 <p>じゃあ初めから、<a class="keyword" href="https://d.hatena.ne.jp/keyword/OpenGL">OpenGL</a>と相性の良さそうなVulkanを選べば良いのではないか、と思うけれど、正直個人的には<a class="keyword" href="https://d.hatena.ne.jp/keyword/OpenGL">OpenGL</a>からVulkanへの飛躍はかなり大きくて、Vulkanは直接書くのはだいぶ辛いと感じるので、その点BGFXは良い緩衝材になってくれているように思う。（個人的にVulkanは、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B2%A1%BC%A5%E0%A5%A8%A5%F3%A5%B8%A5%F3">ゲームエンジン</a>などの基盤になるべきもので、直接書くものではない気がする。BGFXはその点、直接書くことをかなり意識されている。）</p>
-
 <p>おそらく<a href="https://github.com/RavEngine/RGL/">RGL</a>が目指していることなのかなと思うけれど、Metalの<a class="keyword" href="https://d.hatena.ne.jp/keyword/API">API</a>だったら個人的に書いてもいいかなと思うので、Metal-likeな<a class="keyword" href="https://d.hatena.ne.jp/keyword/API">API</a>がそのまま<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%AF%A5%ED%A5%B9%A5%D7%A5%E9%A5%C3%A5%C8%A5%D5%A5%A9%A1%BC%A5%E0">クロスプラットフォーム</a>になるというのは、RGLの魅力の一つかもしれない。</p>
-
 <h2 id="BGFX研究の成果">BGFX研究の成果</h2>
-
 <p>さて、この成果を何に活かしていくかについては、やっぱり最終的にはProcessingやOpenFrameworksの新しい描画基盤にしたいところだけど、前述の通り、素のGLSLが書けなかったりといろいろ過渡期な感じは否めないので、やるとしたらシェーダとテクスチャ周りは厚めにラップしてBGFXの存在を意識しないで良いようにするか、あるいは逆にBGFXを意識して書けるようにするかかな、と思う。</p>
-
 <p>ただ正直、RGLやRavEngineのようなムーブメントがあることや、自分自身既に<a href="https://bevyengine.org/">Bevy Engine</a>や<a href="https://godotengine.org/">Godot Engine</a>などで楽しくコーディングできていることを思うと、完全にライフワークの域かなとは思う。</p>
-
 <p>ちなみに<a href="https://github.com/roman01la/minimax">minimax</a> (<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>言語用の、BGFXを使った3D<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B2%A1%BC%A5%E0%A5%A8%A5%F3%A5%B8%A5%F3">ゲームエンジン</a>) のように、BGFXは<a class="keyword" href="https://d.hatena.ne.jp/keyword/Java">Java</a>等のほとんどの言語で既に<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D0%A5%A4%A5%F3%A5%C7%A5%A3%A5%F3%A5%B0">バインディング</a>があることを利用した、面白い使い方はできそうで、これは5年前に記事を書いたときも思ったのだけれど、BGFXのように<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B2%A1%BC%A5%E0%A5%A8%A5%F3%A5%B8%A5%F3">ゲームエンジン</a>のベースになる<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>を覚えておいて、その名前などで<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B2%A1%BC%A5%E0%A5%A8%A5%F3%A5%B8%A5%F3">ゲームエンジン</a>を検索すると、もし既存のもので好みのものがないときに、良い選択肢が見つかりやすいかもしれない。</p>
-
 <p>個人的には、いまのOpenFrameworksやProcessingは、それはそれで一つの枯れた<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>を形成してくれててありがたいし、<a class="keyword" href="https://d.hatena.ne.jp/keyword/OpenGL">OpenGL</a>自体も今後もMesaなどで変わらずメンテされていくと思っているので、よほど描画性能がミッションクリティカルな場合でなければ、無理にモダン<a class="keyword" href="https://d.hatena.ne.jp/keyword/API">API</a>に寄せる必要はないように思うけれど、それでも今回手を動かしてみて、例えば並列処理で10倍、<a class="keyword" href="https://d.hatena.ne.jp/keyword/SIMD">SIMD</a>で10倍の性能差が出たら、掛け算して100倍以上の性能差が出る、というような、まるで<a class="keyword" href="https://d.hatena.ne.jp/keyword/Python">Python</a>と<a href="https://www.modular.com/mojo">Mojo</a>みたいなことが平気であり得るなという気はした。</p>
-
 <p>そういう意味で、自分はたぶん今後は普段はBevyやGodot、RavEngineのようなもので何かを作ったり遊んだりしながらも、時々はこういうBGFX研究のような探求というか研究のようなものは続けていくんだろうなという気はする。</p>
-
 <p>余談として、もし<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%AF%A5%ED%A5%B9%A5%D7%A5%E9%A5%C3%A5%C8%A5%D5%A5%A9%A1%BC%A5%E0">クロスプラットフォーム</a>で物を作る必要がないなら、MetalとSwiftを書いていくのが幸せそうだなという気がするし、逆にDX12と<a class="keyword" href="https://d.hatena.ne.jp/keyword/C%23">C#</a>だけを書くのも幸せなように思う。そういう意味でUnityやGodotはちょうど良い戦略をとっていると思うし、一つ前の記事でも書いたけど、今後<a href="https://www.moonbitlang.com/">MoonBit</a>のような言語がWeb/WASMの領域を広げていくのだろうと思う。</p>
-
 <p>BevyやRust自体も、雑な言い方をすればWebGPU含めて<a class="keyword" href="https://d.hatena.ne.jp/keyword/Firefox">Firefox</a>の副産物のようなものなので、何かしら安定したものを作ろうとすると自然とそういう巨人の肩の上に乗ることになるんだろうなと思いつつ、たまには<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EB%A5%B9%A5%AF%A5%E9%A5%C3%A5%C1">フルスクラッチ</a>に自由なものを書く楽しみも大切にしたいなと思う。</p>
 <div class="footnotes">
 <hr/>
@@ -66,4 +41,3 @@
 実際、<a href="https://github.com/bkaradzic/bgfx.cmake">BGFXのCMake版</a>では、シェーダ<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>等はビルドプロセスに自動で組み込んでくれるような工夫が随所で見られる。<a href="#fnref:1" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
-

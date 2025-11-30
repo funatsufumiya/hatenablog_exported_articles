@@ -1,0 +1,90 @@
+<p>最近<a href="https://ebitengine.org/">Ebitengine</a>というものに興味が出てきて、熱心に調べたりアドオンを書いたりしているのだけれど、自分がProcessing Rebornと勝手に呼んでいる最近の活動について、思考整理のために経緯を最初からまとめたいと思う。</p>
+<p>忙しい人は <a href="#Ebitengine">#Ebitengine</a> まで飛ばしていただければ。</p>
+<h2 id="前置き-今まで自分がやってきたこと">前置き: 今まで自分がやってきたこと</h2>
+<h3 id="1-OpenFrameworksの脱OpenGL化--頓挫も代替は整備">1. OpenFrameworksの脱<a class="keyword" href="https://d.hatena.ne.jp/keyword/OpenGL">OpenGL</a>化 → 頓挫も、代替は整備</h3>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ffunatsufumiya.hatenablog.com%2Fentry%2F2024%2F12%2F25%2F204711" title="OpenFrameworksのMetal/DX12/Vulkan化という夢の途中 - しさくろく" class="embed-card embed-blogcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 190px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://funatsufumiya.hatenablog.com/entry/2024/12/25/204711">funatsufumiya.hatenablog.com</a></cite></p>
+<p>昨年末、上のような記事を書いた。このときは、OpenFrameworksをMetal/DX12/Vulkan化しようと意気込んで挑戦していたのだけれど、結局、OpenFrameworksの構造が<a class="keyword" href="https://d.hatena.ne.jp/keyword/OpenGL">OpenGL</a>に特化しすぎていることと、多くのアドオンが<a class="keyword" href="https://d.hatena.ne.jp/keyword/OpenGL">OpenGL</a>依存していることから、一旦諦める形となった。</p>
+<h4 id="RavEngineRGL">RavEngine/RGL</h4>
+<p>ただその後も調査自体は続けて、OpenFrameworksのMetal/DX12/Vulkan代替としては、下記記事にあるように<a href="https://github.com/RavEngine/RavEngine">RavEngine</a>と<a href="github.com/RavEngine/RGL">RGL</a>というものを見つけて、これで一旦目的自体は達成されたと考えて、調査はそこで終えていたが、OpenFrameworksからの飛躍が大きかったのと、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>時間の長さから、個人的にはあまり使うことはなかった。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ffunatsufumiya.hatenablog.com%2Fentry%2F2025%2F01%2F03%2F052733" title="RavEngine/RGLとの出会いと、新年にあたって - しさくろく" class="embed-card embed-blogcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 190px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://funatsufumiya.hatenablog.com/entry/2025/01/03/052733">funatsufumiya.hatenablog.com</a></cite></p>
+<h4 id="sinenparanoixa">sinen/paranoixa</h4>
+<p>また、時期は少し後になるものの、sinenとparanoixaという同様の<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>にも若干コミットし、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%AF%A5%ED%A5%B9%A5%D7%A5%E9%A5%C3%A5%C8%A5%D5%A5%A9%A1%BC%A5%E0">クロスプラットフォーム</a>化の手助けをしたりもした。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Fastomih%2Fsinen" title="GitHub - astomih/sinen: Creative coding framework for Lua" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/astomih/sinen">github.com</a></cite></p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Fastomih%2Fparanoixa" title="GitHub - astomih/paranoixa: Vulkan/WebGPU/SDL3_GPU abstraction layer" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/astomih/paranoixa">github.com</a></cite></p>
+<h3 id="2-Processingの描画強化--minimax">2. Processingの描画強化 → minimax</h3>
+<p>ではProcessing自体を進化させるのはどうかとその後考え、OpenFrameworks同様に調査をした結果、LWJGLを使えば良いと目をつけて、それを既に<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>という<a class="keyword" href="https://d.hatena.ne.jp/keyword/JVM">JVM</a>（<a class="keyword" href="https://d.hatena.ne.jp/keyword/Java">Java</a><a class="keyword" href="https://d.hatena.ne.jp/keyword/%B2%BE%C1%DB%A5%DE%A5%B7%A5%F3">仮想マシン</a>）上の言語で実装されているminimaxを、きちんと<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%AF%A5%ED%A5%B9%A5%D7%A5%E9%A5%C3%A5%C8%A5%D5%A5%A9%A1%BC%A5%E0">クロスプラットフォーム</a>で動くように整備した。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ffunatsufumiya.hatenablog.com%2Fentry%2F2025%2F01%2F13%2F095506" title="BGFX研究の成果が一つ出た 〜 minimax フレームワーク - しさくろく" class="embed-card embed-blogcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 190px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://funatsufumiya.hatenablog.com/entry/2025/01/13/095506">funatsufumiya.hatenablog.com</a></cite></p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fqiita.com%2Ffunatsufumiya%2Fitems%2Fe41df266eb72b097074a" title="minimax - Clojureで書かれた、DirectX11/Vulkan/Metal対応のミニマルなゲームフレームワーク - Qiita" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://qiita.com/funatsufumiya/items/e41df266eb72b097074a">qiita.com</a></cite></p>
+<p>ただminimaxはProcessingライクではなく<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B2%A1%BC%A5%E0%A5%A8%A5%F3%A5%B8%A5%F3">ゲームエンジン</a>なので、ちょっと用途は違うのだけれど、その後<a class="keyword" href="https://d.hatena.ne.jp/keyword/JVM">JVM</a>のメモリやポインタの扱いの大変さに疲れたので、個人的に<a class="keyword" href="https://d.hatena.ne.jp/keyword/JVM">JVM</a>を追うことは今はやっていない。</p>
+<h3 id="3-Sokol関連">3. Sokol関連</h3>
+<h4 id="Delve-Framework">Delve Framework</h4>
+<p>その他、<a href="https://github.com/floooh/sokol">Sokol</a>を使った各種<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>についても調査する過程で、Delve FrameworkというZig言語の<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>にコミットしたりもした。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2FInterrupt%2Fdelve-framework" title="GitHub - Interrupt/delve-framework: Delve is a framework for writing Games in Zig and Lua. For those who value being cross platform and keeping things simple." class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/Interrupt/delve-framework">github.com</a></cite></p>
+<h4 id="V言語--gg">V言語 / gg</h4>
+<p>そこから日が経ち、ふとV言語を再ウォッチしたところ、ggというSokolベースの<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>ができていたことから、それで遊んだりもした。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fqiita.com%2Ffunatsufumiya%2Fitems%2Fec1b72aae4deb845d929" title="V言語のggでProcessingっぽく遊ぶ - Qiita" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://qiita.com/funatsufumiya/items/ec1b72aae4deb845d929">qiita.com</a></cite></p>
+<h2 id="ここで一旦思考整理-なぜ使わないのか">ここで一旦思考整理: なぜ使わないのか</h2>
+<p>さて、こうしてクリエイティブコーディング環境自体はいろいろ整備を進めたものの、どれも実際使うには至っていなかった。</p>
+<p>コードを書くもの以外にも、<a href="https://github.com/tixl3d/tixl">TiXL</a> なども時々触ってはいたものの、本腰を入れて使うにはまだ至っていない。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fqiita.com%2Ffunatsufumiya%2Fitems%2F1314dd23c3894de20790" title="TiXL (Tooll) からRustのdllを呼び出す方法 （C#カスタムオペレータの作り方 + TiXL v4 の最小限の基本操作） - Qiita" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://qiita.com/funatsufumiya/items/1314dd23c3894de20790">qiita.com</a></cite></p>
+<p>なぜだろうかと考えたときに、要因がいくつかあった。</p>
+<ul>
+<li>プラットフォーム依存 (TiXL) <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></li>
+<li>有償・非<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%AA%A1%BC%A5%D7%A5%F3%A5%BD%A1%BC%A5%B9">オープンソース</a> (Touch Designer、Max等)</li>
+<li>アーリーステージ (minimax、sinen)</li>
+<li>描画手順の煩雑さ (Delve、RavEngine、RGL)</li>
+<li>移植の難しさ (V言語、Racket、LÖVE、LÖ<a class="keyword" href="https://d.hatena.ne.jp/keyword/VR">VR</a>)</li>
+<li>エコシステムの小ささ (V言語、Racket、LÖVE、LÖ<a class="keyword" href="https://d.hatena.ne.jp/keyword/VR">VR</a>、odin)</li>
+<li>言語・記法の飛躍、煩雑さ (Racket、minimax、odin、Zig)</li>
+<li><a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C7%A5%D0%A5%C3%A5%B0">デバッグ</a>の大変さ、保守の大変さ (Nim、LÖVE、LÖ<a class="keyword" href="https://d.hatena.ne.jp/keyword/VR">VR</a>、minimax）</li>
+</ul>
+
+<p>特に惜しかったのはV言語で、V言語の場合はggのおかげで描画もサクッとできて<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%AF%A5%ED%A5%B9%A5%D7%A5%E9%A5%C3%A5%C8%A5%D5%A5%A9%A1%BC%A5%E0">クロスプラットフォーム</a>で動いていたことから、各種アドオンなどを移行してみようと努力したものの、移植過程特有のハードルの高さに阻まれて事実上頓挫した。</p>
+<p>ただV言語の場合は本当に惜しいので、また折を見て再挑戦しようとは思っているけれど、V言語自体や<a class="keyword" href="https://d.hatena.ne.jp/keyword/TCC">TCC</a> (Tiny C Compiler) の問題もいろいろあるので、V言語がアーリーステージである間は安心しては使えないかもしれない。</p>
+<p>それにV言語はトランスパイラゆえにCやMake、CMakeの知識が必須となるので、Nim同様、あまり人には気軽には勧められない。</p>
+<h2 id="Ebitengine">Ebitengine</h2>
+<p>そんななか出会ったのがEbitengineだった。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Febitengine.org%2F" title="Ebitengine - A dead simple 2D game engine for Go" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://ebitengine.org/">ebitengine.org</a></cite></p>
+<p>Ebitengine自体は前から知っていたのだけれど、使ってみようという気になったのはV言語の影響が大きかった。</p>
+<p>V言語自体が最近<a class="keyword" href="https://d.hatena.ne.jp/keyword/GC">GC</a>を採用したことと、記法がGoにすごくよく似ていることから、V言語移植に頓挫して疲れているときに、ふとGo言語が目に入った。そしてEbitengineがとてもよくできていることに気づいた。</p>
+<p>Ebitengineは、当初は<a class="keyword" href="https://d.hatena.ne.jp/keyword/OpenGL">OpenGL</a>だけだったようなのだけれど、最近はMetalや<a class="keyword" href="https://d.hatena.ne.jp/keyword/DirectX">DirectX</a>にも対応し、wasm出力によってウェブでも動く。この時点で自分が最初に思っていた目的は達成されているし、Unityなどと同じく<a class="keyword" href="https://d.hatena.ne.jp/keyword/iOS">iOS</a>や<a class="keyword" href="https://d.hatena.ne.jp/keyword/Nintendo%20Switch">Nintendo Switch</a>、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Xbox">Xbox</a>などもサポートしているのは<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%AA%A1%BC%A5%D7%A5%F3%A5%BD%A1%BC%A5%B9">オープンソース</a>としてはすごいことだと思う。</p>
+<p>そしてGo言語は現時点で十分に枯れていて、Pure Goによる実装が数々と進んでおり、ImGuiにあたるものであったり、ZeroMQであったり、ほしいものはほとんどPure Go実装が存在するというありがたい状況になっている。</p>
+<p>ちなみにEbitengineは一見2D専用だけれど、<a href="https://love2d.org/">LÖVE</a>同様に3D実装はいくつかあって、代表的なのがTetra3D。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2FSolarLune%2Ftetra3d" title="GitHub - SolarLune/tetra3d: Tetra3D is a 3D hybrid software/hardware renderer made for games written in Go with Ebitengine." class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/SolarLune/tetra3d">github.com</a></cite></p>
+<p>でも後述のように3DをやりたければGodotなどもあるし、実際Ebitengineで3Dまでやるかはわからない。</p>
+<p>少なくとも、EbitengineはGodotのように普通に使えるなぁというのが第一印象で、かつGodotと同じく簡単で、他の人にも進めやすいし、導入も簡単なのはありがたい。</p>
+<h2 id="Bevyは">Bevyは…？</h2>
+<p>ここで触れておかなければならないのがBevyかなと思う。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fqiita.com%2Ffunatsufumiya%2Fitems%2Fb4b62ec7b044dd28e7fe" title="Bevy Engineのすすめ (小さなUnity、大きなProcessing) - Qiita" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://qiita.com/funatsufumiya/items/b4b62ec7b044dd28e7fe">qiita.com</a></cite></p>
+<p>Bevyは非常に完成度が高くて、アドオン移植などもいろいろ済ませていて、本腰を入れて使える状態には既にあるし、今もウォッチを続けている。</p>
+<p>ただ、Rust言語の難易度の高さから、書いていて疲れるというのが正直なところ。<a class="keyword" href="https://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>もぶっちゃけそうなのだけれど、<a class="keyword" href="https://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>はテンプレートさえ目をつぶれば（<a class="keyword" href="https://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>17〜23なら）一応は普通に書けるのに比べて、Rustは場合は所有権への配慮など、場合によってはかなり疲れる。</p>
+<h4 id="Godotの存在">Godotの存在</h4>
+<p>Rustは動作速度もメモリ使用量も申し分なく、Bevyは<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%EC%A5%F3%A5%C0%A5%EA%A5%F3%A5%B0">レンダリング</a>クオリティも高いので、いろんなところで使っていけるはずなのだけれど、実は自分はその分野では<a href="https://godotengine.org/">Godot</a>を使っているのが正直なところ。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgodotengine.org%2F" title="Godot Engine - Free and open source 2D and 3D game engine" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://godotengine.org/">godotengine.org</a></cite></p>
+<p>まあでも今後も描画クオリティやパフォーマンスが重要なところでは、Bevyを使っていく可能性は十分にあるし、今後もずっとウォッチしていくと思う。</p>
+<h2 id="まとめ">まとめ</h2>
+<p>さて、若干とりとめのない記事になってしまったけれど、OpenFrameworksでできていてEbitengineではできないと思うものに関しては、<a class="keyword" href="https://d.hatena.ne.jp/keyword/GitHub">GitHub</a> Copilotの支援もあってほとんど移植は完了した。</p>
+<ul>
+<li><a href="https://github.com/funatsufumiya/ebiten_path">ebiten_path</a></li>
+<li><a href="https://github.com/funatsufumiya/ebiten_gvvideo">ebiten_gvvideo</a></li>
+<li><a href="https://github.com/funatsufumiya/ebiten_layered_scene_manager">ebiten_layered_scene_manager</a> <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></li>
+<li><a href="https://github.com/funatsufumiya/ebiten_fade">ebiten_fade</a></li>
+<li><a href="https://github.com/funatsufumiya/go_ae_easing_loader">go_ae_easing_loader</a></li>
+</ul>
+
+<p>OpenFrameworks自体も枯れていていろんな用途に使えて楽しいのだけれど、まあ正直<a class="keyword" href="https://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>と向き合うのが疲れることもRust同様にあって、そういうときにEbitengineやGodotで遊んで<a class="keyword" href="https://d.hatena.ne.jp/keyword/SAN%C3%CD">SAN値</a>を回復させていければと思う。</p>
+<p>Ebitengineは、シンプルさが売りなのだけれど、<a href="https://github.com/hajimehoshi/ebiten/issues/867">圧縮テクスチャがまだ使えない</a>など、成長の余地はいろいろあるので、様子をみつついろいろ試していきたい。</p>
+<h2 id="余談-Processing-Python">余談: Processing <a class="keyword" href="https://d.hatena.ne.jp/keyword/Python">Python</a></h2>
+<p>ちなみに余談として、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Python">Python</a>でもProcessingっぽくできるものがいくつかあって、<a href="https://pypi.org/project/p5/">p5</a>が一番近いのだけれどライセンスが<a class="keyword" href="https://d.hatena.ne.jp/keyword/LGPL">LGPL</a>ではなく<a class="keyword" href="https://d.hatena.ne.jp/keyword/GPL">GPL</a>なので、正直使いづらいところ。</p>
+<p>Rustのnannouを呼び出す形で実装されている、<a href="https://pypi.org/project/q5">q5</a>というものがあって、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Python">Python</a>でやるならこれがいいかもしれない。</p>
+<p><a href="https://blog.eqseqs.work/2022/12/16/234043/">https://blog.eqseqs.work/2022/12/16/234043/</a><cite class="hatena-citation"><a href="https://blog.eqseqs.work/2022/12/16/234043/">blog.eqseqs.work</a></cite></p>
+<p>numbaとかで高速化したりできるかわからないけれど、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Python">Python</a>らしい<a class="keyword" href="https://d.hatena.ne.jp/keyword/%B5%A1%B3%A3%B3%D8%BD%AC">機械学習</a>とかを組み合わせたものについては良いかもしれない。</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+【追記】公式でWineを使ってTiXLをセットアップする方法が公開されてた: <a href="https://www.youtube.com/watch?v=PyBf3i8V8s0">https://www.youtube.com/watch?v=PyBf3i8V8s0</a> / ただ自分は<a class="keyword" href="https://d.hatena.ne.jp/keyword/Parallels%20Desktop">Parallels Desktop</a>をセットアップしてずっと使っていたので、正直プラットフォームが壁というのは半分嘘かもしれない。<a href="#fnref:1" rev="footnote">&#8617;</a></li>
+<li id="fn:2">
+シーンマネージャーは、好みに合うものがなかっただけで、探せばいろんなアドオンがある。<a href="#fnref:2" rev="footnote">&#8617;</a></li>
+</ol>
+</div>

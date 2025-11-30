@@ -1,41 +1,27 @@
+<h1>OpenFrameworksのMetal/DX12/Vulkan化という夢の途中</h1>
+<p>投稿日: 2024/12/25 20:47:11</p>
+<p>カテゴリ: Processing Reborn</p>
+<p>サムネイル: なし</p><hr>
+
 <p>このブログ、実名でいろいろ好き勝手書いている影響で、なんだか無性に不安になるときがあって、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%C9%D4%C4%EA">不定</a>期に非公開にしたり戻したりしているけれど、勘弁してもらえれば嬉しいなと思う。</p>
-
 <p>そういえば、こないだ配列関係の面白い動画があって、年末ゆっくり観ようと思って実はまだチラッとしか見ていないけど、年末観るのを楽しみにしてる。</p>
-
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/iKSnUOVDimM?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="標準配列禁止のタイピングコンテスト【Alternative Typing Contest 2024】"></iframe><cite class="hatena-citation"><a href="https://www.youtube.com/watch?v=iKSnUOVDimM">www.youtube.com</a></cite></p>
-
 <p>このブログは基本的に新下駄配列で書いているけれど、このブログが長く続いているのも、そしてこのブログを書いているときだけは心が穏やかで平穏なのも、新配列によってゆったり穏やかに、そしてそれでいて迅速に効率よく打てるお陰様なので、本当に配列やキーボードには感謝したい。</p>
-
 <p>・・・さて、いきなり脱線しまくりだけれど、最近少し夢ができて、いまその夢を叶えようと少しずつ動いている。</p>
-
 <p>その夢というのは、現代的な描画基盤の上にクリエイティブコーディングを再構築したいというもので、それは、クリエイティブコーディング自体に対する危機感が半分 (= 1/2)、現代の描画基盤への興味がさらにその半分 (= 1/4)、そしてGL抽象レイヤー (<a class="keyword" href="https://d.hatena.ne.jp/keyword/PGL">PGL</a>等) のリライトを通じての<a class="keyword" href="https://d.hatena.ne.jp/keyword/OpenGL">OpenGL</a>へのリスペクトとレトロスペクトが残りの半分 (= 1/4)。</p>
-
 <p>やっていることはタイトルの通りで、最終的にはOpenFrameworksをMetal/DX12/Vulkan化できたらと思っているけれど、今は一旦というかいきなり本命ともいうべきか、ProcessingのLWJGL + BGFX化を進めていて、全くわからないなりにも毎日少しずつ進めている。</p>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Ffunatsufumiya%2Fprocessing-lwjgl-bgfx" title="GitHub - funatsufumiya/processing-lwjgl-bgfx: Processing LWJGL library (BGFX fork)" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/funatsufumiya/processing-lwjgl-bgfx">github.com</a></cite></p>
-
 <p>いろいろわからないことがあって、本当は色んな人に質問でもしながらやりたいのだけれど、毎日<a class="keyword" href="https://d.hatena.ne.jp/keyword/GitHub">GitHub</a>のコード検索と<a class="keyword" href="https://d.hatena.ne.jp/keyword/API">API</a>リファレンス引き引き、少しずつ進めている。今現在のステータスはまだウィンドウが出せただけだけれど、少しずつ、背景色が出せたり、四角形が描けたりみたいなところからグレードアップさせていきたい。</p>
-
 <p>なんでこんなにこれがやりたいのか、もう何年も考え過ぎて逆によくわからなくなってきているのだけれど、とにかくいえるのは、Processing等がまたUnity等と対等に並んで使われる夢をみたいし、画材としてのコードの価値を高めたいということに尽きるのかもしれないし、自分自身のUnityやUE等に対するささやかな対抗心なのかもしれない。<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
-
 <p>けれど、OpenFrameworks等をもう長く使っていてだいぶ愛着が湧いているのも事実だし、ユーザが年々減っている実感もあるし、この楽しさにもっと人を引き留めていたいし、それで素晴らしい革新が起きてほしいという気持ちがただただあるのかもしれない。</p>
-
 <p>ちなみに本当はSokolという<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>から手を付けていこうとしたのだけれど、最近<a class="keyword" href="https://d.hatena.ne.jp/keyword/Android">Android</a>を買ったというのもあってVulkanを切り捨てる気になれず、BGFXを使う方向でスイッチして、そしたらたまたまLWJGL3に含まれていることを知った。</p>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Ffloooh%2Fsokol" title="GitHub - floooh/sokol: minimal cross-platform standalone C headers" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/floooh/sokol">github.com</a></cite></p>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2FLWJGL%2Flwjgl3" title="GitHub - LWJGL/lwjgl3: LWJGL is a Java library that enables cross-platform access to popular native APIs useful in the development of graphics (OpenGL, Vulkan, bgfx), audio (OpenAL, Opus), parallel computing (OpenCL, CUDA) and XR (OpenVR, LibOVR, OpenXR) applications." class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/LWJGL/lwjgl3">github.com</a></cite></p>
-
 <p>LWJGLに含まれているということは、Processingフォークも夢じゃないと思っていたら、やっぱりGLだけどやっている人がいて、いまそのフォークを元にフォークしている。走り始められたのは本当に大きいし、OpenFrameworksのフォークだけだったらとうに挫折していたかもしれないと思う。</p>
-
 <p>自分は前々から<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>という言語が神がかり的に好きで、いつか<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>に戻っていきたいという気持ちがあって、最近<a class="keyword" href="https://d.hatena.ne.jp/keyword/Java">Java</a>にメモリセグメントやアリーナアロケータ、スタックアロケータがあることを知って少しワクワクしている。</p>
-
 <p>正直、<a class="keyword" href="https://d.hatena.ne.jp/keyword/GC">GC</a>やスタートアップ時間以外で<a class="keyword" href="https://d.hatena.ne.jp/keyword/JVM">JVM</a>以外を使おうと思った要因はあまりなかったように思うので、あとはLWJGLのような軽量の低レイヤー<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D0%A5%A4%A5%F3%A5%C7%A5%A3%A5%F3%A5%B0">バインディング</a>があればもう本当に<a class="keyword" href="https://d.hatena.ne.jp/keyword/JVM">JVM</a>を使っていけるかもしれないので、このプロジェクトの最終ゴール自体はタイトルの通りなのだけれど、理想通り行ったなら、自分自身もしかするとProcessingや<a class="keyword" href="https://d.hatena.ne.jp/keyword/JVM">JVM</a>、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Clojure">Clojure</a>を使うという夢の途中なのかもしれない。</p>
-
 <p>ただ、最近はMoonbitや<a class="keyword" href="https://d.hatena.ne.jp/keyword/Mojo">Mojo</a>のような新勢力も台頭してきているし、来年自分が何言語をメインに使っているか、ちょっと楽しみな自分も居るのも事実。</p>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fwww.moonbitlang.com%2F" title="MoonBit" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://www.moonbitlang.com/">www.moonbitlang.com</a></cite></p>
-
 <p>冒頭の脱線部の新配列ではないけれど、やっぱり何事も選択肢が多いというのが一番幸せだし、試行錯誤の間が一番楽しい。</p>
 <div class="footnotes">
 <hr/>
@@ -44,4 +30,3 @@
 Processing-likeな形式でなければ、自分自身Qiita等で記事を書いているように<a href="https://bevyengine.org/">Bevy Engine</a>があるのだけれど、やはり自分自身、Processingの素朴な楽しさがどうしても忘れられなくて、それが原動力になっているように思う。<a href="#fnref:1" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
-

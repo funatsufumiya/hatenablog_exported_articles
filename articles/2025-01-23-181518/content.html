@@ -1,51 +1,31 @@
+<h1>クリエイティブコーディングフレームワーク選定のその後</h1>
+<p>投稿日: 2025/01/23 18:15:18</p>
+<p>カテゴリ: 思考整理</p>
+<p>サムネイル: なし</p><hr>
+
 <p>ブログ等にもちょこちょこは書いているけれど、以下の記事を書いてから、いくつか後日談があるので記録していきたい。</p>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fqiita.com%2Ffunatsufumiya%2Fitems%2Fe8df03e0ccad284ede82" title="2025年1月: 個人的クリエイティブコーディングフレームワーク選定 - Qiita" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://qiita.com/funatsufumiya/items/e8df03e0ccad284ede82">qiita.com</a></cite></p>
-
 <h2 id="Delve-Framework">Delve Framework</h2>
-
 <p>自分的に一番大きかったのは、Qiita記事に後から追記した、Delve Frameworkの存在。</p>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2FInterrupt%2Fdelve-framework" title="GitHub - Interrupt/delve-framework: Delve is a framework for writing Games in Zig and Lua. For those who value being cross platform and keeping things simple." class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/Interrupt/delve-framework">github.com</a></cite></p>
-
 <p>Zig言語の存在は、Rustのエラーメッセージの難解さに疲れている自分にとってはちょうど良くて、時期的にも今年はZig言語が誕生して10年になり、そろそろ安定版が出ても良いくらいの頃合いになっている。破壊的変更の多さからするとまだ時間はかかるかなと思うけれど、依存関係の簡単な解決もできるようになってきたし、ビルドの速さと簡単さ、言語自体の簡明さを考えても、結構有力な候補になるのではないかと思う。</p>
-
 <p>既に何度かIssueを通して作者さんと交流し、PRを送ってマージされたりはしているけれど、今後も引き続き遊んでいってみたい。<a class="keyword" href="https://d.hatena.ne.jp/keyword/C/C%2B%2B">C/C++</a>ととても自然に連携できて、Zigと同様のビルドプロセスに組み込めるのは大きいし、DelveのREADMEのDesign Philosphy（設計哲学）に書いてある、Being simple and understandable is better than being clever! （賢いよりもシンプルでわかりやすい方が良い）という言葉は、まるでRustとZigの対比のようで、とても印象的。</p>
-
 <h2 id="minimax">minimax</h2>
-
 <p>これも何度か書いた覚えがあるけれど、記事を書いてしばらくして、Win/<a class="keyword" href="https://d.hatena.ne.jp/keyword/Mac">Mac</a>/<a class="keyword" href="https://d.hatena.ne.jp/keyword/Linux">Linux</a>に対応するPRを送った。執筆時点ではまだマージはされず。</p>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Froman01la%2Fminimax" title="GitHub - roman01la/minimax: Minimalist 3D game engine in Clojure" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/roman01la/minimax">github.com</a></cite></p>
-
 <p>こちらも実用段階にあるのだけれど、実際しばらく使ってみて、手動メモリと自動メモリ管理（<a class="keyword" href="https://d.hatena.ne.jp/keyword/GC">GC</a>）が混在する難しさに自分がまだ適応の準備ができていなくて、きちんと実用できるようになるにはしばらく時間がかかりそう。Zig等に比べて、<a class="keyword" href="https://d.hatena.ne.jp/keyword/C/C%2B%2B">C/C++</a>との連携のハードルもあるので、普段使っているライブラリの移植にも時間がかかりそうな予感。（いくつか類似の<a class="keyword" href="https://d.hatena.ne.jp/keyword/C/C%2B%2B">C/C++</a>を呼ぶライブラリの存在も確認して、PRの準備までしたのだけれど、保守の難しさもあり、一旦保留中。）</p>
-
 <h2 id="Sinen">Sinen</h2>
-
 <p>Sinenについてもminimax同様に、記事を書いてからすぐにWin/<a class="keyword" href="https://d.hatena.ne.jp/keyword/Mac">Mac</a>/<a class="keyword" href="https://d.hatena.ne.jp/keyword/Linux">Linux</a>対応がなされた。</p>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Fastomih%2Fsinen" title="GitHub - astomih/sinen: A toolkit for creative coding" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/astomih/sinen">github.com</a></cite></p>
-
 <p>こちらは自分がPRを送ったのではなくて、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Mac">Mac</a>対応（MoltenVK対応）に若干のお手伝いをした程度。</p>
-
 <p>それでも、こうやって<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%AF%A5%ED%A5%B9%A5%D7%A5%E9%A5%C3%A5%C8%A5%D5%A5%A9%A1%BC%A5%E0">クロスプラットフォーム</a>に使える、モダンな<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>が一つでも増えることは喜ばしいし、Sinenはきっと楽しい<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>として気軽な実験環境に最適のはず。良い意味で<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B2%A1%BC%A5%E0%A5%A8%A5%F3%A5%B8%A5%F3">ゲームエンジン</a>っぽくないのが良い。</p>
-
 <h2 id="RavEngine">RavEngine</h2>
-
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2FRavEngine%2FRavEngine" title="GitHub - RavEngine/RavEngine: A fast C++23 3D game engine for modern devices, with wide platform support" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/RavEngine/RavEngine">github.com</a></cite></p>
-
 <p>RavEngineについては、直接的に何か貢献したわけではないけれど（小さなPRを送ってまだマージされていないものはあるけれど）、Qiitaにいくつか解説記事を書いた。</p>
-
 <p>ECSを使って<a class="keyword" href="https://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>で何かを書くとしたら、自分的にはBevy同様に楽しく使える<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>ではないかなと感じていて、用途やニーズがマッチするものがあれば今後も使っていきたいなと思う。</p>
-
 <h2 id="まとめ">まとめ</h2>
-
 <p>今までこういう記事はZennとかQiitaに書くことが多くて、このブログにはあまり書いてこなかったのだけれど、今回は後日談ということでラフな雑記中心にまとめてみた。</p>
-
 <p>（余談として、Qiita等に書くときは<a class="keyword" href="https://d.hatena.ne.jp/keyword/Qwerty%C7%DB%CE%F3">Qwerty配列</a>でバババーっと書くので、新下駄+Astarte配列でこういう記事をまったりと書くと不思議な気分がする。書き方が変わると見る目も違ってくるので、たまには良いかもしれない。）</p>
-
 <p>実際自分が2025年はどれを中心に使っていくか、このリストにないものになるかは出たとこ勝負だけど、選定候補が多いというのはいろんな要件に合わせて選びやすくなるので、個人的には喜ばしい限り。</p>
-
 <p><a href="https://github.com/libsdl-org/SDL/releases">SDL3の正式リリース</a>もついに発表されたので、こういう<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>の裾野がどんどん広がっていってくれるといいなと思う。</p>
-
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/5Bh8GTmVHQQ?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="SDL 3 Is Finally Here!"></iframe><cite class="hatena-citation"><a href="https://www.youtube.com/watch?v=5Bh8GTmVHQQ">www.youtube.com</a></cite></p>

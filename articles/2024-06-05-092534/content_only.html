@@ -1,0 +1,92 @@
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240601/20240601211204.jpg" width="1200" height="700" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><strong><em>(全体の5記事目になります。他パートへのリンク: <a href="https://funatsufumiya.hatenablog.com/entry/2024/05/31/194416">Part1</a>, <a href="https://funatsufumiya.hatenablog.com/entry/2024/06/01/204016">Part2</a>, <a href="https://funatsufumiya.hatenablog.com/entry/2024/06/02/073000">Part3</a>, <a href="https://funatsufumiya.hatenablog.com/entry/2024/06/02/091844">Part4</a>, <a href="https://funatsufumiya.hatenablog.com/entry/2024/06/05/092534">Part5</a>, <a href="https://funatsufumiya.hatenablog.com/entry/2024/06/09/171112">Part6</a> )</em></strong></p>
+<p>全4回で一旦完結させたつもりだった、CAD → Sculpt の「いいとこ取り」手法ですが、最大の要（かなめ）である<strong>穴埋め技法</strong>について、言葉足らずな部分が多くある気がしたので、もう少し詳細に解説を加えたいと思います。</p>
+<h2 id="穴埋め技法の概要目次">穴埋め技法の概要、目次</h2>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605075700.jpg" width="1200" height="675" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>上の写真が、穴埋め技法のおおまかな流れを表しています。このテクニックで、CADからエクスポートしたモデル(<a class="keyword" href="https://d.hatena.ne.jp/keyword/STL">STL</a>)について、<strong>一見いい感じにみえるけれどおかしい部分を修正</strong>します。</p>
+<p>具体的には、以下の手順を経ます。</p>
+<hr />
+<ul>
+<li><strong>１:</strong> CADからモデルをエクスポート</li>
+<li><strong>２:</strong> 一度<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>にインポートして、法線を再計算</li>
+<li><strong>３:</strong> <a class="keyword" href="https://d.hatena.ne.jp/keyword/Nomad">Nomad</a> Sculptにインポートして、<strong>穴埋め作業</strong></li>
+<li><strong>４:</strong> <a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>に戻して、Quad Remesherで自動リ<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a></li>
+<li><strong>５:</strong> 必要なら、解像度を極端に落として、サブディビジョン<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a> (subdiv) で滑らかに。</li>
+<li><strong>６:</strong> (オマケ) Export IGESアドオンでCADに戻せる…！？</li>
+</ul>
+
+<hr />
+<h2 id="１-CADからモデルをエクスポート">１: CADからモデルをエクスポート</h2>
+<p>では、早速手順を示していきます。今回は、Plasticityで作った以下の顔データを修正していきます。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605082354.png" width="1200" height="727" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>このデータ、一見するといい感じにみえるのですが、<a class="keyword" href="https://d.hatena.ne.jp/keyword/STL">STL</a>エクスポートして他のツールでプレビューすると…？</p>
+<p><figure class="figure-image figure-image-fotolife" title="PlasticityでSTLエクスポート"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605082711.png" width="1200" height="727" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>Plasticityで<a class="keyword" href="https://d.hatena.ne.jp/keyword/STL">STL</a>エクスポート</figcaption></figure></p>
+<p><figure class="figure-image figure-image-fotolife" title="Macのプレビュー（Winの場合は3Dビューワ）"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605082731.png" width="1200" height="953" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption><a class="keyword" href="https://d.hatena.ne.jp/keyword/Mac">Mac</a>のプレビュー（Winの場合は3Dビューワ）</figcaption></figure></p>
+<p>表示されない面があったりすることがわかります。次の手順でこれをまず修正します。</p>
+<h2 id="２-一度Blenderにインポートして法線を再計算">２: 一度<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>にインポートして、法線を再計算</h2>
+<p>まず、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a> (今回は4.1) に<a class="keyword" href="https://d.hatena.ne.jp/keyword/STL">STL</a>ファイルをドラッグ・アンド・ドロップ（もしくは「ファイル > インポート > <a class="keyword" href="https://d.hatena.ne.jp/keyword/STL">STL</a>」）してインポートします。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605083228.png" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>タブキーを押すか、左上のモード切替で<strong>編集モード</strong>に切り替えます。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605083415.jpg" width="762" height="506" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>編集モードに切り替わったら、ポリゴンを <strong>全選択</strong> (Aキー) してから、<strong>法線を再計算</strong> (Shift + Nキー) します。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605083545.png" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>こうすると、ポリゴンの裏表のおかしい部分が自動修正され、ちゃんと表示されるようになります。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605083818.jpg" width="1200" height="919" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><figure class="figure-image figure-image-fotolife" title="試しにエクスポートしてみると、プレビューでもちゃんと見れるようになった。"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605083933.png" width="1200" height="953" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>試しにエクスポートしてみると、プレビューでもちゃんと見れるようになった。</figcaption></figure></p>
+<p>ちなみにこの工程を念のためやっておかないと、スカルプトツール（<a class="keyword" href="https://d.hatena.ne.jp/keyword/Nomad">Nomad</a> Sculpt等）にインポートしたあとも、おかしな挙動をすることがあるので注意です。</p>
+<p>※「距離でマージ」という機能もうまく活用すると、クリーニング工程では優秀ですので、参考記事だけ挙げておきます。（かえって穴が空いてしまう場合もありますが…。）</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fwww.ay3s-room.com%2Fentry%2Fblender-merge-duplicate-points" title="【Blender4.0】重なった頂点を結合する（マージする）方法" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://www.ay3s-room.com/entry/blender-merge-duplicate-points">www.ay3s-room.com</a></cite></p>
+<h2 id="３-Nomad-Sculptにインポートして穴埋め作業">３: <a class="keyword" href="https://d.hatena.ne.jp/keyword/Nomad">Nomad</a> Sculptにインポートして、穴埋め作業</h2>
+<p>さて、こうして法線を再計算したモデルを、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Nomad">Nomad</a> Sculptにインポートしてみます。今回は<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>で<a class="keyword" href="https://d.hatena.ne.jp/keyword/STL">STL</a>エクスポートし直したものを、<a class="keyword" href="https://d.hatena.ne.jp/keyword/iCloud">iCloud</a> Drive経由で<a class="keyword" href="https://d.hatena.ne.jp/keyword/Nomad">Nomad</a> Sculptにもってきました。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605084231.png" width="700" height="934" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>多少カクカクして見えるものの、一見するとおかしなところはありません。</p>
+<p>ここで、ボクセルリメッシュを実行してみます。解像度は400にしてみます。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605084658.jpg" width="1061" height="1200" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>すると実は、頭の部分などに裂け目が出てきて、実は<strong>モデルに穴が空いていた</strong>ということがわかります。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605084729.png" width="800" height="1067" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>ちなみにこの解像度設定ですが、低すぎると穴が空きすぎてしまうので、<strong>普段よりかなり高い解像度にする</strong>のがおすすめです。（逆に高すぎるとおかしな挙動をするので、やっているうちに感覚はつかめると思います。）</p>
+<p>この穴を埋めていくには、「膨張ブラシ（インフレートブラシ）」を使います。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605085321.png" width="800" height="1067" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>実際には、<strong>「膨張」→「リメッシュ」→「スムーズ」→「リメッシュ」→「膨張」→「リメッシュ」→ ...</strong> をひたすら繰り返していくのですが（木工でいうボンドやヤスリがけみたいなもの？）、見たほうがわかりやすいので、動画にしてみました。</p>
+<p><iframe width="420" height="315" src="https://www.youtube.com/embed/YB3hdXfY6Io?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Nomad Sculptで穴埋めを行う様子（膨張→リメッシュ→スムーズ→リメッシュ）"></iframe><cite class="hatena-citation"><a href="https://www.youtube.com/watch?v=YB3hdXfY6Io">www.youtube.com</a></cite></p>
+<p>ちなみにここでのポイントは、<strong>穴を小さくするには高解像度で作業する</strong>という一方で、高解像度ではスムーズブラシが効きにくいので、<strong>最後は解像度を下げて一気にスムーズブラシをかける</strong>、というのがコツです。</p>
+<p>最終的には、以下のように綺麗に仕上がりました。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605090658.png" width="800" height="1067" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<h2 id="４-Blenderに戻してQuad-Remesherで自動リトポロジー">４: <a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>に戻して、Quad Remesherで自動リ<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a></h2>
+<p>こうして綺麗に整えたものを、またエクスポートして、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>に再度インポートしてみます。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605090816.png" width="1200" height="654" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>とても綺麗で、モデルとしては問題はありませんが、<strong>解像度が高すぎる</strong>ので、<strong>自動リトポ</strong>によって解像度を下げてあげます。具体的には<strong>Quad Remesher</strong>という、<a class="keyword" href="https://d.hatena.ne.jp/keyword/ZBrush">ZBrush</a>でいうところのZRemesherに相当するアドオンを使います。</p>
+<p>インストール方法などは割愛しますが、同じアドオンが<a class="keyword" href="https://d.hatena.ne.jp/keyword/Nomad">Nomad</a> Sculpt上でも使えるので、どちらがいいかは好みだと思います。（いずれにしても有償ですので、注意です。）</p>
+<p>比較のために、5000ポリゴン程度にしたものと、1000ポリゴン程度にしたものを張っておきます。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605091108.png" width="1200" height="918" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605091120.png" width="1200" height="901" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>解像度（ポリゴン数）が適切になり、とても扱いやすいデータになりました。自動リトポのリ<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a>（再<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a>）も比較的に賢いので、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%DD%A5%ED%A5%B8%A1%BC">トポロジー</a>の流れ（ポリゴンの流れ）も綺麗です。</p>
+<h2 id="５-必要なら解像度を極端に落としてサブディビジョンサーフェス-subdiv-で滑らかに">５: 必要なら、解像度を極端に落として、サブディビジョン<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a> (subdiv) で滑らかに。</h2>
+<p>最後に、ちょっとした裏技として、<strong>思い切って数百ポリゴンくらいにして、サブディビジョン<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a> (subdiv) をかける</strong> というコツを紹介します。</p>
+<p>先ほど、5000や1000にリトポしてみましたが、思い切って300ポリゴンに下げてみます。</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605091416.png" width="1200" height="889" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>だいぶカクカクになったのがわかります。</p>
+<p>ここに、サブディビジョン<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a> (subdiv) というモディファイアをつけて、x3 くらいで表示させてみると…？（※ ここで「最適化表示」にチェックが入っていると実際のポリゴンはわからないので注意。）</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605091636.png" width="802" height="612" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>なんと、非常に滑らかになりました。</p>
+<p>実は、自分でスムーズブラシで一所懸命に滑らかにするよりも、全体を滑らかにしたいだけならこちらのほうが楽なのです。</p>
+<h2 id="６-オマケ-Export-IGESアドオンでCADに戻せる">６: (オマケ) Export IGESアドオンでCADに戻せる…！？</h2>
+<p>最後はオマケになりますが、Export IGESというアドオンが<a class="keyword" href="https://d.hatena.ne.jp/keyword/Blender">Blender</a>に存在します。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2F3dnchu.com%2Farchives%2Fexport-iges-v1-4%2F" title="Export IGES v1.4 - BlenderからCADで一般的なIGES形式で形状を出力可能な無料アドオン！Plasticityとのやり取りに最適！" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://3dnchu.com/archives/export-iges-v1-4/">3dnchu.com</a></cite></p>
+<p>実はこれを使うと、いま作ったような<strong>普通のポリゴンモデルを、CADデータとして再度PlasticityやMoiに戻すことが可能</strong>になります。</p>
+<p>（ただし、高解像度のままIGESエクスポートすると、線が多すぎるので、あえて低解像度でエクスポートすることをおすすめします。）</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605092059.png" width="1200" height="727" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605094841.png" width="1200" height="659" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p>このやり方を使うと、改めてこのモデルをガイド線にして、もう一度CADを引き直すといったことが可能になるので、例えば清書の過程などとして、うまくケースバイケースで使ってください。</p>
+<h2 id="まとめ-穴埋め技法を通してCADとスカルプトの弱点を補い合う">まとめ: 穴埋め技法を通して、CADとスカルプトの弱点を補い合う</h2>
+<p>さて、今回はちょっと早足でしたが、説明不足に感じていた「穴埋め技法」について、詳細に解説してみました。</p>
+<p>実際には手を動かす必要があるので、感覚が身につくまではちょっと大変かもしれませんが、この技法を用いると、<strong>CADで一見してうまくいっているようなデータ</strong>でも、ポリゴンにしたり実際に印刷や表示するとおかしなモデルに対して、<strong>スカルプトツールを使って手直しをする</strong>ということが可能になります。</p>
+<p>これで、CAD側で厳密に綺麗な曲線や曲面を、きちんと繋がなきゃいけないという呪いから開放されます（笑）。</p>
+<p>これはある意味で、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a>CADのデータを手動（半自動）でソリッド（実体）にしているようなもので、これを可能にしているのは、<strong><a class="keyword" href="https://d.hatena.ne.jp/keyword/Nomad">Nomad</a> Sculptがボクセルと<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a>の両方を扱えるため</strong>です。</p>
+<p><figure class="figure-image figure-image-fotolife" title="※ どちらかといえばの分類。切り替えもできる。"><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20240605/20240605105852.png" width="1092" height="348" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span><figcaption>※ どちらかといえばの分類。切り替えもできる。</figcaption></figure></p>
+<p>3DCoatなどでも同様のことが可能で、<a class="keyword" href="https://d.hatena.ne.jp/keyword/ZBrush">ZBrush</a>は基本は<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D5%A5%A7%A5%B9">サーフェス</a>のみですが、「穴閉じ」などを使って同様の修正が可能です。ただ<a class="keyword" href="https://d.hatena.ne.jp/keyword/Nomad">Nomad</a> Sculptなら、<a class="keyword" href="https://d.hatena.ne.jp/keyword/iPad">iPad</a>で作業できますし、<a class="keyword" href="https://d.hatena.ne.jp/keyword/Apple">Apple</a> Pencilが快適なのと、価格的に安価なので一番気軽に始められるのではないかと思います。</p>
+<p>本当ならCAD側での穴埋め技法やスムージングについても解説できればと思うのですが、私自身、研究中なので、どこかでまた記事を書く機会があれば。（教えてくれる人がいたらウェルカムです。）</p>
+<p>（Plasticityの新機能である、Raise Degreeなんかも、スムージングの一助になると思います。↓）</p>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/A1ELtJ8Q_J8?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Plasticity | Raise Degree and Edit Control Points"></iframe><cite class="hatena-citation"><a href="https://www.youtube.com/watch?v=A1ELtJ8Q_J8">www.youtube.com</a></cite></p>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/BJheCEw2_84?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Mastering smooth surfaces in Plasticity (Drawing in 3D)"></iframe><cite class="hatena-citation"><a href="https://www.youtube.com/watch?v=BJheCEw2_84">www.youtube.com</a></cite></p>
+<p>こうしたいろんな技法を使って、ぜひ思い通りのイメージを形にするという楽しさを少しでも知っていただければ幸いです。</p>

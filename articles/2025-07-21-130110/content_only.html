@@ -1,0 +1,170 @@
+<h2 id="目次">目次</h2>
+<ul class="table-of-contents">
+    <li><a href="#目次">目次</a></li>
+    <li><a href="#先にまとめの内容を転記">（先に「まとめ」の内容を転記）</a></li>
+    <li><a href="#日本語キー配列アナライザーのフォーク">日本語キー配列アナライザーのフォーク</a></li>
+    <li><a href="#分析方法">分析方法</a></li>
+    <li><a href="#-計測1-まずはデフォルト文章">◆ 計測1: まずはデフォルト文章</a><ul>
+            <li><a href="#JISかな">JISかな</a></li>
+            <li><a href="#JIS下駄">JIS下駄</a></li>
+        </ul>
+    </li>
+    <li><a href="#-計測1の分析">◆ 計測1の分析</a></li>
+    <li><a href="#-計測2-不思議の国のアリス">◆ 計測2: 不思議の国のアリス</a><ul>
+            <li><a href="#JISかな-1">JISかな</a></li>
+            <li><a href="#JIS下駄-1">JIS下駄</a></li>
+        </ul>
+    </li>
+    <li><a href="#-計測2の分析">◆ 計測2の分析</a></li>
+    <li><a href="#-計測3-Wikipedia---血小板">◆ 計測3: Wikipedia - 血小板</a><ul>
+            <li><a href="#JISかな-2">JISかな</a></li>
+            <li><a href="#JIS下駄-2">JIS下駄</a></li>
+        </ul>
+    </li>
+    <li><a href="#-計測3の分析">◆ 計測3の分析</a></li>
+    <li><a href="#まとめ">まとめ</a></li>
+</ul>
+<h2 id="先にまとめの内容を転記">（先に「まとめ」の内容を転記）</h2>
+<p>※ とてもデータ量の多い記事になってしまったので、先にまとめに書いている箇条書きをこちらにも転機しておきます。</p>
+<ul>
+<li>JISかなに比べて、JIS下駄は最上段の利用頻度は下がっている。</li>
+<li>JISかなが中心部以外に偏りがたまに見られる一方、JIS下駄はより中心寄りになっている。</li>
+<li>Shiftと@の利用頻度が下がっている代わりに、K = 中指シフトの利用頻度が高い。
+
+<ul>
+<li>今回句読点などにShiftを利用する設定をしたが、中指シフトを使う選択をした場合はより偏重傾向がある可能性。</li>
+</ul>
+</li>
+<li>打つ文章によっては、最上段の利用頻度が上がることがある。特に「え/お/や」などの打ちづらいキーもあるが、高頻度というほどではないものの、ここで好みが分かれる可能性。</li>
+<li>偏りは解消されているが、設計思想の時点でそうであるように、キーボード全体を満遍なく使う傾向。</li>
+</ul>
+
+<h2 id="日本語キー配列アナライザーのフォーク">日本語キー配列アナライザーのフォーク</h2>
+<p><a href="https://funatsufumiya.hatenablog.com/entry/2025/07/20/164420">前の記事</a>で<a href="https://github.com/funatsufumiya/jis_geta">JIS下駄</a>の入力効率を客観的に測るテストをしたとき、<a href="https://github.com/eswai/keyboard_analyzer">eswai/keyboard_analyzer</a>（日本語キー配列アナライザー）を使えばよかったという追記をした。</p>
+<p>で、早速フォークして対応させてみた。</p>
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fgithub.com%2Ffunatsufumiya%2Fkeyboard_analyzer_jisgeta" title="GitHub - funatsufumiya/keyboard_analyzer_jisgeta: 日本語キー配列アナライザー（フォークしてJIS下駄を追加）" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://github.com/funatsufumiya/keyboard_analyzer_jisgeta">github.com</a></cite></p>
+<p>実際使うには、もちろん<a href="https://keyboard-analyzer.vercel.app/">元サイト</a>では「JIS下駄」を選ぶことはできないので、本来は手元で<code>git clone</code>して<code>npm install</code>して<code>npm run dev</code>するなどが必要だけど、以下に<strong>ブラウザだけで試せるサイト</strong>（<a class="keyword" href="https://d.hatena.ne.jp/keyword/GitHub">GitHub</a> Pages）を準備した。</p>
+<p><a href="https://funatsufumiya.github.io/keyboard_analyzer_jisgeta_static/">https://funatsufumiya.github.io/keyboard_analyzer_jisgeta_static/</a></p>
+<p>余談だけれど、「この日本語の文章ってこの配列ではどうやって打つんだろう？」って思ったときなんかに便利で、こういうツールに一つ一つ対応しておくと何かと便利なのかもしれない。</p>
+<h2 id="分析方法">分析方法</h2>
+<p><a href="https://github.com/funatsufumiya/keyboard_analyzer_jisgeta">今回のツール</a>は、いわゆる「<a href="https://patorjk.com/keyboard-layout-analyzer/">Keyboard Layout Analyzer</a>」のように「スコア」みたいなわかりやすい指標を出してくれるわけではなくて、数々の客観指標の中から自分で分析させるスタイルをとっている。</p>
+<p>よって、とりあえずすごく長い文章から出る傾向を比較して、都度それらを比較して分析してみようと思う。</p>
+<p>※ なお、キー打鍵列については、そのまま掲載するとなぜか "<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A4%CF%A4%C6%A4%CA%B5%AD%CB%A1">はてな記法</a>" により一部省略されてしまうので、作為的に改行した。</p>
+<p>※ 記号定義について、新下駄配列由来の特殊なバインド（FG = <code>「」左</code> など）が正しく計測されないという問題をはらんでいるため、各分析で都度言及するが、少し工夫をしている。</p>
+<h2 id="-計測1-まずはデフォルト文章">◆ 計測1: まずはデフォルト文章</h2>
+<p>入力文章:</p>
+<blockquote><p>人類が増えすぎた人口を宇宙に移民させるようになって、既に半世紀が過ぎていた。地球の周りの巨大な人工都市は人類の第二の故郷となり、人々はそこで子を産み、育て、そして死んでいった。</p></blockquote>
+<h3 id="JISかな">JISかな</h3>
+<p>キー打鍵列:</p>
+<pre class="code" data-lang="" data-unlink>d@y.et@25rg@qd@yb4&lt;shift&gt;04a&lt;shift&gt;84ienyxp.94iu&lt;shift&gt;zw&lt;shift&gt;,
+rw@ifypegt@rg@weq&lt;shift&gt;.
+ag&lt;shift&gt;84kj0lkg&lt;shift&gt;9q@eud@yb4sdfd@y.ekq@eikbg&lt;shift&gt;94sul&lt;shift&gt;,
+vsv@sfcbw@b&lt;shift&gt;04n&lt;shift&gt;,
+cq@w&lt;shift&gt;,cdwdyw@e&lt;shift&gt;zq&lt;shift&gt;.</pre>
+
+<p>ヒートマップ・グラフ等:</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721104428.png" width="1200" height="1086" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721112102.png" width="1200" height="1135" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721104441.png" width="1200" height="913" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<h3 id="JIS下駄">JIS下駄</h3>
+<p>キー打鍵列:</p>
+<pre class="code" data-lang="" data-unlink>&lt;k&gt;dy.e&lt;k&gt;t25r&lt;k&gt;zq&lt;k&gt;dybj&lt;d&gt;0j&lt;i&gt;ajienyxp.9jiugw&lt;shift&gt;,
+r&lt;k&gt;wifypez&lt;k&gt;tr&lt;k&gt;zweq&lt;shift&gt;.
+a&lt;i&gt;gjk40lk&lt;o&gt;g&lt;k&gt;qeu&lt;k&gt;dybjsdf&lt;k&gt;dy.ek&lt;k&gt;qeikb&lt;o&gt;gjsul&lt;shift&gt;,
+vs&lt;k&gt;vsfcb&lt;k&gt;wb&lt;d&gt;0jn&lt;shift&gt;,c&lt;k&gt;qw&lt;shift&gt;,cdwdy&lt;k&gt;wegq&lt;shift&gt;.</pre>
+
+<p>ヒートマップ・グラフ等:</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721121339.png" width="1200" height="1084" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721121344.png" width="1200" height="1129" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721121349.png" width="1200" height="912" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<h2 id="-計測1の分析">◆ 計測1の分析</h2>
+<p>明らかに<strong>最上段の数字列、＠（濁点）、Shiftの利用率が減っている</strong>。そして <strong>K（中指シフト）の利用率が増えている</strong>。</p>
+<p>これはJIS下駄では拗音レイヤーを定義したことにより、拗音入力に最上段を使わなくなったため。また、「う」を4キーの位置からJキーの位置に移動させたことが影響している。</p>
+<p>中指シフトについては、<strong>右中指のシフト率が急上昇している</strong>ことからも明らか。これは元のJISかなで「@（濁点）」に当たる部分が全て中指シフトに置き換えられていることを物語っている。</p>
+<p>また、単打鍵率が89.1%から75.2%に低下しているが、<a href="https://funatsufumiya.hatenablog.com/entry/2025/07/20/164420">前回の記事</a>では単打率の定義をモーラを基準にしていたため、この測定方式では単打鍵率の定義が異なっていることに注意。</p>
+<p>グラフを見ていると、左Shiftの利用率が減った割には左小指の利用率はさほど減っていない印象で、用途としてはシフトとなっているが、キー打鍵列を見てもShiftキー以外は一見何シフトに割かれているかよくわからないので、この後の計測でも一応注意して見ていきたい。</p>
+<div align="center">◆・◆・◆</div>
+
+<div align="center">◆・◆・◆</div>
+
+<h2 id="-計測2-不思議の国のアリス">◆ 計測2: <a class="keyword" href="https://d.hatena.ne.jp/keyword/%C9%D4%BB%D7%B5%C4%A4%CE%B9%F1%A4%CE%A5%A2%A5%EA%A5%B9">不思議の国のアリス</a></h2>
+<p>入力文章 (756文字):</p>
+<blockquote><p>アリスは川辺でおねえさんのよこにすわって、なんにもすることがないのでとても退屈（たいくつ）しはじめていました。一、二回はおねえさんの読んでいる本をのぞいてみたけれど、そこには絵も会話もないのです。「絵や会話のない本なんて、なんの役にもたたないじゃないの」とアリスは思いました。</p>
+<p>そこでアリスは、頭のなかで、<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A4%D2%A4%CA%A4%AE%A4%AF">ひなぎく</a>のくさりをつくったら楽しいだろうけれど、起きあがって<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A4%D2%A4%CA%A4%AE%A4%AF">ひなぎく</a>をつむのもめんどくさいし、どうしようかと考えていました（といっても、昼間で暑いし、とってもねむくて頭もまわらなかったので、これもたいへんだったのですが）。そこへいきなり、ピンクの目をした白うさぎが近くを走ってきたのです。それだけなら、そんなにめずらしいことでもありませんでした。さらにアリスとしては、そのうさぎが「どうしよう！　どうしよう！　ちこくしちゃうぞ！」とつぶやくのを聞いたときも、それがそんなにへんてこだとは思いませんでした（あとから考えてみたら、これも不思議に思うべきだったのですけれど、でもこのときには、それがごく自然なことに思えたのです）。でもそのうさぎがほんとうに、チョッキのポケットから懐中時計（かいちゅうどけい）をとりだしてそれをながめ、そしてまたあわててかけだしたとき、アリスもとびあがりました。</p>
+<p>というのも、チョッキのポケットなんかがあるうさぎはこれまで見たことがないし、そこからとりだす時計をもっているうさぎなんかも見たことないぞ、というのに急に気がついたからです。そこで、興味（きょうみ）しんしんになったアリスは、うさぎのあとを追っかけて野原をよこぎって、それがしげみの下の、おっきなうさぎの穴にとびこむのを、ぎりぎりのところで見つけました。次のしゅんかんに、アリスもそのあとを追っかけてとびこみました。</p></blockquote>
+<h3 id="JISかな-1">JISかな</h3>
+<p>※ キー打鍵列はそのまま掲載しているが、長過ぎるものは<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A4%CF%A4%C6%A4%CA%B5%AD%CB%A1">はてな記法</a>により...と変わり、抜粋されている。</p>
+<p>キー打鍵列:</p>
+<pre class="code" data-lang="" data-unlink>3lrft0^@w@6,5xyk9bir0&lt;shift&gt;zw&lt;shift&gt;,uyimr.bst@uekw@swmqehz&lt;shift&gt;8qehz&lt;shift&gt;9dfd@/wejdq&lt;shift&gt;.ea&lt;shift&gt;,itef6,5xyk9yw@e.-y&lt;shift&gt;0kc@ewnq:;s@&lt;shift&gt;,cbif5mte0muekw@r&lt;shift&gt;.[57te0kue-yuyw&lt;shift&gt;,uyk7himqqued@&lt;shift&gt;7uek]s3lrf6mejdq&lt;shift&gt;.enterentercbw@3lrf&lt;shift&gt;,3qjkutw@&lt;shift&gt;,vug@hkhxl&lt;shift&gt;0zh&lt;shift&gt;zqoqkdeq@_4:;s@&lt;shift&gt;,6g3t@&lt;shift&gt;zwvug@h&lt;shift&gt;0z]km/ys@hxed&lt;shift&gt;,s@4d94tstyt@5wejdq&lt;shift&gt;8se&lt;shift&gt;zwm&lt;shift&gt;,v.jw@3zed&lt;shift&gt;,s&lt;shift&gt;zwm,]hw3qjmj0out&lt;shift&gt;zqkw@&lt;shift&gt;,b;mqe^yq@&lt;shift&gt;zqkw@rt@&lt;shift&gt;9&lt;shift&gt;.cb^egul&lt;shift&gt;,v[yhk/&lt;shift&gt;0dqfh4xg@t@ath&lt;shift&gt;0fd&lt;shift&gt;zwgqkw@r&lt;shift&gt;.c;q@:uo&lt;shift&gt;,cyui/r@odebsw@m3ljpyw@dq&lt;shift&gt;.xoi3lrsdwf&lt;shift&gt;,ck4xg@t@[s@4d94&lt;shift&gt;1spaces@4d94&lt;shift&gt;1spaceabhda&lt;shift&gt;74c@&lt;shift&gt;1]sz2@7hk&lt;shift&gt;0geqsgm&lt;shift&gt;,c;t@cyui^ywbq@sf6mejpyw@dq&lt;shift&gt;83stotyt@5wnqo&lt;shift&gt;,b;m2dg@i6m4^@gq@&lt;shift&gt;zqkw@r:;s@&lt;shift&gt;,w@mbksgif&lt;shift&gt;,c;t@b@hdp@yubsi6m5qkw@r&lt;shift&gt;9&lt;shift&gt;.w@mck4xg@t@-ys4i&lt;shift&gt;,a&lt;shift&gt;9&lt;shift&gt;zgk-[:&lt;shift&gt;zstotea&lt;shift&gt;84s@:e&lt;shift&gt;8tea&lt;shift&gt;84s@:e&lt;shift&gt;9&lt;shift&gt;0slq@dwc;&lt;shift&gt;0ut@/&lt;shift&gt;,cdwjq30wwt:q@dqsg&lt;shift&gt;,3lrmsv@3t@ljdq&lt;shift&gt;.enterenterse4km&lt;shift&gt;,a&lt;shift&gt;9&lt;shift&gt;zgk-[:&lt;shift&gt;zsuytt@3.4xg@fb;jw@nqbst@ued&lt;shift&gt;,cbtoslq@rs:e&lt;shift&gt;0m&lt;shift&gt;zwe.4xg@uytmnqbsuec@&lt;shift&gt;,se4kig&lt;shift&gt;84igt@zeqtow@r&lt;shift&gt;.cbw@&lt;shift&gt;,g&lt;shift&gt;94n&lt;shift&gt;8g&lt;shift&gt;94n&lt;shift&gt;9dydyiu&lt;shift&gt;zq3lrf&lt;shift&gt;,4xg@k3s&lt;shift&gt;06&lt;shift&gt;zt:wkfo&lt;shift&gt;09bg@&lt;shift&gt;zw&lt;shift&gt;,c;t@d:@nkdqk&lt;shift&gt;,6&lt;shift&gt;zgu4xg@k3uisv@b]k&lt;shift&gt;0&lt;shift&gt;,g@lg@lksb_w@nz:jdq&lt;shift&gt;.zg@kd&lt;shift&gt;8ytyi&lt;shift&gt;,3lrmck3s&lt;shift&gt;06&lt;shift&gt;zt:wsv@bnjdq&lt;shift&gt;.</pre>
+
+<p>ヒートマップ・グラフ等:</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721111633.png" width="1200" height="1082" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721112012.png" width="1200" height="1133" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721111645.png" width="1200" height="888" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<h3 id="JIS下駄-1">JIS下駄</h3>
+<p>キー打鍵列:</p>
+<pre class="code" data-lang="" data-unlink>3lrft0&lt;d&gt;^&lt;k&gt;w6,5xyk9bir0gw&lt;shift&gt;,uyimr.bs&lt;k&gt;tuek&lt;k&gt;wswmqeh@&lt;j&gt;hqeh@df&lt;k&gt;d/we4dq&lt;shift&gt;.ea&lt;shift&gt;,itef6,5xyk9y&lt;k&gt;we.-y&lt;d&gt;0k&lt;k&gt;cewnq:;&lt;k&gt;s&lt;shift&gt;,cbif5mte0muek&lt;k&gt;wr&lt;shift&gt;.&lt;g&gt;f57te0kue-yuyw&lt;shift&gt;,uyk7himqque&lt;u&gt;cueks3lrf6me4dq&lt;shift&gt;.enterentercb&lt;k&gt;w3lrf&lt;shift&gt;,3q4kut&lt;k&gt;w&lt;shift&gt;,vu&lt;k&gt;zhkhxl&lt;d&gt;0@hgqoqkde&lt;k&gt;q_j:;&lt;k&gt;s&lt;shift&gt;,6z3&lt;k&gt;tgwvu&lt;k&gt;zh&lt;d&gt;0@]km/y&lt;k&gt;shxed&lt;shift&gt;,&lt;k&gt;sjd9jtsty&lt;k&gt;t5we4dq&lt;j&gt;hsegwm&lt;shift&gt;,v.4&lt;k&gt;w3@ed&lt;shift&gt;,sgwm,]hw3q4m40outgqk&lt;k&gt;w&lt;shift&gt;,b;mqe^y&lt;k&gt;qgqk&lt;k&gt;wr&lt;k&gt;t&lt;shift&gt;.cb^ezul&lt;shift&gt;,&lt;l&gt;vyhk/&lt;d&gt;0dqfhjx&lt;k&gt;z&lt;k&gt;tath&lt;d&gt;0fdgwzqk&lt;k&gt;wr&lt;shift&gt;.c;&lt;k&gt;q:uo&lt;shift&gt;,cyui/&lt;k&gt;rodebs&lt;k&gt;wm3l4py&lt;k&gt;wdq&lt;shift&gt;.xoi3lrsdwf&lt;shift&gt;,ckjx&lt;k&gt;z&lt;k&gt;t&lt;g&gt;f&lt;k&gt;sjd9j&lt;shift&gt;1space&lt;k&gt;sjd9j&lt;shift&gt;1spaceabhd&lt;u&gt;aj&lt;k&gt;c&lt;shift&gt;1s@&lt;k&gt;27hk&lt;d&gt;0zeqszm&lt;shift&gt;,c;&lt;k&gt;tcyui^ywb&lt;k&gt;qsf6me4py&lt;k&gt;wdq&lt;j&gt;h3stoty&lt;k&gt;t5wnqo&lt;shift&gt;,b;m2d&lt;k&gt;zi6mj&lt;d&gt;^z&lt;k&gt;qgqk&lt;k&gt;wr:;&lt;k&gt;s&lt;shift&gt;,&lt;k&gt;wmbkszif&lt;shift&gt;,c;&lt;k&gt;t&lt;k&gt;bhd&lt;d&gt;pyubsi6m5qk&lt;k&gt;wr&lt;shift&gt;.&lt;k&gt;wmckjx&lt;k&gt;z&lt;k&gt;t-ysji&lt;shift&gt;,&lt;o&gt;agzk&lt;l&gt;-:gstote&lt;i&gt;aj&lt;k&gt;s:e&lt;j&gt;hte&lt;i&gt;aj&lt;k&gt;s:e&lt;d&gt;0sl&lt;k&gt;qdwc;&lt;d&gt;0u&lt;k&gt;t/&lt;shift&gt;,cdw4q30wwt:&lt;k&gt;qdqsz&lt;shift&gt;,3lrms&lt;k&gt;v3&lt;k&gt;tl4dq&lt;shift&gt;.enterentersejkm&lt;shift&gt;,&lt;o&gt;agzk&lt;l&gt;-:gsuyt&lt;k&gt;t3.jx&lt;k&gt;zfb;4&lt;k&gt;wnqbs&lt;k&gt;tued&lt;shift&gt;,cbtosl&lt;k&gt;qrs:e&lt;d&gt;0mgwe.jx&lt;k&gt;zuytmnqbsue&lt;k&gt;c&lt;shift&gt;,sejki&lt;i&gt;gjiz&lt;k&gt;t@eqto&lt;k&gt;wr&lt;shift&gt;.cb&lt;k&gt;w&lt;shift&gt;,&lt;o&gt;gjn&lt;j&gt;h&lt;o&gt;gjndydyiugq3lrf&lt;shift&gt;,jx&lt;k&gt;zk3s&lt;d&gt;06gt:wkfo&lt;d&gt;09b&lt;k&gt;zgw&lt;shift&gt;,c;&lt;k&gt;td&lt;d&gt;:nkdqk&lt;shift&gt;,6gzujx&lt;k&gt;zk3uis&lt;k&gt;vb]k&lt;d&gt;0&lt;shift&gt;,&lt;k&gt;zl&lt;k&gt;zlksb_&lt;k&gt;wn@:4dq&lt;shift&gt;.@&lt;k&gt;zk&lt;i&gt;dytyi&lt;shift&gt;,3lrmck3s&lt;d&gt;06gt:ws&lt;k&gt;vbn4dq&lt;shift&gt;.</pre>
+
+<p>ヒートマップ・グラフ等:</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721121718.png" width="1200" height="1099" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721121723.png" width="1200" height="1135" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721121726.png" width="1200" height="890" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<h2 id="-計測2の分析">◆ 計測2の分析</h2>
+<p>まず、記号入力については、当初、新下駄配列由来の<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%AD%A1%BC%A5%D0%A5%A4%A5%F3%A5%C9">キーバインド</a>を正しく正確に設定していたため、計測結果に偏りが出ていた。（FG = <code>「」左</code>などが反映されず、無理のある記号入力が採用される現象。）</p>
+<p>そこで、FG = <code>「」左</code> など、<strong>実際の<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B9%A5%C8%A5%ED%A1%BC%A5%AF">ストローク</a>が正しく打たれるように、定義を少しだけ工夫している</strong>。（詳しくは<a href="https://github.com/funatsufumiya/keyboard_analyzer_jisgeta">コード</a>を参照のこと。ただし、「？」や「！」などの句読点系はJIS由来のShiftを使ったキー<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%B9%A5%C8%A5%ED%A1%BC%A5%AF">ストローク</a>を優先している。）</p>
+<p>全体傾向としては計測1と変わっていないのだけれど、<strong>「あ/ま/わ」の出現率の高さから、最上段は意外とよく利用される</strong>ということがよくわかる。</p>
+<p>これは実際にJIS下駄配列やJISかな配列を打っているときの体感と一致していて、JIS配列の好みが分かれるところになると思う。自分は「あ/ま/わ」については打ちにくさを感じないので、大きな問題ではないと思うけれど、例えば「ほ」や「へ」なども含めたとき、手の大きさなど人によって好みが分かれるポイントのはず。</p>
+<p>あくまで自分の印象では、「あ/ま/わ」は良いとしても「え/お/や」は自分は入力しづらいなと感じていて、ヒートマップで見るとそれほど多い頻度ではない気はしつつ、<strong>「お」の出現率は比較的高いので、たぶんここで好みが分かれてくる</strong>。</p>
+<p>あとは、句読点入力が多いためか、意外とShiftキーがよく使われる印象。（これは中指・薬指シフトを使った方法も<strong>両方提供していながら</strong>、本分析ではJIS定義を優先しているので、ある意味では当然の結果。）</p>
+<p>Shiftキー定義を自分が優先して（利用して）いるのは、ヒートマップを見てもわかるように、<strong>K = 中指シフトの偏重傾向が強い</strong>ので、それを緩和する意図もある。</p>
+<p>いずれにしても、<strong>元のJISかなが中心部以外に異様に偏りがある傾向は、JIS下駄ではより中心寄りにバランスが補正されている</strong>という印象。</p>
+<div align="center">◆・◆・◆</div>
+
+<div align="center">◆・◆・◆</div>
+
+<h2 id="-計測3-Wikipedia---血小板">◆ 計測3: <a class="keyword" href="https://d.hatena.ne.jp/keyword/Wikipedia">Wikipedia</a> - 血小板</h2>
+<p>（先ほど小説を採用したので、今回科学的な文章を採用した。明らかに正しく計測できなそうな「α」や「β」などの記号は置き換えるなどの処理を施している。）</p>
+<p>入力文章 (693文字):</p>
+<blockquote><p>血小板は、血液に含まれる細胞で、赤血球、白血球と並ぶ第三の血球系である。骨髄中の巨核球（巨大核細胞）の細胞質から産生されるため、核を持たない。大きさは約2ナノmであり、赤血球や白血球の細胞よりも小さい。正常状態の血中には15万～40万個/マイクロL程度含まれている。血小板は、何種類かの血液凝固因子を含んでおり、これらは血小板のアルファ顆粒や濃染顆粒内に含まれている。出血などで血管内皮細胞が傷害を受けると、血小板内の<a class="keyword" href="https://d.hatena.ne.jp/keyword/%BA%D9%CB%A6%B9%FC%B3%CA">細胞骨格</a>系が変化すると同時に、新たに細胞膜上に細胞接着因子の受容体が発現する。これを血小板の活性化と呼ぶ。これらの糖タンパク受容体やその他の接着因子などを介して血小板は血管内皮に接着し、血小板どうしが凝集し傷口を塞いで<a class="keyword" href="https://d.hatena.ne.jp/keyword/%B7%EC%C0%F2">血栓</a>を形成する。これを一次止血と呼ぶ。その後、ここから各種凝固因子が放出されることによって、血液中にあるフィブリンが凝固し、さらに血小板や赤血球が捕らわれて、強固な止<a class="keyword" href="https://d.hatena.ne.jp/keyword/%B7%EC%C0%F2">血栓</a>が完成する。これを二次止血と呼ぶ。体外で固まった血小板とフィブリンおよびそれに捕らわれた赤血球の塊が乾燥したものは「かさぶた」と呼ばれる。（凝固・線溶系も参照）</p>
+<p>形態は、非活性状態では円盤状の形態であるが、出血などで血管内皮細胞が傷害を受けると活性化し、偽足（あるいは仮足）とよばれるアメーバ状の突起を伸ばして胞体を伸展させ、最終的には扁平状あるいは球状に変化する。さらに内皮細胞への粘着後には、血小板内部の顆粒が<a class="keyword" href="https://d.hatena.ne.jp/keyword/%BA%D9%CB%A6%B9%FC%B3%CA">細胞骨格</a>の成分の一つであるアクチンフィラメントによって中央にたぐり寄せられ、目玉焼きのような形態となる。（これは顆粒などの細胞小器官が中央部へと集まるからである。）</p></blockquote>
+<h3 id="JISかな-2">JISかな</h3>
+<p>※ キー打鍵列はそのまま掲載しているが、長過ぎるものは<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A4%CF%A4%C6%A4%CA%B5%AD%CB%A1">はてな記法</a>により...と変わり、抜粋されている。</p>
+<p>キー打鍵列:</p>
+<pre class="code" data-lang="" data-unlink>:&lt;shift&gt;zd&lt;shift&gt;94f@yf&lt;shift&gt;,:z5gi2hj;.xe-@4w@&lt;shift&gt;,p&lt;shift&gt;z:&lt;shift&gt;zg&lt;shift&gt;84&lt;shift&gt;,f&lt;shift&gt;z:&lt;shift&gt;zg&lt;shift&gt;84suo2@q@exyk:&lt;shift&gt;zg&lt;shift&gt;84:ew@3.&lt;shift&gt;.bzz@ea&lt;shift&gt;84kthq@j&lt;shift&gt;8g&lt;shift&gt;9q@ethxe-@4&lt;shift&gt;9kxe-@4dztoxyux;.q/&lt;shift&gt;,th&lt;shift&gt;0mque&lt;shift&gt;.66gxf7h2ukmw@3l&lt;shift&gt;,p&lt;shift&gt;z:&lt;shift&gt;zg&lt;shift&gt;847f&lt;shift&gt;z:&lt;shift&gt;zg&lt;shift&gt;84kxe-@49lmaexe&lt;shift&gt;.ped@&lt;shift&gt;94d@&lt;shift&gt;94qekaa&lt;shift&gt;84if15jy&lt;shift&gt;^40jyb/jeh_&lt;shift&gt;lwes@2hj;we.&lt;shift&gt;.:&lt;shift&gt;zd&lt;shift&gt;94f@yf&lt;shift&gt;,uid&lt;shift&gt;8.etk:z5gg@&lt;shift&gt;94beyd&lt;shift&gt;02hyw@6l&lt;shift&gt;,b;of:&lt;shift&gt;zd&lt;shift&gt;94f@yk3.2&lt;shift&gt;3tl&lt;shift&gt;847bc/tl&lt;shift&gt;84uei2hj;we.&lt;shift&gt;.d&lt;shift&gt;8&lt;shift&gt;z:zus@w@:&lt;shift&gt;ztyuevxe-@4t@d&lt;shift&gt;94t@e&lt;shift&gt;04:.s&lt;shift&gt;,:&lt;shift&gt;zd&lt;shift&gt;94f@yuekxe-@4b&lt;shift&gt;zth:et@^ytr.ss@4d@i&lt;shift&gt;,3oqixe-@4jhd@&lt;shift&gt;94ixe-@4p&lt;shift&gt;za&lt;shift&gt;7heydkd@&lt;shift&gt;894qet@fz:@yr.&lt;shift&gt;.b;&lt;shift&gt;0:&lt;shift&gt;zd&lt;shift&gt;94f@ykt&lt;shift&gt;zpets92@&lt;shift&gt;.b;oks4qyf[hd@&lt;shift&gt;894qe7ckqkp&lt;shift&gt;za&lt;shift&gt;7heydus@&lt;shift&gt;0tedw:&lt;shift&gt;zd&lt;shift&gt;94f@yf:&lt;shift&gt;ztyuevip&lt;shift&gt;za&lt;shift&gt;7hd&lt;shift&gt;,:&lt;shift&gt;zd&lt;shift&gt;94f@ys@4dt@g@&lt;shift&gt;94d&lt;shift&gt;84dgr@h@a&lt;shift&gt;02xew@:&lt;shift&gt;zpy&lt;shift&gt;0:eper.&lt;shift&gt;.b;&lt;shift&gt;0ead@d:zs92@&lt;shift&gt;.ckb@&lt;shift&gt;,bbtothd&lt;shift&gt;8g@&lt;shift&gt;94beydt@-4d&lt;shift&gt;8zx;.bsi9&lt;shift&gt;zw&lt;shift&gt;,:z5ga&lt;shift&gt;84i3.2&lt;shift&gt;e2@lyt@g@&lt;shift&gt;94bd&lt;shift&gt;,xoi:&lt;shift&gt;zd&lt;shift&gt;94f@y7p&lt;shift&gt;z:&lt;shift&gt;zg&lt;shift&gt;84t@so0;w&lt;shift&gt;,g&lt;shift&gt;94bud:zpyt@typer.&lt;shift&gt;.b;&lt;shift&gt;0id@d:zs92@&lt;shift&gt;.qet@ew@tqj&lt;shift&gt;zq:&lt;shift&gt;zd&lt;shift&gt;94f@ys2&lt;shift&gt;e2@ly69v@c;iso0;qp&lt;shift&gt;z:&lt;shift&gt;zg&lt;shift&gt;84ktqjlt@tyc4dqmkf[tx2@q]s9f@;.&lt;shift&gt;.&lt;shift&gt;8g@&lt;shift&gt;94b/spacepy:emxyd&lt;shift&gt;94&lt;shift&gt;9enterenter:eqef&lt;shift&gt;,vt&lt;shift&gt;zped@&lt;shift&gt;94qew@f5yf@yd@&lt;shift&gt;94k:eqew@3.t@&lt;shift&gt;,d&lt;shift&gt;8&lt;shift&gt;z:zus@w@:&lt;shift&gt;ztyuevxe-@4t@d&lt;shift&gt;94t@e&lt;shift&gt;04:.st&lt;shift&gt;zpetd&lt;shift&gt;,g@ch&lt;shift&gt;83.eftl3d&lt;shift&gt;9s9f@;.3/\f@d@&lt;shift&gt;94ks&lt;shift&gt;zg&lt;shift&gt;0kf@dwqe&lt;shift&gt;0dywyxp&lt;shift&gt;,xed&lt;shift&gt;84wgif^y^[ed@&lt;shift&gt;943.efg&lt;shift&gt;84d@&lt;shift&gt;94i^ytr.&lt;shift&gt;.xoiuevxe-@4^k,ya&lt;shift&gt;7hb@if&lt;shift&gt;,:&lt;shift&gt;zd&lt;shift&gt;94f@yue2@ktl&lt;shift&gt;84t@xe-@4b&lt;shift&gt;zthkpe2@ykvszw@3.3hay2&lt;shift&gt;eo/ysi9&lt;shift&gt;zwa&lt;shift&gt;8464iqh@l9po;&lt;shift&gt;,/q@j7gk94u:eqesu.&lt;shift&gt;.&lt;shift&gt;8b;ftl&lt;shift&gt;84us@kxe-@4d&lt;shift&gt;94gtyt@a&lt;shift&gt;84642@^s3zj.tow@3.&lt;shift&gt;.&lt;shift&gt;9</pre>
+
+<p>ヒートマップ・グラフ等:</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721123636.png" width="1200" height="1083" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721123640.png" width="1200" height="1141" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721123645.png" width="1200" height="871" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<h3 id="JIS下駄-2">JIS下駄</h3>
+<p>キー打鍵列:</p>
+<pre class="code" data-lang="" data-unlink>:g&lt;o&gt;dj&lt;k&gt;fyf&lt;shift&gt;,:@5zi2h4;.xe&lt;d&gt;-j&lt;k&gt;w&lt;shift&gt;,pg:g&lt;i&gt;gj&lt;shift&gt;,fg:g&lt;i&gt;gjsuo&lt;k&gt;2&lt;k&gt;qexyk:g&lt;i&gt;gj:e&lt;k&gt;w3.&lt;shift&gt;.b@&lt;d&gt;@e&lt;i&gt;ajkth&lt;k&gt;q4&lt;j&gt;h&lt;o&gt;g&lt;k&gt;qethxe&lt;d&gt;-jkxe&lt;d&gt;-jd@toxyux;.q/&lt;shift&gt;,th&lt;d&gt;0mque&lt;shift&gt;.66zxf7h2ukm&lt;k&gt;w3l&lt;shift&gt;,pg:g&lt;i&gt;gj7fg:g&lt;i&gt;gjkxe&lt;d&gt;-j9lmaexe&lt;shift&gt;.pe&lt;o&gt;cj&lt;o&gt;cjqeka&lt;i&gt;ajif154y&lt;shift&gt;^404yb/4eh_&lt;shift&gt;lwe&lt;k&gt;s2h4;we.&lt;shift&gt;.:g&lt;o&gt;dj&lt;k&gt;fyf&lt;shift&gt;,ui&lt;i&gt;d.etk:@5z&lt;k&gt;z&lt;d&gt;9jbeyd&lt;d&gt;02hy&lt;k&gt;w6l&lt;shift&gt;,b;of:g&lt;o&gt;dj&lt;k&gt;fyk3.&lt;3&gt;2t&lt;e&gt;lj7bc/t&lt;e&gt;ljuei2h4;we.&lt;shift&gt;.&lt;i&gt;dg:@u&lt;k&gt;s&lt;k&gt;w:gtyuevxe&lt;d&gt;-j&lt;k&gt;t&lt;o&gt;dj&lt;k&gt;te&lt;d&gt;0j:.s&lt;shift&gt;,:g&lt;o&gt;dj&lt;k&gt;fyuekxe&lt;d&gt;-jbgth:e&lt;k&gt;t^ytr.s&lt;k&gt;sj&lt;k&gt;di&lt;shift&gt;,3oqixe&lt;d&gt;-j4h&lt;o&gt;cjixe&lt;d&gt;-jpg&lt;u&gt;aheydk&lt;i&gt;c9jqe&lt;k&gt;tf@&lt;d&gt;:yr.&lt;shift&gt;.b;&lt;d&gt;0:g&lt;o&gt;dj&lt;k&gt;fyktgpets9&lt;k&gt;2&lt;shift&gt;.b;oksjqy&lt;l&gt;fh&lt;i&gt;c9jqe7ckqkpg&lt;u&gt;aheydu&lt;k&gt;s&lt;d&gt;0tedw:g&lt;o&gt;dj&lt;k&gt;fyf:gtyuevipg&lt;u&gt;ahd&lt;shift&gt;,:g&lt;o&gt;dj&lt;k&gt;fy&lt;k&gt;sjd&lt;k&gt;t&lt;k&gt;z&lt;d&gt;9j&lt;i&gt;djdz&lt;k&gt;r&lt;k&gt;ha&lt;d&gt;02xe&lt;k&gt;w:gpy&lt;d&gt;0:eper.&lt;shift&gt;.b;&lt;d&gt;0ea&lt;k&gt;dd:@s9&lt;k&gt;2&lt;shift&gt;.ck&lt;k&gt;b&lt;shift&gt;,bbtoth&lt;i&gt;d&lt;k&gt;z&lt;d&gt;9jbeyd&lt;k&gt;t-j&lt;i&gt;d@x;.bsi9gw&lt;shift&gt;,:@5z&lt;i&gt;aji3.&lt;e&gt;2&lt;k&gt;2ly&lt;k&gt;t&lt;k&gt;z&lt;d&gt;9jbd&lt;shift&gt;,xoi:g&lt;o&gt;dj&lt;k&gt;fy7pg:g&lt;i&gt;gj&lt;k&gt;tso0;w&lt;shift&gt;,&lt;o&gt;gjbud:@py&lt;k&gt;ttyper.&lt;shift&gt;.b;&lt;d&gt;0i&lt;k&gt;dd:@s9&lt;k&gt;2&lt;shift&gt;.qe&lt;k&gt;te&lt;k&gt;wtq4gq:g&lt;o&gt;dj&lt;k&gt;fys&lt;e&gt;2&lt;k&gt;2ly69&lt;k&gt;vc;iso0;qpg:g&lt;i&gt;gjktq4l&lt;k&gt;ttycjdqmkf&lt;g&gt;ftx&lt;k&gt;2qs9&lt;k&gt;f;.&lt;shift&gt;.&lt;j&gt;h&lt;k&gt;z&lt;d&gt;9jb&lt;f&gt;rpy:emxy&lt;o&gt;djenterenter:eqef&lt;shift&gt;,vtgpe&lt;o&gt;cjqe&lt;k&gt;wf5y&lt;k&gt;fy&lt;o&gt;cjk:eqe&lt;k&gt;w3.&lt;k&gt;t&lt;shift&gt;,&lt;i&gt;dg:@u&lt;k&gt;s&lt;k&gt;w:gtyuevxe&lt;d&gt;-j&lt;k&gt;t&lt;o&gt;dj&lt;k&gt;te&lt;d&gt;0j:.stgpetd&lt;shift&gt;,&lt;k&gt;zch&lt;j&gt;h3.eftl3ds9&lt;k&gt;f;.3/[&lt;k&gt;f&lt;o&gt;cjksgz&lt;d&gt;0k&lt;k&gt;fdwqe&lt;d&gt;0dywyxp&lt;shift&gt;,xe&lt;i&gt;djwzif^y&lt;s&gt;^e&lt;o&gt;cj3.ef&lt;i&gt;gj&lt;o&gt;cji^ytr.&lt;shift&gt;.xoiuevxe&lt;d&gt;-j^k,y&lt;u&gt;ah&lt;k&gt;bif&lt;shift&gt;,:g&lt;o&gt;dj&lt;k&gt;fyue&lt;k&gt;2kt&lt;e&gt;lj&lt;k&gt;txe&lt;d&gt;-jbgthkpe&lt;k&gt;2ykvs@&lt;k&gt;w3.3hay&lt;e&gt;2o/ysi9gw&lt;i&gt;aj6jiq&lt;k&gt;hl9po;&lt;shift&gt;,/&lt;k&gt;q47zk9ju:eqesu.&lt;shift&gt;.&lt;j&gt;hb;ft&lt;e&gt;lju&lt;k&gt;skxe&lt;d&gt;-j&lt;o&gt;djzty&lt;k&gt;t&lt;i&gt;aj6j&lt;k&gt;2^s3@4.to&lt;k&gt;w3.&lt;shift&gt;.</pre>
+
+<p>ヒートマップ・グラフ等:</p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721123757.png" width="1200" height="1086" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721123802.png" width="1200" height="1135" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/f/funatsufumiya/20250721/20250721123807.png" width="1200" height="879" loading="lazy" title="" class="hatena-fotolife" itemprop="image"></span></p>
+<h2 id="-計測3の分析">◆ 計測3の分析</h2>
+<p>今回、入力できなかった文字が3とカウントされているが、一部漢字かな変換がうまくいかなかった言葉がある様子。</p>
+<p>今回気になった結果としては、「<strong>同じ指で連続して違うキーを打鍵した数</strong>」が、左人差し指が非常に多いという結果になっている。これはおそらく、「かっ」といった<strong>特定の語が多かったことが影響</strong>していると思われる。実は計測2でも右人差し指で同様の傾向が見られていて、この辺も打鍵の辛さとか好みに影響がありそうなファクターかもしれない。</p>
+<p>あと今回「ふ」と「ほ」の出現頻度が高かったようで、それによって<strong>最上段の利用頻度が他の計測よりも高くなっている</strong>。個人的には計測2の分析でも述べたように「え/お/や」ほど打ちにくいと感じないのでさほど気にならないけれど、人によっては最上段の利用頻度が多いのは好ましくないのかもしれない。</p>
+<p>ちなみに自分が最上段に慣れているのは、普段からプログラミング等で記号入力が多いこととかなり相関がある。また、自分は人よりも結構手が大きいので、こうした様々なコンテキストが、JISかななどの利用には影響があると思われる。</p>
+<p>自分はこれらの要因によって、他の配列であるような各種シフトを使った同時押しをするくらいなら、手を伸ばして単打になっていた方が嬉しいなと思う方なのもあって、今回の<a href="https://github.com/funatsufumiya/jis_geta">JIS下駄配列</a>の考案に至ったのだけれど、JISかなと同じように、キーボード全体を使う傾向にあることは今回のヒートマップの分析でも明らかになったように思う。</p>
+<div align="center">◆・◆・◆</div>
+
+<div align="center">◆・◆・◆</div>
+
+<h2 id="まとめ">まとめ</h2>
+<p>データ量が多い記事となったので、一応箇条書きで分析結果をまとめておく。</p>
+<ul>
+<li>JISかなに比べて、JIS下駄は最上段の利用頻度は下がっている。</li>
+<li>JISかなが中心部以外に偏りがたまに見られる一方、JIS下駄はより中心寄りになっている。</li>
+<li>Shiftと@の利用頻度が下がっている代わりに、K = 中指シフトの利用頻度が高い。
+
+<ul>
+<li>今回句読点などにShiftを利用する設定をしたが、中指シフトを使う選択をした場合はより偏重傾向がある可能性。</li>
+</ul>
+</li>
+<li>打つ文章によっては、最上段の利用頻度が上がることがある。特に「え/お/や」などの打ちづらいキーもあるが、高頻度というほどではないものの、ここで好みが分かれる可能性。</li>
+<li>偏りは解消されているが、設計思想の時点でそうであるように、キーボード全体を満遍なく使う傾向。</li>
+</ul>
