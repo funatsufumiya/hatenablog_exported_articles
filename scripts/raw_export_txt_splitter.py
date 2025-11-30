@@ -2,12 +2,14 @@ import argparse
 import json
 import sys
 import os
+from datetime import datetime
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("path", help="path to raw_export.txt")
     parser.add_argument("-o", "--output", help="output directory")
     parser.add_argument("-j", "--json", action='store_true', help="export as json (to stdout)")
+    parser.add_argument("-l", "--list", action='store_true', help="list titles")
     args = parser.parse_args()
 
     global articles
@@ -59,6 +61,30 @@ if __name__ == "__main__":
             
         if "title" in article and "body" in article:
             finalize_article()
+
+    if args.list:
+        out_dir = "articles"
+        sp = "/"
+        # print(f"count: {len(articles)}")
+        for article in articles:
+            if "title" in article and "body" in article and "basename" in article:
+                basename: str = article["basename"]
+                id = basename.replace('/','-')
+                title: str = article["title"]
+                date_raw: str = article["date"]
+                dt = datetime.strptime(date_raw, "%m/%d/%Y %H:%M:%S")
+                date = dt.strftime("%Y/%m/%d %H:%M:%S")
+                dir = out_dir + sp + id
+                    
+                print(f"- [{title}]({dir}/content.html)")
+                print(f"    - 投稿日: {date}")
+                if "category" in article:
+                    category: str = article["category"]
+                    print(f"    - カテゴリ: {category}")
+                else:
+                    print(f"    - カテゴリ: なし")
+
+        sys.exit()
 
     if args.json:
         obj = {"count": len(articles), "articles": articles}
