@@ -18,11 +18,12 @@ https://funatsufumiya.github.io/hatenablog_exported_articles/index.html (GitHub 
 
 GitHubが適切な配置場所だとは思っていないので、より適切な場所をゆっくりと検討していきたいと思っていますが、技術記事等の価値を鑑みてバックアップを公開しています。
 
-なお、はてなブログ・Qiita・Zennの後継となるブログは、一旦GitHub/Obsidianにて継続しています： https://github.com/funatsufumiya/articles/
+なお、はてなブログ・Qiita・Zennの後継となるブログは、一旦GitHub/Obsidianにて継続しています（主に技術記事のみ）： https://github.com/funatsufumiya/articles/
 
 ### ライセンスについて
 
 GitHub上での公開に伴うオープンソースライセンス等は検討中ですが、CC-BY-SAなどが適切とはあまり思えないので精査中です。現状はGitHubの利用規約にしたがって利用していただければと思います。（[参考記事: GitHubでライセンスをつけないとどうなるの？ - Qiita](https://qiita.com/Tatamo/items/ae7bf4878abcf0584291)）
+
 
 
 
